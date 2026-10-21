@@ -61,6 +61,14 @@ export const rehearsalExamples = [
 export function suggestRehearsalTopic(goal) {
   const rules = [
     ['dependency', /\b(?:waiting|wait for|depend\w*|blocked by)\b|等.*回|依赖|等同事/i],
+    ['video-calls', /\b(?:video calls?|muted|screen shar\w*|choppy|zoom call)\b|静音|共享.*屏幕|视频会议/i],
+    ['priorities', /\b(?:priorit\w*|urgent|capacity|deadline\w*)\b|优先|哪个.*急|来不及/i],
+    ['weather', /\b(?:weather|rain\w*|umbrella\w*|forecast)\b|天气|下雨|带伞/i],
+    ['deliveries', /\b(?:deliver\w*|packages?|parcels?|couriers?)\b|快递|包裹/i],
+    ['routines', /\b(?:routines?|commut\w*|work(?:ing)? from home|wake up)\b|起床|通勤|在家办公/i],
+    ['declining', /\b(?:declin\w*|turn down|can[’']t make it)\b|拒绝|去不了/i],
+    ['catching-up', /\b(?:catch(?:ing)? up|keep in touch|stay in touch|new job)\b|好久没见|换工作/i],
+    ['misunderstandings', /\b(?:misunderstand\w*|misheard|mix.up|apolog\w*)\b|听错|误会|说清楚/i],
     ['changing-plans', /\b(?:late|reschedul\w*|delay\w*)\b|改天|迟到|晚点|改时间/i],
     ['making-plans', /\b(?:invite\w*|coffee|meet.*friend|plans)\b|约|咖啡|见面/i],
     ['your-day', /\b(?:my day|their day|how.*day|tired|after work)\b|一天|下班|今天过|累/i],

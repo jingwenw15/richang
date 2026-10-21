@@ -1,3 +1,5 @@
+import { additionalScenarios } from './more-lessons.js';
+
 const phrase = (id, zh, traditional, pinyin, en, note, register = 'Neutral') => ({ id, zh, traditional, pinyin, en, note, register });
 
 // Teaching convention: show the spoken changes of 一 and 不, retain lexical
@@ -295,6 +297,8 @@ scenarios.push(
     ]
   }
 );
+
+scenarios.push(...additionalScenarios);
 
 export const phrases = scenarios.flatMap(scene => scene.phrases.map(p => ({ ...p, sceneId: scene.id, sceneTitle: scene.short, category: scene.category })));
 export const phraseById = id => phrases.find(p => p.id === id);

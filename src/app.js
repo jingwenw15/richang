@@ -10,6 +10,7 @@ let filter = 'All situations';
 let query = '';
 let savedOnly = false;
 let practice;
+let listeningOffset = 0;
 let recorder;
 let stream;
 let recordingTimer;
@@ -113,7 +114,7 @@ function categoryTabs() {
 function reviewPage() {
   const ids = due();
   const studied = Object.keys(state.reviews).filter(id => findPhrase(id));
-  return `<section class="page-heading"><div class="eyebrow">FAMILIAR WORDS, STRONGER ROOTS</div><h1>Bring it back. Make it stick.</h1><p>A little recall today makes tomorrow’s conversation easier.</p></section><section class="review-hero"><span class="large-scene-icon sage">${icon('repeat')}</span><h2>${ids.length ? `${ids.length} phrases ready for you` : studied.length ? 'You’re all caught up.' : 'Your first words start here.'}</h2><p>${ids.length ? 'Think of how you’d say it. Reveal the phrase, listen, and rate how easily it came to you.' : studied.length ? 'Your next reviews will appear when they’re due. You can also practice your learned phrases anytime.' : 'Finish a conversation to start your personal review queue.'}</p>${ids.length ? '<button class="button primary" data-action="review-due">Start review '+icon('arrow')+'</button>' : studied.length ? '<button class="button primary" data-action="review-all">Practice learned phrases '+icon('arrow')+'</button>' : '<button class="button primary" data-page="scenarios">Find a conversation '+icon('arrow')+'</button>'}</section><div class="stat-grid"><div><strong>${studied.length}</strong><span>Phrases practiced</span></div><div><strong>${ids.length}</strong><span>Ready for review</span></div><div><strong>${studied.length - ids.length}</strong><span>Resting until next time</span></div></div>${rehearsalReviewSection()}${studied.length ? `<div class="section-heading"><h2>In your rotation</h2></div><div class="phrase-list">${studied.slice(0, 12).map(id => phraseRow(findPhrase(id), true)).join('')}</div>` : ''}`;
+  return `<section class="page-heading"><div class="eyebrow">FAMILIAR WORDS, STRONGER ROOTS</div><h1>Bring it back. Make it stick.</h1><p>A little recall today makes tomorrow’s conversation easier.</p></section><section class="review-hero"><span class="large-scene-icon sage">${icon('repeat')}</span><h2>${ids.length ? `${ids.length} phrases ready for you` : studied.length ? 'You’re all caught up.' : 'Your first words start here.'}</h2><p>${ids.length ? 'Think of how you’d say it. Reveal the phrase, listen, and rate how easily it came to you.' : studied.length ? 'Your next reviews will appear when they’re due. You can also practice your learned phrases anytime.' : 'Finish a conversation to start your personal review queue.'}</p>${ids.length ? '<button class="button primary" data-action="review-due">Start review '+icon('arrow')+'</button>' : studied.length ? '<button class="button primary" data-action="review-all">Practice learned phrases '+icon('arrow')+'</button>' : '<button class="button primary" data-page="scenarios">Find a conversation '+icon('arrow')+'</button>'}</section><div class="stat-grid"><div><strong>${studied.length}</strong><span>Phrases practiced</span></div><div><strong>${ids.length}</strong><span>Ready for review</span></div><div><strong>${studied.length - ids.length}</strong><span>Resting until next time</span></div></div>${studied.length ? `<section class="rehearsal-banner"><span class="scene-icon blue">${icon("headphones")}</span><div><strong>Understand it before you read it.</strong><p>Listen to up to ten learned phrases, with due phrases first. Reveal the text when you’re ready. Listening practice leaves your recall schedule unchanged.</p></div><button class="button secondary" data-action="listen-learned">Practice listening ${icon("arrow")}</button></section>` : ''}${rehearsalReviewSection()}${studied.length ? `<div class="section-heading"><h2>In your rotation</h2></div><div class="phrase-list">${studied.slice(0, 12).map(id => phraseRow(findPhrase(id), true)).join('')}</div>` : ''}`;
 }
 function phraseRow(p, withDue = false) {
   const isSaved = state.saved.includes(p.id);
@@ -152,11 +153,21 @@ function startScene(id) {
   practice = { type: 'lesson', scene, index: 0, phase: 'learn', answered: false, selected: null, rated: false, correct: 0, mistakes: new Set() };
   state.lastScene = id; save(); showPractice(); if (!dialog.open) dialog.showModal();
 }
-function startReview(ids) {
+function startReview(ids, listening = false) {
   ids = ids.filter(id => findPhrase(id));
   if (!ids.length) return;
-  practice = { type: 'review', ids, index: 0, phase: 'review', revealed: false };
+  practice = { type: 'review', ids, index: 0, phase: 'review', revealed: false, listening };
   showPractice(); if (!dialog.open) dialog.showModal();
+}
+function listeningQueue() {
+  const priority = due().slice(0, 10);
+  const dueSet = new Set(due());
+  const resting = Object.keys(state.reviews).filter(id => findPhrase(id) && !dueSet.has(id));
+  if (!resting.length) return priority;
+  const start = listeningOffset % resting.length;
+  const extra = [...resting.slice(start), ...resting.slice(0, start)].slice(0, 10 - priority.length);
+  listeningOffset = (start + extra.length) % resting.length;
+  return [...priority, ...extra];
 }
 function practiceChrome(body, eyebrow, title, step, total) {
   return `<div class="practice-header"><span class="overline">${eyebrow}</span><button class="round-button" data-action="close-practice" aria-label="Close practice">${icon('close')}</button></div><progress class="session-progress" value="${step}" max="${total}" aria-label="Session progress"></progress><div class="practice-title"><span class="small-label">${practice.type === 'lesson' ? practice.scene.category : 'YOUR REVIEW'}</span><h2>${title}</h2></div>${body}`;
@@ -166,10 +177,13 @@ function showPractice() {
   releaseAudio();
   if (practice.phase === 'done') {
     const lesson = practice.type === 'lesson';
-    dialog.innerHTML = `<div class="practice-header"><span class="overline">A LITTLE MORE CONFIDENT</span><button class="round-button" data-action="close-practice" aria-label="Close practice">${icon('close')}</button></div><div class="session-done"><span class="done-icon">${icon('check')}</span><h2>These words are yours to try.</h2><p>${lesson ? `You practiced ${practice.scene.phrases.length} phrases and completed a short conversation.` : `You reviewed ${practice.ids.length} phrase${practice.ids.length === 1 ? '' : 's'}. They will return when it is time.`}</p>${lesson ? `<div class="session-summary">${practice.correct} of ${practice.scene.turns.length} replies chosen correctly on the first try</div>` : ''}<div class="takeaway"><span class="overline">TAKE IT INTO REAL LIFE</span><p>${lesson ? escape(practice.scene.phrases[0].en) : 'Try using one of these phrases in your next conversation.'}</p>${lesson ? `<strong lang="zh-CN">${chinese(practice.scene.phrases[0])}</strong>` : ''}</div><button class="button primary" data-action="close-practice">Back to your day ${icon('arrow')}</button></div>`; render(); return;
+    dialog.innerHTML = `<div class="practice-header"><span class="overline">A LITTLE MORE CONFIDENT</span><button class="round-button" data-action="close-practice" aria-label="Close practice">${icon('close')}</button></div><div class="session-done"><span class="done-icon">${icon('check')}</span><h2>These words are yours to try.</h2><p>${lesson ? `You practiced ${practice.scene.phrases.length} phrases and completed a short conversation.` : `${practice.listening ? 'You listened to' : 'You reviewed'} ${practice.ids.length} phrase${practice.ids.length === 1 ? '' : 's'}. ${practice.listening ? 'Your recall schedule is unchanged.' : 'They will return when it is time.'}`}</p>${lesson ? `<div class="session-summary">${practice.correct} of ${practice.scene.turns.length} replies chosen correctly on the first try</div>` : ''}<div class="takeaway"><span class="overline">TAKE IT INTO REAL LIFE</span><p>${lesson ? escape(practice.scene.phrases[0].en) : 'Try using one of these phrases in your next conversation.'}</p>${lesson ? `<strong lang="zh-CN">${chinese(practice.scene.phrases[0])}</strong>` : ''}</div><button class="button primary" data-action="close-practice">Back to your day ${icon('arrow')}</button></div>`; render(); return;
   }
   if (practice.type === 'review') {
     const p = findPhrase(practice.ids[practice.index]);
+    if (practice.listening) {
+      dialog.innerHTML = practiceChrome(`<div class="review-prompt"><span class="overline">WHAT DID YOU HEAR?</span><h3>Listen before you look.</h3><p>Say what you understood, then reveal and compare.</p></div>${!practice.revealed ? `<div class="learning-controls"><button class="button secondary" data-speak="${p.id}">${icon('volume')} Listen to phrase</button><button class="text-button" data-slow="${p.id}">${icon('headphones')} Slower</button></div>` : ''}${practice.revealed ? `${learningPhrase(p)}<div class="usage-note"><p>${escape(p.note)}</p></div><button class="button primary wide" data-action="next-listening">${practice.index === practice.ids.length - 1 ? 'Finish listening' : 'Next listening phrase'} ${icon('arrow')}</button>` : '<div class="recall-space">Try listening at normal speed first. Use Slower if you need another pass.<br>Audio unavailable? You can still reveal the phrase.</div><button class="button primary wide" data-action="reveal">Reveal phrase & meaning</button>'}`, 'LISTENING PRACTICE', 'Train your ear for everyday Chinese.', practice.index, practice.ids.length); return;
+    }
     dialog.innerHTML = practiceChrome(`<div class="review-prompt"><span class="overline">HOW WOULD YOU SAY…</span><h3>${escape(p.en)}</h3><span class="small-label">${escape(p.sceneTitle)}</span></div>${practice.revealed ? `${learningPhrase(p)}<p class="self-rating">How easily did it come to you?</p>${ratingButtons()}` : `<div class="recall-space">Say it out loud, or think it through.<br>It doesn’t have to be perfect.</div><button class="button primary wide" data-action="reveal">Reveal phrase ${icon('arrow')}</button>`}`, 'RECALL & REPEAT', 'A familiar phrase, a fresh try.', practice.index, practice.ids.length); return;
   }
   const s = practice.scene;
@@ -461,7 +475,7 @@ document.addEventListener('click', async event => {
     else practice.mistakes.add(practice.index);
     showPractice(); return;
   }
-  if (button.dataset.rating && practice?.type === 'review' && practice.revealed) {
+  if (button.dataset.rating && practice?.type === 'review' && !practice.listening && practice.revealed) {
     logPractice(state, practice.ids[practice.index], button.dataset.rating); save();
     practice.index++; practice.revealed = false; if (practice.index >= practice.ids.length) practice.phase = 'done'; showPractice(); return;
   }
@@ -470,6 +484,12 @@ document.addEventListener('click', async event => {
     case 'saved-only': savedOnly = !savedOnly; render(); break;
     case 'review-due': startReview(due()); break;
     case 'review-all': startReview(Object.keys(state.reviews)); break;
+    case 'listen-learned': startReview(listeningQueue(), true); break;
+    case 'next-listening':
+      if (practice?.type !== 'review' || !practice.listening || !practice.revealed || practice.phase === 'done') break;
+      practice.index++; practice.revealed = false;
+      if (practice.index >= practice.ids.length) practice.phase = 'done';
+      showPractice(); break;
     case 'close-practice': closePractice(); break;
     case 'previous': stopRecording(); practice.index = Math.max(0, practice.index - 1); showPractice(); break;
     case 'next-phrase':

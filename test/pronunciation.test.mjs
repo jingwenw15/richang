@@ -19,7 +19,8 @@ test('every curriculum occurrence follows the chosen spoken 一 and 不 conventi
     ['一遍', 'yíbiàn'], ['一直', 'yìzhí'], ['一天', 'yìtiān'],
     ['一部', 'yíbù'], ['一说', 'yìshuō'], ['一号', 'yíhào'],
     ['不错', 'búcuò'], ['不够', 'búgòu'], ['不过', 'búguò'],
-    ['不着急', 'bùzháojí'], ['不好意思', 'bùhǎoyìsi']
+    ['不着急', 'bùzháojí'], ['不好意思', 'bùhǎoyìsi'],
+    ['一般', 'yìbān'], ['不在', 'búzài'], ['不是', 'búshì']
   ];
   for (const [zh, expected] of patterns) {
     const matches = entries.filter(entry => entry.zh.includes(zh));
@@ -40,4 +41,7 @@ test('neutral syllables and lexical third tones remain distinct', () => {
   assert.match(phraseById('plan2').pinyin, /^Yào bu yào/);
   assert.match(phraseById('change4').pinyin, /^Yàobu/);
   assert.match(phraseById('help4').pinyin, /lián bu shàng/);
+  assert.match(phraseById('prio5').pinyin, /lái bu jí/);
+  assert.match(phraseById('decline1').pinyin, /qù bu liǎo/);
+  assert.match(phraseById('decline5').pinyin, /yǒu kòng/);
 });

@@ -227,3 +227,82 @@ test('personal expressions remain escaped in the phrasebook and spaced review', 
   assert.doesNotMatch(ui.modal(), /<img src=x|<b>Zhōngwén|<button data-action="confirm-reset"/);
   assert.match(ui.modal(), /&lt;button/);
 });
+
+test('listening hides the answer, plays normal and slow audio, and preserves recall progress', async () => {
+  const now = Date.now();
+  const stored = { 'richang.v1': JSON.stringify({ version: 1, reviews: {
+    u1: { due: now - 1000, interval: 2, repetitions: 1 },
+    c3: { due: now - 2000, interval: 4, repetitions: 3 }
+  }, saved: ['u1'], activity: {} }) };
+  const spoken = [];
+  const ui = app(stored, { speechAvailable: async () => true, speak: async (text, slow) => { spoken.push([text, slow]); return true; }, stopSpeech() {} });
+  await ui.click({ page: 'review' });
+  assert.match(ui.html(), /Practice listening/);
+  const before = ui.state();
+  await ui.click({ action: 'listen-learned' });
+  assert.match(ui.modal(), /WHAT DID YOU HEAR/);
+  assert.doesNotMatch(ui.modal(), /我确认一下|Wǒ quèrèn|Just checking|data-rating/);
+  await ui.click({ speak: 'c3' }); await ui.click({ slow: 'c3' });
+  assert.deepEqual(spoken, [['我确认一下，你是说……', false], ['我确认一下，你是说……', true]]);
+  await ui.click({ action: 'next-listening' }); // No skipping without revealing.
+  assert.match(ui.modal(), /data-speak="c3"/);
+  await ui.click({ action: 'reveal' });
+  assert.match(ui.modal(), /我确认一下/);
+  assert.match(ui.modal(), /Just checking/);
+  await ui.click({ rating: 'easy' }); // Listening must never reschedule speaking recall.
+  assert.match(ui.modal(), /我确认一下/);
+  await ui.click({ action: 'next-listening' });
+  assert.doesNotMatch(ui.modal(), /我跟你说一下|Quick update/);
+  await ui.click({ action: 'reveal' }); await ui.click({ action: 'next-listening' });
+  assert.match(ui.modal(), /You listened to 2 phrases/);
+  assert.match(ui.modal(), /recall schedule is unchanged/);
+  assert.deepEqual(ui.state(), before);
+  await ui.click({ action: 'close-practice' }); await ui.click({ action: 'review-due' });
+  await ui.click({ action: 'reveal' }); await ui.click({ rating: 'good' });
+  assert.equal(ui.state().reviews.c3.repetitions, 4);
+});
+
+test('listening includes personal expressions, caps the drill, and respects script preferences', async () => {
+  const reviews = Object.fromEntries(scenarios.flatMap(s => s.phrases).slice(0, 12).map(p => [p.id, { due: Date.now() + 100000, interval: 2, repetitions: 1 }]));
+  const personal = { id: 'rlisten123_0', zh: '我想喝茶。', traditional: '我想喝茶。', pinyin: 'Wǒ xiǎng hē chá.', en: 'I would like tea.', note: 'A polite preference.', sceneTitle: 'A tea break', category: 'Everyday life', register: 'Friendly' };
+  reviews[personal.id] = { due: 1, interval: 1, repetitions: 1 };
+  const ui = app({ 'richang.v1': JSON.stringify({ version: 1, reviews, personalPhrases: [personal], settings: { traditional: true, pinyin: false, english: true } }) });
+  await ui.click({ page: 'review' }); await ui.click({ action: 'listen-learned' });
+  assert.doesNotMatch(ui.modal(), /我想喝茶|I would like tea/);
+  await ui.click({ action: 'reveal' }); assert.match(ui.modal(), /我想喝茶/);
+  assert.doesNotMatch(ui.modal(), /class="pinyin"/);
+  await ui.click({ action: 'next-listening' }); await ui.click({ action: 'reveal' });
+  assert.match(ui.modal(), /我跟你說一下/);
+  for (let i = 1; i < 10; i++) {
+    await ui.click({ action: 'reveal' }); await ui.click({ action: 'next-listening' });
+  }
+  assert.match(ui.modal(), /You listened to 10 phrases/);
+});
+
+test('new lessons appear in both conversation filters and support offline rehearsal', async () => {
+  const ui = app(); await ui.click({ page: 'scenarios' });
+  await ui.click({ filter: 'At work' });
+  assert.match(ui.html(), /data-start="video-calls"/);
+  assert.match(ui.html(), /data-start="priorities"/);
+  assert.doesNotMatch(ui.html(), /data-start="deliveries"/);
+  await ui.click({ filter: 'Everyday life' });
+  for (const id of ['weather', 'deliveries', 'routines', 'declining', 'catching-up', 'misunderstandings']) assert.ok(ui.html().includes(`data-start="${id}"`));
+  await ui.click({ page: 'rehearsal' });
+  ui.input('rehearsal-goal', 'Explain that my video call is choppy.');
+  await ui.click({ action: 'r-prepare' }); assert.match(ui.html(), /我这边有点卡/);
+});
+
+test('successive listening drills rotate through learned phrases beyond the first ten', async () => {
+  const ids = scenarios.flatMap(s => s.phrases).slice(0, 12).map(p => p.id);
+  const reviews = Object.fromEntries(ids.map(id => [id, { due: Date.now() + 86400000, interval: 1, repetitions: 1 }]));
+  const ui = app({ 'richang.v1': JSON.stringify({ version: 1, reviews }) });
+  await ui.click({ page: 'review' }); await ui.click({ action: 'listen-learned' });
+  assert.match(ui.modal(), /data-speak="u1"/);
+  for (let i = 0; i < 10; i++) {
+    await ui.click({ action: 'reveal' }); await ui.click({ action: 'next-listening' });
+  }
+  await ui.click({ action: 'close-practice' }); await ui.click({ action: 'listen-learned' });
+  assert.match(ui.modal(), /data-speak="c5"/);
+  await ui.click({ action: 'reveal' }); await ui.click({ action: 'next-listening' });
+  assert.match(ui.modal(), /data-speak="c6"/);
+});

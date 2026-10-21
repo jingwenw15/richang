@@ -1,6 +1,6 @@
-# Lesson text audit — October 15, 2026
+# Lesson text audit — updated October 20, 2026
 
-Reviewed all 96 teaching phrases and 48 roleplay prompts for Chinese wording, simplified/traditional correspondence, pinyin, English meaning, usage notes, and response context. This audit covers written lesson content; it does not independently evaluate the Mac speech voice's recordings.
+Reviewed all 144 teaching phrases and 72 roleplay prompts for Chinese wording, simplified/traditional correspondence, pinyin, English meaning, usage notes, and response context. This audit covers written lesson content; it does not independently evaluate the Mac speech voice's recordings.
 
 ## The daily phrase
 
@@ -31,7 +31,7 @@ The existing **yíxià** is correct for connected spoken Mandarin. 一 has the b
 | Thanks for explaining | Use the short acknowledgment **明白了，谢谢！** with matching pinyin **Míngbai le, xièxie!**. |
 | Roleplay | Give every turn an explicit speaking goal. For example, “Did you catch that last part?” now says you missed it and want a repeat. Without that context, both an acknowledgment and a repeat request could be sensible answers. |
 
-All 16 scenarios use conversational material. Their English translations are idiomatic equivalents rather than word-for-word glosses. Existing notes distinguish alternatives such as 地铁/捷运 and 买单/结账.
+All 24 scenarios use conversational material. Their English translations are idiomatic equivalents rather than word-for-word glosses. Existing notes distinguish alternatives such as 地铁/捷运 and 买单/结账.
 
 ## Friendly tech-team register
 
@@ -56,8 +56,16 @@ Eight new lessons add 48 phrases and 24 roleplay turns. They cover talking about
 
 The new phrases keep the friendly register, explicit usage notes, and matched simplified/traditional text. Script selection preserves the same words and pinyin; regional alternatives are explained in notes instead of silently changing the wording. New tone-change examples include 一天 **yì tiān**, 一部 **yí bù**, 这么一说 **zhème yì shuō**, 大一号 **dà yí hào**. 连不上 uses conversational neutral **bu** in a potential complement.
 
-Usage references include [ChinesePod’s visiting lesson](https://www.chinesepod.com/lesson/do-i-need-to-remove-my-shoes) for asking about changing shoes and [its dictionary entry for 消息](https://www.chinesepod.com/dictionary/%E6%B6%88%E6%81%AF) for neutral **xiāoxi**. The pinyin tests cover the additional 一 examples and neutral-tone patterns. All 16 lessons are exercised through their full learning and roleplay flow.
+Usage references include [ChinesePod’s visiting lesson](https://www.chinesepod.com/lesson/do-i-need-to-remove-my-shoes) for asking about changing shoes and [its dictionary entry for 消息](https://www.chinesepod.com/dictionary/%E6%B6%88%E6%81%AF) for neutral **xiāoxi**. The pinyin tests cover the additional 一 examples and neutral-tone patterns. All 24 lessons are exercised through their full learning and roleplay flow.
+
+## October 20 expansion
+
+Eight more lessons add 48 phrases and 24 prompts: video calls, priorities, weather, deliveries, routines, declining invitations, catching up, and misunderstandings. Work requests remain short and polite, aimed at familiar tech coworkers rather than formal business meetings. Every turn has an explicit communication goal.
+
+Reviewed the new text for wording, translation, script correspondence, and pinyin. The traditional forms preserve the same Mandarin words: 屏幕 remains 屏幕 and 链接 becomes 鏈接; the regional alternative 螢幕 is explained separately in a note. 一般 uses **yìbān**, 不在 uses **bú zài**, and 不是 uses **bú shì**. 来不及 and 去不了 use light **bu**; 去不了 also needs **liǎo**, and 有空 uses **kòng**. Usage notes distinguish 听错 from 没听清, explain 得 **děi**, and make open-ended invitations such as 改天再约 explicit. Automated checks protect these choices but do not replace an independent language review.
+
+Listening practice presents audio before the answer, then reveals the same reviewed phrase, script, and optional pinyin/English. It does not score comprehension or alter the spoken-recall schedule.
 
 ## Regression checks
 
-Automated checks protect the daily phrase and all current 一/不 examples, verify selected neutral-tone conventions, require a speaking goal for every roleplay turn, and exercise the new explanations in the renderer. The complete suite has 16 passing tests. These tests protect reviewed choices from accidental edits; they are not an automatic language-accuracy judge.
+Automated checks protect the daily phrase and all current 一/不 examples, verify selected neutral-tone conventions, require a speaking goal for every roleplay turn, and exercise the new explanations in the renderer. The complete suite has 36 passing tests. These tests protect reviewed choices from accidental edits; they are not an automatic language-accuracy judge.

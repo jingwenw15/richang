@@ -10,6 +10,12 @@ test('offline topic matching is transparent and every lesson supports a three-ex
   assert.equal(suggestRehearsalTopic('I am waiting on someone before I finish'), 'dependency');
   assert.equal(suggestRehearsalTopic('I need to reschedule because I will be late'), 'changing-plans');
   assert.equal(suggestRehearsalTopic('An unrelated legal document'), '');
+  for (const [goal, topic] of [
+    ['My video call is choppy', 'video-calls'], ['Ask my manager which deadline is urgent', 'priorities'],
+    ['Talk about rainy weather', 'weather'], ['Receive a package delivery', 'deliveries'],
+    ['Explain my commute routine', 'routines'], ['Decline a dinner invitation', 'declining'],
+    ['Catch up about their new job', 'catching-up'], ['Apologize for a mix-up', 'misunderstandings']
+  ]) assert.equal(suggestRehearsalTopic(goal), topic);
   assert.throws(() => createOfflinePreparation('missing'), /Choose an offline topic/);
   for (const topic of ['dependency', ...scenarios.map(s => s.id)]) {
     const plan = createOfflinePreparation(topic);

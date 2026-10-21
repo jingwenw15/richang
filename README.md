@@ -48,11 +48,12 @@ This opens the local app in your default browser. For browser development with a
 
 ## What you can do
 
-- Practice **96 phrases in 16 situations**: five conversations for work and 11 for everyday life.
+- Practice **144 phrases in 24 situations**: seven conversations for work and 17 for everyday life.
 - Listen at normal or slower speed, read optional pinyin and English, and switch character scripts.
 - Record yourself for up to 30 seconds and listen back against the example. This is self-listening practice, with no automated pronunciation grading.
 - Try the original three-turn guided lessons, or use Rehearsal for open responses. Connected rehearsal adds adaptive AI conversation and wording feedback.
 - Search the phrasebook in English, Chinese, or pinyin and bookmark useful phrases.
+- Train your ear with **Review → Practice listening**: normal or slower audio, hidden text until reveal, and up to ten learned phrases per drill. Due phrases come first, including your personal expressions. Repeated drills rotate through the remaining learned phrases while the app stays open. Listening drills do not change the spoken-recall schedule or award daily phrase activity.
 - Recall learned phrases in spaced review. “Again” returns in ten minutes, “Hard” in one day, “Got it” starts at two days, and “Easy” starts at four. Stronger recall increases the interval.
 - Track unique phrases practiced per day, completed conversations, streaks, and a configurable daily goal.
 - Export progress as JSON. Export is a manual backup; importing backups is not implemented in this version.
@@ -67,7 +68,7 @@ API keys are held in the desktop main process. A newly entered key lasts only un
 
 Pinyin shows the usual spoken tone changes of 一 and 不, retains lexical third-tone marks, and uses unmarked syllables for common neutral tones. The daily phrase explains why 一下 is shown as **yíxià**, while Preferences includes a short guide to the notation. Traditional characters change the script, not the Mandarin pronunciation variety.
 
-The [lesson text audit](docs/content-audit.md) covers all 96 phrases and 48 roleplay prompts, explains the notation choices and refinements, and links the pronunciation references.
+The [lesson text audit](docs/content-audit.md) covers all 144 phrases and 72 roleplay prompts, explains the notation choices and refinements, and links the pronunciation references.
 
 ## Everyday conversations
 
@@ -86,6 +87,21 @@ Choose **Conversations → Everyday life** to find these lessons. The home scree
 
 These join the existing weekend chat, cafés and restaurants, and getting-around lessons. Each lesson has six phrases with pinyin, both character scripts, English meanings, usage notes, and a three-turn guided conversation. New phrases use the same saved phrasebook, recording, review, and progress features. Existing progress and bookmarks are preserved.
 
+## More conversations for work and daily life
+
+The latest eight lessons each add six phrases and a three-turn roleplay. They are also available as offline rehearsal topics, searchable phrases, bookmarks, and review material.
+
+| Lesson | What you practice |
+| --- | --- |
+| Video calls & audio hiccups | Checking sound, sharing a screen, and picking up after a dropped connection. |
+| Priorities & realistic timelines | Asking what is urgent, explaining a tradeoff, and agreeing on a deadline. |
+| Weather & changing plans | Casual weather chat and choosing an indoor alternative. |
+| Packages & delivery calls | Arranging a package handoff and confirming receipt. |
+| Mornings, commuting & routines | Sharing your usual day and asking a follow-up. |
+| Declining an invitation kindly | Saying no clearly, giving a short reason, and suggesting another time. |
+| Catching up & staying in touch | Asking about a new job and leaving room for a longer conversation. |
+| Apologizing & clearing things up | Owning a mix-up and confirming a revised plan. |
+
 ## Build a Mac app
 
 ```sh
@@ -102,9 +118,9 @@ Packaging produces an unsigned personal-use app. Developer ID signing, notarizat
 npm test
 ```
 
-The build uses a small dependency-free bundler to assemble the three renderer modules. Electron and the packager are the only third-party development dependencies.
+The build uses a small dependency-free bundler to assemble the five renderer modules. Electron and the packager are the only third-party development dependencies.
 
-- `src/content.js`: phrases, pinyin, translations, usage notes, and roleplay prompts.
+- `src/content.js` and `src/more-lessons.js`: phrases, pinyin, translations, usage notes, and roleplay prompts.
 - `src/model.js`: progress data, review intervals, daily activity, and streaks.
 - `src/rehearsal.js`: preparation schemas, offline practice, validation, and saved rehearsal data.
 - `src/app.js`: screens, learning sessions, listening, and recording.
@@ -117,8 +133,8 @@ The renderer has no Node access. A restricted preload exposes speech and specifi
 
 ## Verification status
 
-The automated tests cover curriculum integrity, all 16 original lesson flows, personal rehearsal from preparation through completion, review, reminders, persistence, retry behavior, escaping, provider response handling, key storage, transcription request construction, daily goals, review timing, and streaks. Provider tests use mocked responses and never make paid API calls.
+The 36 automated tests cover curriculum integrity, listening answer concealment and speech dispatch, preservation of recall schedules, all 24 lesson flows, personal rehearsal from preparation through completion, review, reminders, persistence, retry behavior, escaping, provider response handling, key storage, transcription request construction, daily goals, review timing, and streaks. Provider tests use mocked responses and never make paid API calls.
 
-The installed Electron executable exited during macOS application initialization (`SIGABRT`) when launched by this development environment. Packaging also failed because its download request could not complete. An existing running window was reachable, but reloading it did not load the current renderer. Consequently, the new desktop UI, live audio playback, microphone recording, and live provider calls remain unverified here. Restart the app from your terminal to complete those checks.
+The installed Electron executable exited during macOS application initialization (`SIGABRT`) when launched by this development environment. Packaging also failed because its download request could not complete. The October 20 browser preview check verified the expanded catalogue, the new video-call lesson and roleplay, and listening conceal/reveal with no browser console errors. Native Electron audio and microphone behavior have not been reverified. An existing running window was reachable, but reloading it did not load the current renderer. Consequently, the new desktop UI, live audio playback, microphone recording, and live provider calls remain unverified here. Restart the app from your terminal to complete those checks.
 
 Electron setup follows the [official security guidance](https://www.electronjs.org/docs/latest/tutorial/security).

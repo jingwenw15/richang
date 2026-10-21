@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import { defaultState, hydrate, dateKey, dueIds, logPractice, scheduleReview, streak } from '../src/model.js';
 import { scenarios, phrases, phraseById } from '../src/content.js';
 
-test('curriculum has 96 unique, bilingual phrases and valid roleplay choices', () => {
-  assert.equal(scenarios.length, 16); assert.equal(phrases.length, 96);
+test('curriculum has 144 unique, bilingual phrases and valid roleplay choices', () => {
+  assert.equal(scenarios.length, 24); assert.equal(phrases.length, 144);
   assert.equal(new Set(scenarios.map(s => s.id)).size, scenarios.length);
   assert.equal(new Set(phrases.map(p => p.id)).size, phrases.length);
   for (const scene of scenarios) {
@@ -20,7 +20,7 @@ test('curriculum has 96 unique, bilingual phrases and valid roleplay choices', (
     }
   }
   assert.equal(phraseById('u1').category, 'At work');
-  assert.equal(scenarios.filter(s => s.category === 'Everyday life').length, 11);
+  assert.equal(scenarios.filter(s => s.category === 'Everyday life').length, 17);
 });
 test('hydration safely recovers from missing or malformed stored progress', () => {
   assert.deepEqual(hydrate(null), defaultState());
