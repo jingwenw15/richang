@@ -3,10 +3,12 @@ import assert from 'node:assert/strict';
 import { vocabulary, vocabularyGroups, vocabularyById, selectVocabulary } from '../src/vocabulary.js';
 import { phrases } from '../src/content.js';
 
-test('vocabulary contains 48 distinct words in six topics, each with a complete example', () => {
-  assert.equal(vocabulary.length, 48);
-  assert.equal(vocabularyGroups.length, 6);
+test('vocabulary contains 96 distinct words in twelve topics, each with a complete example', () => {
+  assert.equal(vocabulary.length, 96);
+  assert.equal(vocabularyGroups.length, 12);
   assert.equal(new Set([...vocabulary, ...phrases].map(p => p.id)).size, vocabulary.length + phrases.length);
+  assert.equal(new Set(vocabulary.map(word => word.zh)).size, vocabulary.length);
+  assert.equal(new Set(vocabularyGroups.map(group => group.id)).size, vocabularyGroups.length);
   for (const group of vocabularyGroups) assert.equal(group.words.length, 8);
   for (const word of vocabulary) {
     assert.match(word.id, /^v_[a-z-]+$/);
@@ -21,6 +23,9 @@ test('vocabulary contains 48 distinct words in six topics, each with a complete 
 test('vocabulary search accepts Chinese, traditional characters, meanings, and pinyin with or without tones', () => {
   for (const query of ['反馈', '反饋', 'feedback', 'fankui', 'fǎn kuì', 'FANKUI']) {
     assert.ok(selectVocabulary({ query }).some(word => word.id === 'v_feedback'), query);
+  }
+  for (const [query, id] of [['shouji', 'v_phone'], ['鑰匙', 'v_keys'], ['diannao', 'v_computer'], ['gengxin', 'v_update'], ['piányi', 'v_cheap']]) {
+    assert.ok(selectVocabulary({ query }).some(word => word.id === id), query);
   }
   assert.equal(selectVocabulary({ topic: 'work' }).length, 8);
   assert.deepEqual(selectVocabulary({ topic: 'food', query: 'feedback' }), []);
@@ -44,4 +49,13 @@ test('ambiguous readings, neutral syllables, and spoken tone changes are explain
   assert.match(vocabularyById('v_or-question').note, /choice question/);
   assert.match(vocabularyById('v_or-statement').note, /statement/);
   assert.match(vocabularyById('v_again').note, /又/);
+  assert.equal(vocabularyById('v_update').pinyin, 'gēngxīn');
+  assert.equal(vocabularyById('v_more').pinyin, 'gèng');
+  assert.equal(vocabularyById('v_cheap').pinyin, 'piányi');
+  assert.equal(vocabularyById('v_keys').pinyin, 'yàoshi');
+  assert.equal(vocabularyById('v_about-same').pinyin, 'chàbuduō');
+  assert.match(vocabularyById('v_together').example.pinyin, /yìqǐ/);
+  assert.match(vocabularyById('v_receipt').example.pinyin, /yì zhāng/);
+  assert.match(vocabularyById('v_size').example.pinyin, /yìdiǎn/);
+  assert.match(vocabularyById('v_network').example.pinyin, /bú tài/);
 });

@@ -72,7 +72,7 @@ The [lesson text audit](docs/content-audit.md) covers all 144 phrases and 72 rol
 
 ## Common vocabulary
 
-Open **Vocabulary** in the sidebar for **48 useful words across six topics**: time and routines, connecting your thoughts, work and your team, food and everyday errands, getting around, and feelings and availability. Each word has simplified and traditional characters, pinyin, a short usage note, and a conversational example with its own pinyin and translation.
+Open **Vocabulary** in the sidebar for **96 useful words across twelve topics**: time and routines, connecting your thoughts, work and your team, food and everyday errands, getting around, feelings and availability, plans and getting things done, devices and digital life, people and relationships, home and daily life, shopping and services, and describing and comparing. Each word has simplified and traditional characters, pinyin, a short usage note, and a conversational example with its own pinyin and translation.
 
 - Listen to the word or its example separately. The normal reading, character, translation, and listening-speed preferences apply.
 - Search in English, either character script, or pinyin with or without tones: `fankui` and `fǎnkuì` both find 反馈.
@@ -80,7 +80,7 @@ Open **Vocabulary** in the sidebar for **48 useful words across six topics**: ti
 - Choose **Practice word** or **Practice these words** for recall practice. Batches contain up to ten matching words, with unpracticed words first. Reveal the word and example, then rate your recall to add it to spaced review and daily activity.
 - Practiced words also appear in Review and listening drills. Browsing and bookmarking do not award practice or change the review schedule.
 
-Vocabulary progress uses the existing local save and export format; previous lesson progress and bookmarks are preserved. The 48 words are a practical starter selection, not a frequency ranking or an HSK-level claim. Notes explain distinctions such as 再/又, 还是/或者, and 有空 **kòng** versus empty **kōng**.
+Vocabulary progress uses the existing local save and export format; previous lesson progress and bookmarks are preserved. The 96 words are a practical starter selection, not a frequency ranking or an HSK-level claim. Notes explain distinctions such as 再/又, 还是/或者, and 有空 **kòng** versus empty **kōng**.
 
 ## Everyday conversations
 
@@ -146,7 +146,7 @@ The renderer has no Node access. A restricted preload exposes speech and specifi
 
 ## Verification status
 
-The 43 automated tests cover curriculum integrity, listening answer concealment and speech dispatch, preservation of recall schedules, all 24 lesson flows, personal rehearsal from preparation through completion, review, reminders, persistence, retry behavior, escaping, provider response handling, key storage, transcription request construction, daily goals, review timing, and streaks. Provider tests use mocked responses and never make paid API calls.
+The 44 automated tests cover curriculum integrity, listening answer concealment and speech dispatch, preservation of recall schedules, all 24 lesson flows, personal rehearsal from preparation through completion, review, reminders, persistence, retry behavior, escaping, provider response handling, key storage, transcription request construction, daily goals, review timing, and streaks. Provider tests use mocked responses and never make paid API calls.
 
 The installed Electron executable exited during macOS application initialization (`SIGABRT`) when launched by this development environment. Packaging also failed because its download request could not complete. The October 23 browser preview check verified vocabulary discovery, untoned pinyin search, hidden-answer recall, example display, and rating controls. The October 20 browser preview check verified the expanded catalogue, the new video-call lesson and roleplay, and listening conceal/reveal with no browser console errors. Native Electron audio and microphone behavior have not been reverified. An existing running window was reachable, but reloading it did not load the current renderer. Consequently, the new desktop UI, live audio playback, microphone recording, and live provider calls remain unverified here. Restart the app from your terminal to complete those checks.
 

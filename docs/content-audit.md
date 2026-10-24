@@ -74,6 +74,14 @@ Reviewed the word/example pairs for usage, pronunciation, and script corresponde
 
 Integrity tests require unique stable word IDs and complete examples demonstrating each target word in both scripts. Renderer tests cover hidden-answer recall, word/example speech dispatch, preferences, search and saved filters, shared review, and preservation of previous lesson data. These are regression checks, not an independent linguistic certification.
 
+## Vocabulary expansion to 96 words
+
+Added another 48 words and example sentences in six topics: plans and getting things done, devices and digital life, people and relationships, home and daily life, shopping and services, and describing and comparing. All original word and topic IDs remain unchanged, preserving saved words and review history.
+
+Reviewed examples for conversational wording and matching character scripts. Pronunciation notes cover 更新 **gēngxīn** versus 更 **gèng**, 便宜 **piányi** versus 方便 **fāngbiàn**, and neutral syllables in 钥匙 **yàoshi**, 试试 **shìshi**, and 差不多 **chàbuduō**. New spoken-tone examples include 一张 **yì zhāng**, 一起 **yìqǐ**, and 不太 **bú tài**. Regional alternatives such as 螢幕 and 連結 appear separately in notes; selecting traditional script retains 屏幕 and 鏈接 with the original Mandarin pronunciation.
+
+Tests also require unique Chinese headwords and topic IDs, search the new entries using untoned pinyin and traditional characters, and complete eight-word recall sessions in all six added topics while preserving existing bookmarks, completed lessons, and review history.
+
 ## Regression checks
 
-Automated checks protect the daily phrase and all current 一/不 examples, verify selected neutral-tone conventions, require a speaking goal for every roleplay turn, and exercise the new explanations in the renderer. The complete suite has 43 passing tests. These tests protect reviewed choices from accidental edits; they are not an automatic language-accuracy judge.
+Automated checks protect the daily phrase and all current 一/不 examples, verify selected neutral-tone conventions, require a speaking goal for every roleplay turn, and exercise the new explanations in the renderer. The complete suite has 44 passing tests. These tests protect reviewed choices from accidental edits; they are not an automatic language-accuracy judge.

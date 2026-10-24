@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import vm from 'node:vm';
 import { scenarios } from '../src/content.js';
+import { vocabulary } from '../src/vocabulary.js';
 
 // Run the actual bundled renderer with small DOM/storage doubles. Browser layout,
 // microphone permissions, and OS speech need a real Mac and are documented separately.
@@ -311,8 +312,8 @@ test('vocabulary browsing, search and bookmarks preserve lesson progress without
   const ui = app({ 'richang.v1': JSON.stringify({ version: 1, saved: ['u1'], completed: ['updates'], reviews: { u1: { due: 1, interval: 2, repetitions: 1 } }, activity: {} }) });
   assert.match(ui.html(), /data-page="vocabulary"/);
   await ui.click({ page: 'vocabulary' });
-  assert.match(ui.html(), /48 useful words/);
-  assert.match(ui.html(), /0 of 48 words practiced/);
+  assert.ok(ui.html().includes(`${vocabulary.length} useful words`));
+  assert.ok(ui.html().includes(`0 of ${vocabulary.length} words practiced`));
   const before = ui.state();
   ui.input('vocab-search', 'FANKUI');
   assert.match(ui.element('#vocab-results').innerHTML, /反馈/);
@@ -345,7 +346,7 @@ test('word recall hides all Chinese until reveal, then joins spaced review, list
   assert.equal(ui.state().reviews.v_feedback.lastRating, 'again');
   assert.equal(Object.values(ui.state().activity)[0].length, 1);
   await ui.click({ action: 'close-practice' });
-  assert.match(ui.html(), /1 of 48 words practiced/);
+  assert.ok(ui.html().includes(`1 of ${vocabulary.length} words practiced`));
   const restored = app(ui.stored); await restored.click({ page: 'library' });
   restored.input('phrase-search', 'feedback');
   assert.match(restored.element('#phrase-results').innerHTML, /反馈/);
@@ -379,4 +380,34 @@ test('vocabulary batches use only matching words, cap at ten, and prioritize new
   assert.match(ui.modal(), /You reviewed 8 items/);
   await ui.click({ action: 'close-practice' }); ui.input('vocab-search', 'unmatched-word');
   await ui.click({ action: 'vocab-practice' }); assert.equal(ui.isOpen(), false);
+});
+
+test('all six additional vocabulary topics support recall while preserving existing progress', async () => {
+  const originalReview = { due: 1, interval: 4, repetitions: 3 };
+  const ui = app({ 'richang.v1': JSON.stringify({ version: 1, saved: ['v_feedback', 'u1'], completed: ['updates'], reviews: { v_feedback: originalReview } }) });
+  await ui.click({ page: 'vocabulary' });
+  assert.match(ui.html(), /96 useful words/);
+  assert.match(ui.html(), /12 topics/);
+  for (const topic of ['planning', 'devices', 'people', 'home', 'shopping', 'describing']) {
+    await ui.click({ vtopic: topic });
+    const words = vocabulary.filter(word => word.topic === topic);
+    assert.equal(words.length, 8);
+    for (const word of words) assert.ok(ui.html().includes(`data-vpractice="${word.id}"`));
+    assert.doesNotMatch(ui.html(), /data-vpractice="v_feedback"/);
+    await ui.click({ action: 'vocab-practice' });
+    for (const word of words) {
+      await ui.click({ action: 'reveal' });
+      assert.ok(ui.modal().includes(word.zh), word.id);
+      assert.ok(ui.modal().includes(word.example.zh), word.id);
+      await ui.click({ rating: 'good' });
+    }
+    assert.match(ui.modal(), /You reviewed 8 items/);
+    await ui.click({ action: 'close-practice' });
+  }
+  const restored = app(ui.stored); await restored.click({ page: 'vocabulary' });
+  assert.match(restored.html(), /49 of 96 words practiced/);
+  assert.deepEqual(restored.state().saved, ['v_feedback', 'u1']);
+  assert.deepEqual(restored.state().completed, ['updates']);
+  assert.deepEqual(restored.state().reviews.v_feedback, originalReview);
+  assert.equal(Object.values(restored.state().activity)[0].length, 48);
 });
