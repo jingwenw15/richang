@@ -1,4 +1,4 @@
-# Lesson text audit — updated October 20, 2026
+# Lesson text audit — updated October 23, 2026
 
 Reviewed all 144 teaching phrases and 72 roleplay prompts for Chinese wording, simplified/traditional correspondence, pinyin, English meaning, usage notes, and response context. This audit covers written lesson content; it does not independently evaluate the Mac speech voice's recordings.
 
@@ -66,6 +66,14 @@ Reviewed the new text for wording, translation, script correspondence, and pinyi
 
 Listening practice presents audio before the answer, then reveals the same reviewed phrase, script, and optional pinyin/English. It does not score comprehension or alter the spoken-recall schedule.
 
+## October 23 vocabulary section
+
+Added 48 common words and 48 example sentences, grouped into six practical topics. Every entry has matched simplified/traditional forms, pinyin, English meaning, a usage note, and an example with pinyin and translation. This is a starter selection for everyday conversation, not a corpus-derived frequency list or an exam syllabus.
+
+Reviewed the word/example pairs for usage, pronunciation, and script correspondence. Notes distinguish 还 **hái** (still/also) from **huán** (return), 有空 **kòng** from empty **kōng**, and the uses of 再/又 and 还是/或者. Examples retain the curriculum’s spoken tone convention: 一份 **yí fèn**, 下一站 **xià yí zhàn**, 一般 **yìbān**, 不太 **bú tài**, and 不够 **bú gòu**. Neutral syllables include 觉得 **juéde**, 舒服 **shūfu**, and 麻烦 **máfan**. Traditional script preserves the Mandarin wording; 地鐵 remains the same word, with regional 捷運 given separately in the usage note.
+
+Integrity tests require unique stable word IDs and complete examples demonstrating each target word in both scripts. Renderer tests cover hidden-answer recall, word/example speech dispatch, preferences, search and saved filters, shared review, and preservation of previous lesson data. These are regression checks, not an independent linguistic certification.
+
 ## Regression checks
 
-Automated checks protect the daily phrase and all current 一/不 examples, verify selected neutral-tone conventions, require a speaking goal for every roleplay turn, and exercise the new explanations in the renderer. The complete suite has 36 passing tests. These tests protect reviewed choices from accidental edits; they are not an automatic language-accuracy judge.
+Automated checks protect the daily phrase and all current 一/不 examples, verify selected neutral-tone conventions, require a speaking goal for every roleplay turn, and exercise the new explanations in the renderer. The complete suite has 43 passing tests. These tests protect reviewed choices from accidental edits; they are not an automatic language-accuracy judge.

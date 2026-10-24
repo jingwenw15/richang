@@ -15,3 +15,21 @@ dialog{width:660px;max-width:calc(100% - 40px);max-height:calc(100vh - 50px);ove
 @media(max-width:1100px){.rehearsal-layout,.rehearsal-talk-layout{grid-template-columns:1fr}.rehearsal-starters{display:grid;grid-template-columns:1fr 1fr;gap:12px}.rehearsal-starters>.overline{grid-column:1/-1}.rehearsal-example{margin:0}.rehearsal-promise{margin:0}.rehearsal-talk-layout>aside{padding-top:0}.rehearsal-input-actions .field-help{max-width:240px}.rehearsal-session-heading h1{font-size:33px}}
 @media(max-width:650px){.rehearsal-banner{padding:17px;flex-wrap:wrap;gap:12px}.rehearsal-banner .scene-icon{display:none}.rehearsal-banner .button{width:100%}.rehearsal-compose{padding:19px}.rehearsal-starters{grid-template-columns:1fr}.rehearsal-history-card{padding:18px;align-items:flex-start;flex-direction:column;gap:13px}.rehearsal-history-card h3{font-size:20px}.rehearsal-history-card .button{width:100%}.rehearsal-steps{gap:12px;font-size:9px}.rehearsal-session-heading h1{font-size:29px}.rehearsal-expression{padding:19px 15px;gap:12px}.expression-number{font-size:18px}.rehearsal-expression .phrase-actions{gap:7px}.rehearsal-utterance h3{font-size:22px}.rehearsal-input-actions{align-items:flex-start;flex-direction:column;gap:10px}.rehearsal-done{padding:25px 18px}.rehearsal-done h2{font-size:27px}.rehearsal-takeaway{padding:18px}.rehearsal-progress{gap:20px;flex-wrap:wrap}.rehearsal-progress .text-button{margin-left:0}.settings-actions{flex-wrap:wrap}}
 @media(max-height:850px){.sidebar-note{display:none}}
+
+/* Common vocabulary */
+.vocab-summary{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;margin:-5px 0 22px;font-size:12px;color:#647757}
+.vocab-topics{flex-wrap:wrap;gap:7px}
+.vocab-help{font-size:12px;line-height:1.8;color:#647757;max-width:750px;margin:-8px 0 22px}
+.vocab-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.vocab-card{border:1px solid var(--line);border-radius:12px;padding:23px;background:#fdfefa;min-width:0;display:flex;flex-direction:column}
+.vocab-card-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+.vocab-card h2{font-family:'Songti SC','STSong',serif;font-size:34px;font-weight:500;line-height:1.4}
+.vocab-card .pinyin,.vocab-example .pinyin{font-size:13px;color:#647757;line-height:1.8}
+.vocab-card .translation,.vocab-example .translation{font-size:13px;line-height:1.8;color:#566d4b}
+.vocab-note{font-size:12px;line-height:1.8;color:#647757;margin:14px 0}
+.vocab-example{padding:17px;background:#f0f5e8;border-radius:8px;margin:12px 0}
+.vocab-example-zh{font-family:'Songti SC','STSong',serif;font-size:21px;line-height:1.7;margin-top:8px;color:#3e5733}
+.vocab-example .text-button{margin-top:10px}
+.vocab-card-actions{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:auto;padding-top:14px}
+@media(max-width:1000px){.vocab-grid{grid-template-columns:1fr}}
+@media(max-width:650px){.vocab-card{padding:19px}.vocab-topics button{font-size:11px}.vocab-summary{font-size:11px}}

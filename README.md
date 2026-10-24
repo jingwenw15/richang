@@ -55,7 +55,7 @@ This opens the local app in your default browser. For browser development with a
 - Search the phrasebook in English, Chinese, or pinyin and bookmark useful phrases.
 - Train your ear with **Review → Practice listening**: normal or slower audio, hidden text until reveal, and up to ten learned phrases per drill. Due phrases come first, including your personal expressions. Repeated drills rotate through the remaining learned phrases while the app stays open. Listening drills do not change the spoken-recall schedule or award daily phrase activity.
 - Recall learned phrases in spaced review. “Again” returns in ten minutes, “Hard” in one day, “Got it” starts at two days, and “Easy” starts at four. Stronger recall increases the interval.
-- Track unique phrases practiced per day, completed conversations, streaks, and a configurable daily goal.
+- Track unique words and phrases practiced per day, completed conversations, streaks, and a configurable daily goal.
 - Export progress as JSON. Export is a manual backup; importing backups is not implemented in this version.
 
 Advancing past a phrase logs it as practiced and schedules review; this measures practice activity, not proven fluency. Closing a lesson early keeps phrases you practiced, but does not mark the conversation completed.
@@ -69,6 +69,18 @@ API keys are held in the desktop main process. A newly entered key lasts only un
 Pinyin shows the usual spoken tone changes of 一 and 不, retains lexical third-tone marks, and uses unmarked syllables for common neutral tones. The daily phrase explains why 一下 is shown as **yíxià**, while Preferences includes a short guide to the notation. Traditional characters change the script, not the Mandarin pronunciation variety.
 
 The [lesson text audit](docs/content-audit.md) covers all 144 phrases and 72 roleplay prompts, explains the notation choices and refinements, and links the pronunciation references.
+
+## Common vocabulary
+
+Open **Vocabulary** in the sidebar for **48 useful words across six topics**: time and routines, connecting your thoughts, work and your team, food and everyday errands, getting around, and feelings and availability. Each word has simplified and traditional characters, pinyin, a short usage note, and a conversational example with its own pinyin and translation.
+
+- Listen to the word or its example separately. The normal reading, character, translation, and listening-speed preferences apply.
+- Search in English, either character script, or pinyin with or without tones: `fankui` and `fǎnkuì` both find 反馈.
+- Filter by topic or saved words. Bookmarks also appear in the shared Phrasebook.
+- Choose **Practice word** or **Practice these words** for recall practice. Batches contain up to ten matching words, with unpracticed words first. Reveal the word and example, then rate your recall to add it to spaced review and daily activity.
+- Practiced words also appear in Review and listening drills. Browsing and bookmarking do not award practice or change the review schedule.
+
+Vocabulary progress uses the existing local save and export format; previous lesson progress and bookmarks are preserved. The 48 words are a practical starter selection, not a frequency ranking or an HSK-level claim. Notes explain distinctions such as 再/又, 还是/或者, and 有空 **kòng** versus empty **kōng**.
 
 ## Everyday conversations
 
@@ -118,10 +130,11 @@ Packaging produces an unsigned personal-use app. Developer ID signing, notarizat
 npm test
 ```
 
-The build uses a small dependency-free bundler to assemble the five renderer modules. Electron and the packager are the only third-party development dependencies.
+The build uses a small dependency-free bundler to assemble the six renderer modules. Electron and the packager are the only third-party development dependencies.
 
 - `src/content.js` and `src/more-lessons.js`: phrases, pinyin, translations, usage notes, and roleplay prompts.
 - `src/model.js`: progress data, review intervals, daily activity, and streaks.
+- `src/vocabulary.js`: common vocabulary, contextual examples, topic groups, and tone-insensitive search.
 - `src/rehearsal.js`: preparation schemas, offline practice, validation, and saved rehearsal data.
 - `src/app.js`: screens, learning sessions, listening, and recording.
 - `src/styles.css`: responsive desktop interface using system fonts.
@@ -133,8 +146,8 @@ The renderer has no Node access. A restricted preload exposes speech and specifi
 
 ## Verification status
 
-The 36 automated tests cover curriculum integrity, listening answer concealment and speech dispatch, preservation of recall schedules, all 24 lesson flows, personal rehearsal from preparation through completion, review, reminders, persistence, retry behavior, escaping, provider response handling, key storage, transcription request construction, daily goals, review timing, and streaks. Provider tests use mocked responses and never make paid API calls.
+The 43 automated tests cover curriculum integrity, listening answer concealment and speech dispatch, preservation of recall schedules, all 24 lesson flows, personal rehearsal from preparation through completion, review, reminders, persistence, retry behavior, escaping, provider response handling, key storage, transcription request construction, daily goals, review timing, and streaks. Provider tests use mocked responses and never make paid API calls.
 
-The installed Electron executable exited during macOS application initialization (`SIGABRT`) when launched by this development environment. Packaging also failed because its download request could not complete. The October 20 browser preview check verified the expanded catalogue, the new video-call lesson and roleplay, and listening conceal/reveal with no browser console errors. Native Electron audio and microphone behavior have not been reverified. An existing running window was reachable, but reloading it did not load the current renderer. Consequently, the new desktop UI, live audio playback, microphone recording, and live provider calls remain unverified here. Restart the app from your terminal to complete those checks.
+The installed Electron executable exited during macOS application initialization (`SIGABRT`) when launched by this development environment. Packaging also failed because its download request could not complete. The October 23 browser preview check verified vocabulary discovery, untoned pinyin search, hidden-answer recall, example display, and rating controls. The October 20 browser preview check verified the expanded catalogue, the new video-call lesson and roleplay, and listening conceal/reveal with no browser console errors. Native Electron audio and microphone behavior have not been reverified. An existing running window was reachable, but reloading it did not load the current renderer. Consequently, the new desktop UI, live audio playback, microphone recording, and live provider calls remain unverified here. Restart the app from your terminal to complete those checks.
 
 Electron setup follows the [official security guidance](https://www.electronjs.org/docs/latest/tutorial/security).

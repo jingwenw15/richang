@@ -108,12 +108,12 @@ test('new everyday lessons are discoverable and existing progress survives the e
   await ui.click({ page: 'library' });
   ui.input('phrase-search', 'charger');
   assert.match(ui.element('#phrase-results').innerHTML, /充电器/);
-  assert.equal(ui.element('#library-count').textContent, '1 phrases');
+  assert.equal(ui.element('#library-count').textContent, '1 item');
 });
 test('search handles user text as text, saved filtering, and pinyin preferences persist', async () => {
   const ui = app(); await ui.click({ page: 'library' });
   ui.input('phrase-search', 'latte'); assert.match(ui.element('#phrase-results').innerHTML, /拿铁/);
-  assert.equal(ui.element('#library-count').textContent, '1 phrases');
+  assert.equal(ui.element('#library-count').textContent, '1 item');
   ui.input('phrase-search', '<img src=x onerror=alert(1)>');
   await ui.click({ filter: 'All situations' }); assert.doesNotMatch(ui.html(), /<img src=x/);
   await ui.click({ action: 'pinyin' }); assert.equal(ui.state().settings.pinyin, false);
@@ -126,7 +126,7 @@ test('review reveals only on request, rates recall, and does not count a phrase 
   const ui = app(stored); await ui.click({ page: 'review' }); await ui.click({ action: 'review-due' });
   assert.doesNotMatch(ui.modal(), /我跟你说一下/);
   await ui.click({ action: 'reveal' }); assert.match(ui.modal(), /我跟你说一下/);
-  await ui.click({ rating: 'again' }); assert.match(ui.modal(), /You reviewed 1 phrase/);
+  await ui.click({ rating: 'again' }); assert.match(ui.modal(), /You reviewed 1 item/);
   assert.equal(ui.state().reviews.u1.lastRating, 'again');
   assert.ok(ui.state().reviews.u1.due > now && ui.state().reviews.u1.due < now + 610000);
 });
@@ -254,7 +254,7 @@ test('listening hides the answer, plays normal and slow audio, and preserves rec
   await ui.click({ action: 'next-listening' });
   assert.doesNotMatch(ui.modal(), /我跟你说一下|Quick update/);
   await ui.click({ action: 'reveal' }); await ui.click({ action: 'next-listening' });
-  assert.match(ui.modal(), /You listened to 2 phrases/);
+  assert.match(ui.modal(), /You listened to 2 items/);
   assert.match(ui.modal(), /recall schedule is unchanged/);
   assert.deepEqual(ui.state(), before);
   await ui.click({ action: 'close-practice' }); await ui.click({ action: 'review-due' });
@@ -276,7 +276,7 @@ test('listening includes personal expressions, caps the drill, and respects scri
   for (let i = 1; i < 10; i++) {
     await ui.click({ action: 'reveal' }); await ui.click({ action: 'next-listening' });
   }
-  assert.match(ui.modal(), /You listened to 10 phrases/);
+  assert.match(ui.modal(), /You listened to 10 items/);
 });
 
 test('new lessons appear in both conversation filters and support offline rehearsal', async () => {
@@ -305,4 +305,78 @@ test('successive listening drills rotate through learned phrases beyond the firs
   assert.match(ui.modal(), /data-speak="c5"/);
   await ui.click({ action: 'reveal' }); await ui.click({ action: 'next-listening' });
   assert.match(ui.modal(), /data-speak="c6"/);
+});
+
+test('vocabulary browsing, search and bookmarks preserve lesson progress without awarding practice', async () => {
+  const ui = app({ 'richang.v1': JSON.stringify({ version: 1, saved: ['u1'], completed: ['updates'], reviews: { u1: { due: 1, interval: 2, repetitions: 1 } }, activity: {} }) });
+  assert.match(ui.html(), /data-page="vocabulary"/);
+  await ui.click({ page: 'vocabulary' });
+  assert.match(ui.html(), /48 useful words/);
+  assert.match(ui.html(), /0 of 48 words practiced/);
+  const before = ui.state();
+  ui.input('vocab-search', 'FANKUI');
+  assert.match(ui.element('#vocab-results').innerHTML, /反馈/);
+  assert.equal(ui.element('#vocab-count').textContent, '1 word');
+  await ui.click({ save: 'v_feedback' });
+  assert.match(ui.html(), /Saved words \(1\)/);
+  await ui.click({ action: 'vocab-saved' });
+  assert.match(ui.html(), /反馈/);
+  await ui.click({ save: 'v_feedback' });
+  assert.match(ui.html(), /No saved words match yet/);
+  for (const key of ['reviews', 'activity', 'saved', 'completed']) assert.deepEqual(ui.state()[key], before[key]);
+  ui.input('vocab-search', '<img src=x onerror=alert(1)>');
+  await ui.click({ vtopic: 'work' });
+  assert.doesNotMatch(ui.html(), /<img src=x/);
+  const restored = app(ui.stored); await restored.click({ page: 'vocabulary' });
+  assert.deepEqual(restored.state().completed, ['updates']);
+  assert.equal(restored.state().reviews.u1.repetitions, 1);
+});
+
+test('word recall hides all Chinese until reveal, then joins spaced review, listening, and the phrasebook', async () => {
+  const ui = app(); await ui.click({ page: 'vocabulary' });
+  await ui.click({ vpractice: 'v_feedback' });
+  assert.ok(ui.isOpen()); assert.match(ui.modal(), /feedback/);
+  assert.doesNotMatch(ui.modal(), /反馈|反饋|fǎnkuì|我在等/);
+  await ui.click({ action: 'close-practice' });
+  assert.equal(ui.stored['richang.v1'], undefined);
+  await ui.click({ vpractice: 'v_feedback' }); await ui.click({ action: 'reveal' });
+  assert.match(ui.modal(), /反馈/); assert.match(ui.modal(), /我在等你的反馈/);
+  await ui.click({ rating: 'again' });
+  assert.equal(ui.state().reviews.v_feedback.lastRating, 'again');
+  assert.equal(Object.values(ui.state().activity)[0].length, 1);
+  await ui.click({ action: 'close-practice' });
+  assert.match(ui.html(), /1 of 48 words practiced/);
+  const restored = app(ui.stored); await restored.click({ page: 'library' });
+  restored.input('phrase-search', 'feedback');
+  assert.match(restored.element('#phrase-results').innerHTML, /反馈/);
+  await restored.click({ page: 'review' }); await restored.click({ action: 'listen-learned' });
+  assert.doesNotMatch(restored.modal().replace(/<[^>]*>/g, ''), /反馈|feedback/);
+  await restored.click({ action: 'reveal' }); assert.match(restored.modal(), /我在等你的反馈/);
+});
+
+test('vocabulary examples honor reading preferences and play word or sentence separately', async () => {
+  const spoken = [];
+  const ui = app({}, { speechAvailable: async () => true, speak: async (text, slow) => { spoken.push([text, slow]); return true; }, stopSpeech() {} });
+  await ui.click({ page: 'settings' }); await ui.click({ setting: 'traditional' });
+  await ui.click({ setting: 'pinyin' }); await ui.click({ setting: 'english' });
+  await ui.click({ page: 'vocabulary' }); await ui.click({ vtopic: 'work' });
+  assert.match(ui.html(), /反饋/); assert.match(ui.html(), /我在等你的反饋/);
+  assert.doesNotMatch(ui.html(), /class="pinyin"|class="translation"/);
+  await ui.click({ speak: 'v_feedback' }); await ui.click({ vexample: 'v_feedback' });
+  assert.deepEqual(spoken, [['反饋', false], ['我在等你的反饋。', false]]);
+});
+
+test('vocabulary batches use only matching words, cap at ten, and prioritize new words', async () => {
+  const ui = app({ 'richang.v1': JSON.stringify({ version: 1, reviews: { v_recent: { due: Date.now() + 100000, interval: 2, repetitions: 1 } } }) });
+  await ui.click({ page: 'vocabulary' }); await ui.click({ action: 'vocab-practice' });
+  assert.match(ui.modal(), /just now; a moment ago/);
+  for (let i = 0; i < 10; i++) { await ui.click({ action: 'reveal' }); await ui.click({ rating: 'good' }); }
+  assert.match(ui.modal(), /You reviewed 10 items/);
+  assert.equal(Object.keys(ui.state().reviews).length, 11);
+  await ui.click({ action: 'close-practice' }); await ui.click({ vtopic: 'food' });
+  await ui.click({ action: 'vocab-practice' });
+  for (let i = 0; i < 8; i++) { await ui.click({ action: 'reveal' }); await ui.click({ rating: 'hard' }); }
+  assert.match(ui.modal(), /You reviewed 8 items/);
+  await ui.click({ action: 'close-practice' }); ui.input('vocab-search', 'unmatched-word');
+  await ui.click({ action: 'vocab-practice' }); assert.equal(ui.isOpen(), false);
 });
