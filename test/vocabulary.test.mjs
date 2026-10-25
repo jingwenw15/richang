@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import { vocabulary, vocabularyGroups, vocabularyById, selectVocabulary } from '../src/vocabulary.js';
 import { phrases } from '../src/content.js';
 
-test('vocabulary contains 96 distinct words in twelve topics, each with a complete example', () => {
-  assert.equal(vocabulary.length, 96);
-  assert.equal(vocabularyGroups.length, 12);
+test('vocabulary contains 144 distinct words in eighteen topics, each with a complete example', () => {
+  assert.equal(vocabulary.length, 144);
+  assert.equal(vocabularyGroups.length, 18);
   assert.equal(new Set([...vocabulary, ...phrases].map(p => p.id)).size, vocabulary.length + phrases.length);
   assert.equal(new Set(vocabulary.map(word => word.zh)).size, vocabulary.length);
   assert.equal(new Set(vocabularyGroups.map(group => group.id)).size, vocabularyGroups.length);
@@ -24,7 +24,7 @@ test('vocabulary search accepts Chinese, traditional characters, meanings, and p
   for (const query of ['反馈', '反饋', 'feedback', 'fankui', 'fǎn kuì', 'FANKUI']) {
     assert.ok(selectVocabulary({ query }).some(word => word.id === 'v_feedback'), query);
   }
-  for (const [query, id] of [['shouji', 'v_phone'], ['鑰匙', 'v_keys'], ['diannao', 'v_computer'], ['gengxin', 'v_update'], ['piányi', 'v_cheap']]) {
+  for (const [query, id] of [['shouji', 'v_phone'], ['鑰匙', 'v_keys'], ['diannao', 'v_computer'], ['gengxin', 'v_update'], ['piányi', 'v_cheap'], ['yinyue', 'v_music'], ['銀行', 'v_bank'], ['chongfu', 'v_repeat'], ['鹹', 'v_salty'], ['fangsong', 'v_relax']]) {
     assert.ok(selectVocabulary({ query }).some(word => word.id === id), query);
   }
   assert.equal(selectVocabulary({ topic: 'work' }).length, 8);
@@ -58,4 +58,13 @@ test('ambiguous readings, neutral syllables, and spoken tone changes are explain
   assert.match(vocabularyById('v_receipt').example.pinyin, /yì zhāng/);
   assert.match(vocabularyById('v_size').example.pinyin, /yìdiǎn/);
   assert.match(vocabularyById('v_network').example.pinyin, /bú tài/);
+  assert.equal(vocabularyById('v_repeat').pinyin, 'chóngfù');
+  assert.equal(vocabularyById('v_bank').pinyin, 'yínháng');
+  assert.equal(vocabularyById('v_music').pinyin, 'yīnyuè');
+  assert.equal(vocabularyById('v_warm').pinyin, 'nuǎnhuo');
+  assert.equal(vocabularyById('v_cool').pinyin, 'liángkuai');
+  assert.equal(vocabularyById('v_understand').pinyin, 'míngbai');
+  assert.match(vocabularyById('v_repeat').example.pinyin, /zuìhòu yí jù/);
+  assert.match(vocabularyById('v_requirements').example.pinyin, /yìdiǎn/);
+  assert.match(vocabularyById('v_weather').example.pinyin, /búcuò/);
 });

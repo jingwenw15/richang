@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import vm from 'node:vm';
 import { scenarios } from '../src/content.js';
-import { vocabulary } from '../src/vocabulary.js';
+import { vocabulary, vocabularyGroups } from '../src/vocabulary.js';
 
 // Run the actual bundled renderer with small DOM/storage doubles. Browser layout,
 // microphone permissions, and OS speech need a real Mac and are documented separately.
@@ -382,18 +382,18 @@ test('vocabulary batches use only matching words, cap at ten, and prioritize new
   await ui.click({ action: 'vocab-practice' }); assert.equal(ui.isOpen(), false);
 });
 
-test('all six additional vocabulary topics support recall while preserving existing progress', async () => {
+test('every vocabulary topic supports recall while preserving existing lesson progress', async () => {
   const originalReview = { due: 1, interval: 4, repetitions: 3 };
-  const ui = app({ 'richang.v1': JSON.stringify({ version: 1, saved: ['v_feedback', 'u1'], completed: ['updates'], reviews: { v_feedback: originalReview } }) });
+  const ui = app({ 'richang.v1': JSON.stringify({ version: 1, saved: ['v_feedback', 'u1'], completed: ['updates'], reviews: { u1: originalReview } }) });
   await ui.click({ page: 'vocabulary' });
-  assert.match(ui.html(), /96 useful words/);
-  assert.match(ui.html(), /12 topics/);
-  for (const topic of ['planning', 'devices', 'people', 'home', 'shopping', 'describing']) {
+  assert.ok(ui.html().includes(`${vocabulary.length} useful words`));
+  assert.ok(ui.html().includes(`${vocabularyGroups.length} topics`));
+  for (const { id: topic } of vocabularyGroups) {
     await ui.click({ vtopic: topic });
     const words = vocabulary.filter(word => word.topic === topic);
     assert.equal(words.length, 8);
     for (const word of words) assert.ok(ui.html().includes(`data-vpractice="${word.id}"`));
-    assert.doesNotMatch(ui.html(), /data-vpractice="v_feedback"/);
+    for (const word of vocabulary.filter(word => word.topic !== topic)) assert.ok(!ui.html().includes(`data-vpractice="${word.id}"`));
     await ui.click({ action: 'vocab-practice' });
     for (const word of words) {
       await ui.click({ action: 'reveal' });
@@ -405,9 +405,9 @@ test('all six additional vocabulary topics support recall while preserving exist
     await ui.click({ action: 'close-practice' });
   }
   const restored = app(ui.stored); await restored.click({ page: 'vocabulary' });
-  assert.match(restored.html(), /49 of 96 words practiced/);
+  assert.ok(restored.html().includes(`${vocabulary.length} of ${vocabulary.length} words practiced`));
   assert.deepEqual(restored.state().saved, ['v_feedback', 'u1']);
   assert.deepEqual(restored.state().completed, ['updates']);
-  assert.deepEqual(restored.state().reviews.v_feedback, originalReview);
-  assert.equal(Object.values(restored.state().activity)[0].length, 48);
+  assert.deepEqual(restored.state().reviews.u1, originalReview);
+  assert.equal(Object.values(restored.state().activity)[0].length, vocabulary.length);
 });

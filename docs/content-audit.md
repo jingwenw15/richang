@@ -1,4 +1,4 @@
-# Lesson text audit — updated October 23, 2026
+# Lesson text audit — updated October 24, 2026
 
 Reviewed all 144 teaching phrases and 72 roleplay prompts for Chinese wording, simplified/traditional correspondence, pinyin, English meaning, usage notes, and response context. This audit covers written lesson content; it does not independently evaluate the Mac speech voice's recordings.
 
@@ -81,6 +81,14 @@ Added another 48 words and example sentences in six topics: plans and getting th
 Reviewed examples for conversational wording and matching character scripts. Pronunciation notes cover 更新 **gēngxīn** versus 更 **gèng**, 便宜 **piányi** versus 方便 **fāngbiàn**, and neutral syllables in 钥匙 **yàoshi**, 试试 **shìshi**, and 差不多 **chàbuduō**. New spoken-tone examples include 一张 **yì zhāng**, 一起 **yìqǐ**, and 不太 **bú tài**. Regional alternatives such as 螢幕 and 連結 appear separately in notes; selecting traditional script retains 屏幕 and 鏈接 with the original Mandarin pronunciation.
 
 Tests also require unique Chinese headwords and topic IDs, search the new entries using untoned pinyin and traditional characters, and complete eight-word recall sessions in all six added topics while preserving existing bookmarks, completed lessons, and review history.
+
+## October 24 expansion to 144 words
+
+Added 48 more words and matched example sentences in six topics: understanding and explaining, team tasks and projects, places and running errands, meals and food preferences, weather and being outside, and hobbies and weekends. Existing IDs, bookmarks, and review records are preserved.
+
+Reviewed wording, translations, script correspondence, and pinyin. Notes explain 重复 **chóngfù** versus 重要 **zhòngyào**, 银行 **yínháng** versus 行 **xíng**, and 音乐 **yīnyuè** versus 快乐 **kuàilè**. Conversational neutral syllables include 明白 **míngbai**, 意思 **yìsi**, 任务 **rènwu**, 暖和 **nuǎnhuo**, and 凉快 **liángkuai**. Tone-change examples include 最后一句 **zuìhòu yí jù**, 具体一点 **jùtǐ yìdiǎn**, and 天气不错 **tiānqì búcuò**. Usage notes distinguish 听到/听懂, 确认/确定, 清淡/non-spicy, and 散步/走路; 随便 includes a note about how it can sound in conversation.
+
+The renderer regression now practices every word in every topic, verifies that topic filters exclude other topics, and checks that recall activity, bookmarks, and existing lesson review history survive reopening. Search checks cover the new words in untoned pinyin and traditional characters. Written checks do not independently verify synthesized audio or certify language accuracy.
 
 ## Regression checks
 
