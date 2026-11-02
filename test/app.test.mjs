@@ -109,12 +109,12 @@ test('new everyday lessons are discoverable and existing progress survives the e
   await ui.click({ page: 'library' });
   ui.input('phrase-search', 'charger');
   assert.match(ui.element('#phrase-results').innerHTML, /充电器/);
-  assert.equal(ui.element('#library-count').textContent, '1 item');
+  assert.equal(ui.element('#library-count').textContent, '2 items');
 });
 test('search handles user text as text, saved filtering, and pinyin preferences persist', async () => {
   const ui = app(); await ui.click({ page: 'library' });
   ui.input('phrase-search', 'latte'); assert.match(ui.element('#phrase-results').innerHTML, /拿铁/);
-  assert.equal(ui.element('#library-count').textContent, '1 item');
+  assert.equal(ui.element('#library-count').textContent, '2 items');
   ui.input('phrase-search', '<img src=x onerror=alert(1)>');
   await ui.click({ filter: 'All situations' }); assert.doesNotMatch(ui.html(), /<img src=x/);
   await ui.click({ action: 'pinyin' }); assert.equal(ui.state().settings.pinyin, false);
@@ -382,27 +382,33 @@ test('vocabulary batches use only matching words, cap at ten, and prioritize new
   await ui.click({ action: 'vocab-practice' }); assert.equal(ui.isOpen(), false);
 });
 
-test('every vocabulary topic supports recall while preserving existing lesson progress', async () => {
+test('every vocabulary topic supports paginated recall while preserving existing lesson progress', async () => {
   const originalReview = { due: 1, interval: 4, repetitions: 3 };
   const ui = app({ 'richang.v1': JSON.stringify({ version: 1, saved: ['v_feedback', 'u1'], completed: ['updates'], reviews: { u1: originalReview } }) });
   await ui.click({ page: 'vocabulary' });
   assert.ok(ui.html().includes(`${vocabulary.length} useful words`));
   assert.ok(ui.html().includes(`${vocabularyGroups.length} topics`));
   for (const { id: topic } of vocabularyGroups) {
-    await ui.click({ vtopic: topic });
+    ui.change('vocab-topic', topic);
     const words = vocabulary.filter(word => word.topic === topic);
-    assert.equal(words.length, 8);
-    for (const word of words) assert.ok(ui.html().includes(`data-vpractice="${word.id}"`));
+    for (const word of words.slice(0, 24)) assert.ok(ui.html().includes(`data-vpractice="${word.id}"`));
     for (const word of vocabulary.filter(word => word.topic !== topic)) assert.ok(!ui.html().includes(`data-vpractice="${word.id}"`));
-    await ui.click({ action: 'vocab-practice' });
-    for (const word of words) {
-      await ui.click({ action: 'reveal' });
-      assert.ok(ui.modal().includes(word.zh), word.id);
-      assert.ok(ui.modal().includes(word.example.zh), word.id);
-      await ui.click({ rating: 'good' });
+    for (let offset = 0; offset < words.length; offset += 10) {
+      await ui.click({ action: 'vocab-practice' });
+      const batch = words.slice(offset, offset + 10);
+      for (const word of batch) {
+        await ui.click({ action: 'reveal' });
+        assert.ok(ui.modal().includes(word.zh), word.id);
+        assert.ok(ui.modal().includes(word.example.zh), word.id);
+        await ui.click({ rating: 'good' });
+      }
+      // The final batch includes already-practiced words to fill its ten slots.
+      for (let i = batch.length; i < Math.min(10, words.length); i++) {
+        await ui.click({ action: 'reveal' }); await ui.click({ rating: 'good' });
+      }
+      assert.match(ui.modal(), /You reviewed/);
+      await ui.click({ action: 'close-practice' });
     }
-    assert.match(ui.modal(), /You reviewed 8 items/);
-    await ui.click({ action: 'close-practice' });
   }
   const restored = app(ui.stored); await restored.click({ page: 'vocabulary' });
   assert.ok(restored.html().includes(`${vocabulary.length} of ${vocabulary.length} words practiced`));
@@ -410,4 +416,25 @@ test('every vocabulary topic supports recall while preserving existing lesson pr
   assert.deepEqual(restored.state().completed, ['updates']);
   assert.deepEqual(restored.state().reviews.u1, originalReview);
   assert.equal(Object.values(restored.state().activity)[0].length, vocabulary.length);
+});
+
+test('vocabulary pagination reaches the last word and resets for searches, topics and saved filters', async () => {
+  const ui = app(); await ui.click({ page: 'vocabulary' });
+  assert.equal((ui.html().match(/class="vocab-card"/g) || []).length, 24);
+  assert.match(ui.html(), /1–24 of 1000/);
+  await ui.click({ action: 'vocab-next' });
+  assert.match(ui.element('#vocab-pagination').outerHTML, /25–48 of 1000/);
+  for (let i = 0; i < 100; i++) await ui.click({ action: 'vocab-next' });
+  assert.match(ui.element('#vocab-pagination').outerHTML, /985–1000 of 1000/);
+  const last = vocabulary.at(-1);
+  assert.ok(ui.element('#vocab-results').innerHTML.includes(`data-vpractice="${last.id}"`));
+  ui.input('vocab-search', last.zh);
+  assert.match(ui.element('#vocab-pagination').outerHTML, /Page 1 of/);
+  assert.ok(ui.element('#vocab-results').innerHTML.includes(`data-vpractice="${last.id}"`));
+  ui.input('vocab-search', 'unmatched-text');
+  assert.match(ui.element('#vocab-pagination').outerHTML, /0 words/);
+  ui.input('vocab-search', ''); ui.change('vocab-topic', 'core-grammar');
+  assert.match(ui.html(), /Page 1 of 2/);
+  await ui.click({ action: 'vocab-saved' });
+  assert.match(ui.html(), /No saved words match yet/);
 });

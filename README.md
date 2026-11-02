@@ -72,15 +72,17 @@ The [lesson text audit](docs/content-audit.md) covers all 144 phrases and 72 rol
 
 ## Common vocabulary
 
-Open **Vocabulary** in the sidebar for **144 useful words across eighteen topics**: time and routines, connecting your thoughts, work and your team, food and everyday errands, getting around, feelings and availability, plans and getting things done, devices and digital life, people and relationships, home and daily life, shopping and services, describing and comparing, understanding and explaining, team tasks and projects, places and running errands, meals and food preferences, weather and being outside, and hobbies and weekends. Each word has simplified and traditional characters, pinyin, a short usage note, and a conversational example with its own pinyin and translation.
+Open **Vocabulary** in the sidebar for **1,000 useful words across 48 topics**. Topics cover family, people, household items, shopping, food, travel, weather, work, technology, hobbies, numbers, question words, and the small grammar words that connect a sentence. Every entry has pinyin, both character scripts, a usage note, and an example with translation and listening. The original 144 individual examples are retained; the 856 additions use reusable conversation patterns with individual examples for grammar words and exceptions.
 
 - Listen to the word or its example separately. The normal reading, character, translation, and listening-speed preferences apply.
 - Search in English, either character script, or pinyin with or without tones: `fankui` and `fǎnkuì` both find 反馈.
-- Filter by topic or saved words. Bookmarks also appear in the shared Phrasebook.
+- Browse 24 cards per page, choose a topic from the topic picker, or filter to saved words. Search covers all 1,000 words, and practice uses all matches across pages. Bookmarks also appear in the shared Phrasebook.
 - Choose **Practice word** or **Practice these words** for recall practice. Batches contain up to ten matching words, with unpracticed words first. Reveal the word and example, then rate your recall to add it to spaced review and daily activity.
 - Practiced words also appear in Review and listening drills. Browsing and bookmarking do not award practice or change the review schedule.
 
-Vocabulary progress uses the existing local save and export format; previous lesson progress and bookmarks are preserved. The 144 words are a practical starter selection, not a frequency ranking or an HSK-level claim. Notes explain distinctions such as 再/又, 还是/或者, and 有空 **kòng** versus empty **kōng**.
+Vocabulary progress uses the existing local save and export format; previous lesson progress and bookmarks are preserved. The 1,000 words are a practical starter selection, not a frequency ranking or an HSK-level claim. Notes explain distinctions such as 再/又, 还是/或者, and 有空 **kòng** versus empty **kōng**.
+
+Dictionary spellings for the expansion come from [CC-CEDICT](https://www.mdbg.net/chinese/dictionary?page=cc-cedict). Attribution, the CC BY-SA 4.0 data license, example-pattern limitations, and regeneration instructions are in [vocabulary sources](docs/vocabulary-sources.md). No dictionary download is needed to run the app.
 
 ## Everyday conversations
 
@@ -130,11 +132,13 @@ Packaging produces an unsigned personal-use app. Developer ID signing, notarizat
 npm test
 ```
 
-The build uses a small dependency-free bundler to assemble the six renderer modules. Electron and the packager are the only third-party development dependencies.
+The build uses a small dependency-free bundler to assemble the seven renderer modules. Electron and the packager are the only third-party development dependencies.
 
 - `src/content.js` and `src/more-lessons.js`: phrases, pinyin, translations, usage notes, and roleplay prompts.
 - `src/model.js`: progress data, review intervals, daily activity, and streaks.
-- `src/vocabulary.js`: common vocabulary, contextual examples, topic groups, and tone-insensitive search.
+- `src/vocabulary.js`: original vocabulary, topic groups, indexed lookup, and tone-insensitive search.
+- `src/expanded-vocabulary.js`: checked-in dictionary-backed expansion; generated from `data/vocabulary-selection.tsv`.
+- `scripts/generate-vocabulary.cjs`: offline dataset generation with explicit pronunciation choices and example patterns.
 - `src/rehearsal.js`: preparation schemas, offline practice, validation, and saved rehearsal data.
 - `src/app.js`: screens, learning sessions, listening, and recording.
 - `src/styles.css`: responsive desktop interface using system fonts.
@@ -146,8 +150,8 @@ The renderer has no Node access. A restricted preload exposes speech and specifi
 
 ## Verification status
 
-The 44 automated tests cover curriculum integrity, listening answer concealment and speech dispatch, preservation of recall schedules, all 24 lesson flows, personal rehearsal from preparation through completion, review, reminders, persistence, retry behavior, escaping, provider response handling, key storage, transcription request construction, daily goals, review timing, and streaks. Provider tests use mocked responses and never make paid API calls.
+The 48 automated tests cover curriculum integrity, listening answer concealment and speech dispatch, preservation of recall schedules, all 24 lesson flows, personal rehearsal from preparation through completion, review, reminders, persistence, retry behavior, escaping, provider response handling, key storage, transcription request construction, daily goals, review timing, and streaks. Provider tests use mocked responses and never make paid API calls.
 
-The installed Electron executable exited during macOS application initialization (`SIGABRT`) when launched by this development environment. Packaging also failed because its download request could not complete. The October 23 browser preview check verified vocabulary discovery, untoned pinyin search, hidden-answer recall, example display, and rating controls. The October 20 browser preview check verified the expanded catalogue, the new video-call lesson and roleplay, and listening conceal/reveal with no browser console errors. Native Electron audio and microphone behavior have not been reverified. An existing running window was reachable, but reloading it did not load the current renderer. Consequently, the new desktop UI, live audio playback, microphone recording, and live provider calls remain unverified here. Restart the app from your terminal to complete those checks.
+The installed Electron executable exited during macOS application initialization (`SIGABRT`) when launched by this development environment. Packaging also failed because its download request could not complete. The November 2 browser preview check verified the 1,000-word total, untoned search for 工程师, the topic picker, and navigation between 24-card pages. The October 23 browser preview check verified vocabulary discovery, untoned pinyin search, hidden-answer recall, example display, and rating controls. The October 20 browser preview check verified the expanded catalogue, the new video-call lesson and roleplay, and listening conceal/reveal with no browser console errors. Native Electron audio and microphone behavior have not been reverified. An existing running window was reachable, but reloading it did not load the current renderer. Consequently, the new desktop UI, live audio playback, microphone recording, and live provider calls remain unverified here. Restart the app from your terminal to complete those checks.
 
 Electron setup follows the [official security guidance](https://www.electronjs.org/docs/latest/tutorial/security).

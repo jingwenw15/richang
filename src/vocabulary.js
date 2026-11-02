@@ -1,3 +1,5 @@
+import { expandedVocabularyGroups } from './expanded-vocabulary.js';
+
 // A practical starter list, grouped by use rather than a proficiency exam level.
 // Pinyin follows the same spoken 一/不 and neutral-tone conventions as the lessons.
 const vocabEntry = (id, zh, traditional, pinyin, en, note, exampleZh, exampleTraditional, examplePinyin, exampleEn) => ({
@@ -189,13 +191,19 @@ export const vocabularyGroups = [
   ] }
 ];
 
+vocabularyGroups.push(...expandedVocabularyGroups.filter(group => group.words.length));
+
 export const vocabulary = vocabularyGroups.flatMap(group => group.words.map(word => ({ ...word,
   topic: group.id, sceneTitle: group.title, category: group.category
 })));
-export const vocabularyById = id => vocabulary.find(word => word.id === id);
+const vocabularyIndex = new Map(vocabulary.map(word => [word.id, word]));
+export const vocabularyById = id => vocabularyIndex.get(id);
 const vocabSearchKey = value => value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f\s]/g, '');
+const vocabularySearchIndex = new Map(vocabulary.map(word => [word.id,
+  [word.zh, word.traditional, word.pinyin, word.en, word.sceneTitle, ...Object.values(word.example)].map(vocabSearchKey)
+]));
 export function selectVocabulary({ query = '', topic = 'all', savedOnly = false, saved = [] } = {}) {
   const needle = vocabSearchKey(query.trim());
   return vocabulary.filter(word => (topic === 'all' || word.topic === topic) && (!savedOnly || saved.includes(word.id)) &&
-    (!needle || [word.zh, word.traditional, word.pinyin, word.en, word.sceneTitle, ...Object.values(word.example)].some(text => vocabSearchKey(text).includes(needle))));
+    (!needle || vocabularySearchIndex.get(word.id).some(text => text.includes(needle))));
 }

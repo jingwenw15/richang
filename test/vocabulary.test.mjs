@@ -3,15 +3,15 @@ import assert from 'node:assert/strict';
 import { vocabulary, vocabularyGroups, vocabularyById, selectVocabulary } from '../src/vocabulary.js';
 import { phrases } from '../src/content.js';
 
-test('vocabulary contains 144 distinct words in eighteen topics, each with a complete example', () => {
-  assert.equal(vocabulary.length, 144);
-  assert.equal(vocabularyGroups.length, 18);
+test('vocabulary contains 1,000 distinct words in 48 topics, each with a complete example', () => {
+  assert.equal(vocabulary.length, 1000);
+  assert.equal(vocabularyGroups.length, 48);
   assert.equal(new Set([...vocabulary, ...phrases].map(p => p.id)).size, vocabulary.length + phrases.length);
   assert.equal(new Set(vocabulary.map(word => word.zh)).size, vocabulary.length);
   assert.equal(new Set(vocabularyGroups.map(group => group.id)).size, vocabularyGroups.length);
-  for (const group of vocabularyGroups) assert.equal(group.words.length, 8);
+  for (const group of vocabularyGroups) assert.ok(group.words.length > 0);
   for (const word of vocabulary) {
-    assert.match(word.id, /^v_[a-z-]+$/);
+    assert.match(word.id, /^v_[a-z0-9-]+$/);
     assert.equal(word.kind, 'vocabulary');
     for (const key of ['zh', 'traditional', 'pinyin', 'en', 'note', 'sceneTitle', 'topic', 'category']) assert.ok(word[key], `${word.id}: ${key}`);
     for (const key of ['zh', 'traditional', 'pinyin', 'en']) assert.ok(word.example[key], `${word.id} example: ${key}`);

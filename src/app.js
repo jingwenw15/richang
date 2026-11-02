@@ -13,6 +13,8 @@ let savedOnly = false;
 let vocabQuery = '';
 let vocabTopic = 'all';
 let vocabSavedOnly = false;
+let vocabPage = 0;
+const vocabPageSize = 24;
 let practice;
 let listeningOffset = 0;
 let recorder;
@@ -145,12 +147,24 @@ function vocabularyExample(word) {
 function vocabularyResults() {
   const words = visibleVocabulary();
   if (!words.length) return `<div class="empty-state">${icon('book')}<h3>${vocabSavedOnly ? 'No saved words match yet.' : 'No words found.'}</h3><p>Try another search or topic, or turn off Saved words.</p></div>`;
-  return words.map(word => `<article class="vocab-card"><div class="vocab-card-heading"><span class="small-label">${escape(word.sceneTitle)}</span><button class="round-button ${state.saved.includes(word.id) ? 'bookmarked' : ''}" data-save="${word.id}" aria-pressed="${state.saved.includes(word.id)}" aria-label="${state.saved.includes(word.id) ? 'Unsave' : 'Save'} word: ${escape(word.en)}">${icon('bookmark')}</button></div><h2 lang="zh-CN">${escape(chinese(word))}</h2>${state.settings.pinyin ? `<p class="pinyin">${escape(word.pinyin)}</p>` : ''}${state.settings.english ? `<p class="translation">${escape(word.en)}</p>` : ''}<p class="vocab-note">${escape(word.note)}</p>${vocabularyExample(word)}<div class="vocab-card-actions"><button class="button secondary" data-speak="${word.id}" aria-label="Listen to word: ${escape(word.en)}">${icon('volume')} Listen</button><button class="text-button" data-vpractice="${word.id}">${state.reviews[word.id] ? 'Practice again' : 'Practice word'} ${icon('arrow')}</button></div></article>`).join('');
+  vocabPage = Math.min(vocabPage, Math.max(0, Math.ceil(words.length / vocabPageSize) - 1));
+  return words.slice(vocabPage * vocabPageSize, (vocabPage + 1) * vocabPageSize).map(word => `<article class="vocab-card"><div class="vocab-card-heading"><span class="small-label">${escape(word.sceneTitle)}</span><button class="round-button ${state.saved.includes(word.id) ? 'bookmarked' : ''}" data-save="${word.id}" aria-pressed="${state.saved.includes(word.id)}" aria-label="${state.saved.includes(word.id) ? 'Unsave' : 'Save'} word: ${escape(word.en)}">${icon('bookmark')}</button></div><h2 lang="zh-CN">${escape(chinese(word))}</h2>${state.settings.pinyin ? `<p class="pinyin">${escape(word.pinyin)}</p>` : ''}${state.settings.english ? `<p class="translation">${escape(word.en)}</p>` : ''}<p class="vocab-note">${escape(word.note)}</p>${vocabularyExample(word)}<div class="vocab-card-actions"><button class="button secondary" data-speak="${word.id}" aria-label="Listen to word: ${escape(word.en)}">${icon('volume')} Listen</button><button class="text-button" data-vpractice="${word.id}">${state.reviews[word.id] ? 'Practice again' : 'Practice word'} ${icon('arrow')}</button></div></article>`).join('');
+}
+function vocabularyPagination() {
+  const count = visibleVocabulary().length;
+  const pages = Math.max(1, Math.ceil(count / vocabPageSize));
+  vocabPage = Math.min(vocabPage, pages - 1);
+  return `<div class="vocab-pagination" id="vocab-pagination"><button class="button secondary" data-action="vocab-prev" ${vocabPage === 0 ? 'disabled' : ''}>Previous words</button><span role="status" aria-live="polite">${count ? `${vocabPage * vocabPageSize + 1}–${Math.min(count, (vocabPage + 1) * vocabPageSize)} of ${count}` : '0 words'} · Page ${vocabPage + 1} of ${pages}</span><button class="button secondary" data-action="vocab-next" ${vocabPage + 1 >= pages ? 'disabled' : ''}>Next words</button></div>`;
+}
+function refreshVocabulary() {
+  document.querySelector('#vocab-results').innerHTML = vocabularyResults();
+  document.querySelector('#vocab-count').textContent = `${visibleVocabulary().length} word${visibleVocabulary().length === 1 ? '' : 's'}`;
+  document.querySelector('#vocab-pagination').outerHTML = vocabularyPagination();
 }
 function vocabularyPage() {
   const saved = vocabulary.filter(word => state.saved.includes(word.id)).length;
   const learned = vocabulary.filter(word => state.reviews[word.id]).length;
-  return `<section class="page-heading"><div class="eyebrow">THE WORDS THAT HOLD A CONVERSATION TOGETHER</div><h1>A few good words go a long way.</h1><p>${vocabulary.length} useful words for everyday life and your team. Hear each word, see it in a sentence, and try recalling it.</p></section><div class="vocab-summary"><span>${learned} of ${vocabulary.length} words practiced</span><span>${vocabularyGroups.length} topics · Examples with every word</span></div><div class="library-tools"><label class="search-field">${icon('search')}<input id="vocab-search" type="search" placeholder="Try feedback, fankui, or 反馈…" value="${escape(vocabQuery)}" aria-label="Search vocabulary"></label><button class="button secondary ${vocabSavedOnly ? 'selected' : ''}" data-action="vocab-saved" aria-pressed="${vocabSavedOnly}">${icon('bookmark')} Saved words (${saved})</button></div><div class="filter-tabs vocab-topics" aria-label="Vocabulary topics"><button data-vtopic="all" aria-pressed="${vocabTopic === 'all'}" class="${vocabTopic === 'all' ? 'selected' : ''}">All topics</button>${vocabularyGroups.map(group => `<button data-vtopic="${group.id}" aria-pressed="${vocabTopic === group.id}" class="${vocabTopic === group.id ? 'selected' : ''}">${escape(group.title)}</button>`).join('')}</div><div class="section-heading"><span class="library-count" id="vocab-count" role="status" aria-live="polite">${visibleVocabulary().length} word${visibleVocabulary().length === 1 ? '' : 's'}</span><button class="button secondary" data-action="vocab-practice">Practice these words ${icon('arrow')}</button></div><p class="vocab-help">Practice up to ten matching words, starting with new words. Only rating your recall adds a word to spaced review and your daily activity; browsing and saving do not.</p><div class="vocab-grid" id="vocab-results">${vocabularyResults()}</div>`;
+  return `<section class="page-heading"><div class="eyebrow">THE WORDS THAT HOLD A CONVERSATION TOGETHER</div><h1>A few good words go a long way.</h1><p>${vocabulary.length} useful words for everyday life and your team. Hear each word, see it in a sentence, and try recalling it.</p></section><div class="vocab-summary"><span>${learned} of ${vocabulary.length} words practiced</span><span>${vocabularyGroups.length} topics · Examples with every word</span></div><div class="library-tools"><label class="search-field">${icon('search')}<input id="vocab-search" type="search" placeholder="Try feedback, fankui, or 反馈…" value="${escape(vocabQuery)}" aria-label="Search vocabulary"></label><button class="button secondary ${vocabSavedOnly ? 'selected' : ''}" data-action="vocab-saved" aria-pressed="${vocabSavedOnly}">${icon('bookmark')} Saved words (${saved})</button></div><div class="vocab-topic-picker"><label for="vocab-topic">Topic</label><select id="vocab-topic"><option value="all" ${vocabTopic === 'all' ? 'selected' : ''}>All topics (${vocabulary.length})</option>${vocabularyGroups.map(group => `<option value="${group.id}" ${vocabTopic === group.id ? 'selected' : ''}>${escape(group.title)} (${group.words.length})</option>`).join('')}</select></div><div class="section-heading"><span class="library-count" id="vocab-count" role="status" aria-live="polite">${visibleVocabulary().length} word${visibleVocabulary().length === 1 ? '' : 's'}</span><button class="button secondary" data-action="vocab-practice">Practice these words ${icon('arrow')}</button></div><p class="vocab-help">Practice up to ten matching words, starting with new words. Practice uses all matches across pages. Only rating your recall adds a word to spaced review and your daily activity.</p><div class="vocab-grid" id="vocab-results">${vocabularyResults()}</div>${vocabularyPagination()}<details class="pronunciation-help"><summary>Vocabulary sources & example patterns</summary><p>The original 144 entries use individual examples. The expansion adds 856 selected words with spellings from CC-CEDICT contributors, published by MDBG, under CC BY-SA 4.0. Its examples use reusable conversation patterns, with individual examples for grammar words and other exceptions. This is a practical selection rather than a ranked frequency list. Source: www.mdbg.net/chinese/dictionary?page=cc-cedict · License: creativecommons.org/licenses/by-sa/4.0/.</p></details>`;
 }
 function progressPage() {
   const learned = Object.keys(state.reviews).filter(id => findPhrase(id)).length;
@@ -483,7 +497,7 @@ document.addEventListener('click', async event => {
   if (button.dataset.page) { event.preventDefault(); disposeRehearsalAudio(); rehearsalError = ''; page = button.dataset.page; render(); window.scrollTo(0, 0); return; }
   if (button.dataset.start) { startScene(button.dataset.start); return; }
   if (button.dataset.filter) { filter = button.dataset.filter; render(); return; }
-  if (button.dataset.vtopic) { vocabTopic = button.dataset.vtopic; render(); return; }
+  if (button.dataset.vtopic) { vocabTopic = button.dataset.vtopic; vocabPage = 0; render(); return; }
   if (button.dataset.vpractice) { if (vocabularyById(button.dataset.vpractice)) startReview([button.dataset.vpractice]); return; }
   if (button.dataset.vexample) { const word = vocabularyById(button.dataset.vexample); if (word) await speak(chinese(word.example)); return; }
   if (button.dataset.speak || button.dataset.slow) { const p = findPhrase(button.dataset.speak || button.dataset.slow); await speak(chinese(p), button.dataset.slow ? true : state.settings.slow); return; }
@@ -507,7 +521,9 @@ document.addEventListener('click', async event => {
   switch (button.dataset.action) {
     case 'pinyin': state.settings.pinyin = !state.settings.pinyin; save(); render(); break;
     case 'saved-only': savedOnly = !savedOnly; render(); break;
-    case 'vocab-saved': vocabSavedOnly = !vocabSavedOnly; render(); break;
+    case 'vocab-saved': vocabSavedOnly = !vocabSavedOnly; vocabPage = 0; render(); break;
+    case 'vocab-prev': vocabPage = Math.max(0, vocabPage - 1); refreshVocabulary(); document.querySelector('#vocab-results').scrollIntoView?.({ block: 'start' }); break;
+    case 'vocab-next': vocabPage = Math.min(Math.max(0, Math.ceil(visibleVocabulary().length / vocabPageSize) - 1), vocabPage + 1); refreshVocabulary(); document.querySelector('#vocab-results').scrollIntoView?.({ block: 'start' }); break;
     case 'vocab-practice': {
       const matches = visibleVocabulary();
       const ids = [...matches.filter(word => !state.reviews[word.id]), ...matches.filter(word => state.reviews[word.id])].slice(0, 10).map(word => word.id);
@@ -542,7 +558,7 @@ document.addEventListener('click', async event => {
   }
 });
 document.addEventListener('input', event => {
-  if (event.target.id === 'vocab-search') { vocabQuery = event.target.value; document.querySelector('#vocab-results').innerHTML = vocabularyResults(); document.querySelector('#vocab-count').textContent = `${visibleVocabulary().length} word${visibleVocabulary().length === 1 ? '' : 's'}`; }
+  if (event.target.id === 'vocab-search') { vocabQuery = event.target.value; vocabPage = 0; refreshVocabulary(); }
   if (event.target.id === 'phrase-search') { query = event.target.value; document.querySelector('#phrase-results').innerHTML = phraseResults(); document.querySelector('#library-count').textContent = `${itemCount(filteredPhrases().length)}`; }
   if (event.target.id === 'rehearsal-goal') rehearsalDraft.goal = event.target.value.slice(0, 1000);
   if (event.target.id === 'rehearsal-answer' && currentRehearsal()) { currentRehearsal().draft = event.target.value.slice(0, 2000); save(); }
@@ -551,6 +567,7 @@ document.addEventListener('input', event => {
   if (connectionField) { connectionDraft ||= { ...aiConnection, apiKey: '', rememberKey: aiConnection.keyStored }; connectionDraft[connectionField] = event.target.value; }
 });
 document.addEventListener('change', event => {
+  if (event.target.id === 'vocab-topic') { vocabTopic = event.target.value; vocabPage = 0; render(); }
   if (event.target.id === 'daily-goal') { state.settings.goal = Number(event.target.value); save(); render(); }
   if (event.target.id === 'rehearsal-audience') rehearsalDraft.audience = event.target.value;
   if (event.target.id === 'rehearsal-topic') rehearsalDraft.topic = event.target.value;

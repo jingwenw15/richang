@@ -1,4 +1,4 @@
-# Lesson text audit — updated October 24, 2026
+# Lesson text audit — updated November 2, 2026
 
 Reviewed all 144 teaching phrases and 72 roleplay prompts for Chinese wording, simplified/traditional correspondence, pinyin, English meaning, usage notes, and response context. This audit covers written lesson content; it does not independently evaluate the Mac speech voice's recordings.
 
@@ -90,6 +90,14 @@ Reviewed wording, translations, script correspondence, and pinyin. Notes explain
 
 The renderer regression now practices every word in every topic, verifies that topic filters exclude other topics, and checks that recall activity, bookmarks, and existing lesson review history survive reopening. Search checks cover the new words in untoned pinyin and traditional characters. Written checks do not independently verify synthesized audio or certify language accuracy.
 
+## Expansion to 1,000 words
+
+Added 856 entries to the original 144, preserving every original ID. The expansion covers 30 additional topics, for 48 total. Chinese headwords are unique; a second pronunciation of the same spelling is explained in notes rather than counted as another word.
+
+Spellings and readings come from a pinned CC-CEDICT download, with explicit choices for polyphonic entries and traditional spelling variants. See [sources, data licensing, and regeneration](vocabulary-sources.md). Short English glosses are selected for the teaching sense. Most new examples use reusable conversation patterns; grammar words, modal verbs, numbers, and awkward frame combinations receive individual examples. The entire dataset is not represented as 856 independently authored dialogues.
+
+New regression checks exercise all 1,000 words through recall, topic filtering, saved-state restoration, pagination to the last word, and search resets. Generator checks protect ü, compound vowels, neutral tones, ordinal 一, spoken 一/不 changes, traditional example suffixes, number phrasing, source metadata, and common-word readings instead of archaic variants. Written tests do not independently establish the idiomaticity of every example or verify Mac speech output.
+
 ## Regression checks
 
-Automated checks protect the daily phrase and all current 一/不 examples, verify selected neutral-tone conventions, require a speaking goal for every roleplay turn, and exercise the new explanations in the renderer. The complete suite has 44 passing tests. These tests protect reviewed choices from accidental edits; they are not an automatic language-accuracy judge.
+Automated checks protect the daily phrase and all current 一/不 examples, verify selected neutral-tone conventions, require a speaking goal for every roleplay turn, and exercise the new explanations in the renderer. The complete suite has 48 passing tests. These tests protect reviewed choices from accidental edits; they are not an automatic language-accuracy judge.

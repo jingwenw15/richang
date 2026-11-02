@@ -1,0 +1,896 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# See docs/vocabulary-sources.md for dictionary attribution and dataset licensing.
+# Richang curated vocabulary additions. Fields: example pattern | simplified | English gloss | optional example wording.
+# Dictionary spellings are resolved by scripts/generate-vocabulary.cjs.
+@family|Family & people|Everyday life
+family|爸爸|dad
+family|妈妈|mom
+family|父亲|father
+family|母亲|mother
+family|哥哥|older brother
+family|弟弟|younger brother
+family|姐姐|older sister
+family|妹妹|younger sister
+family|爷爷|paternal grandfather
+family|奶奶|paternal grandmother
+family|外公|maternal grandfather
+family|外婆|maternal grandmother
+family|丈夫|husband
+family|妻子|wife
+family|老公|husband
+family|老婆|wife
+family|儿子|son
+family|女儿|daughter
+family|孩子|child
+family|男朋友|boyfriend
+family|女朋友|girlfriend
+family|室友|roommate
+family|同学|classmate
+family|亲戚|relative
+family|叔叔|uncle
+family|阿姨|aunt
+family|老师|teacher
+family|学生|student
+family|搭档|partner
+@jobs|Jobs & workplaces|At work
+job|工程师|engineer
+job|设计师|designer
+job|程序员|programmer
+job|产品经理|product manager
+job|医生|doctor
+job|护士|nurse
+job|司机|driver
+job|厨师|chef
+job|服务员|server
+job|律师|lawyer
+job|会计|accountant
+job|记者|journalist
+job|演员|actor
+job|歌手|singer
+job|作家|writer
+job|翻译|translator
+job|主管|supervisor
+location|公司|company
+location|办公室|office
+location|会议室|meeting room
+location|前台|front desk
+location|工作室|studio
+location|休息室|break room
+location|食堂|cafeteria
+location|大厅|lobby
+location|停车场|parking lot
+@household|Household things|Everyday life
+buy|桌子|table
+buy|椅子|chair
+buy|沙发|sofa
+buy|床|bed
+buy|枕头|pillow
+buy|被子|quilt
+buy|毯子|blanket
+buy|书架|bookshelf
+buy|柜子|cabinet
+buy|衣柜|wardrobe
+buy|镜子|mirror
+buy|灯|lamp
+buy|台灯|desk lamp
+buy|垃圾桶|trash can
+buy|扫把|broom
+buy|拖把|mop
+buy|吸尘器|vacuum cleaner
+buy|洗衣机|washing machine
+buy|烘干机|dryer
+buy|空调|air conditioner
+buy|风扇|fan
+buy|电视|television
+buy|遥控器|remote control
+buy|电池|battery
+buy|充电器|charger
+buy|毛巾|towel
+buy|牙刷|toothbrush
+buy|牙膏|toothpaste|some toothpaste
+buy|肥皂|soap|some soap
+buy|洗发水|shampoo|some shampoo
+buy|纸巾|tissues|some tissues
+buy|卫生纸|toilet paper|some toilet paper
+buy|刷子|brush
+@rooms|Buildings & spaces|Everyday life
+location|家|home|at home
+location|卧室|bedroom
+location|客厅|living room
+location|餐厅|restaurant
+location|阳台|balcony
+location|院子|courtyard
+location|花园|garden
+location|楼下|downstairs|downstairs
+location|楼上|upstairs|upstairs
+location|楼梯|stairs|by the stairs
+location|电梯|elevator|by the elevator
+location|门口|doorway|by the door
+location|走廊|hallway
+location|浴室|bathroom
+location|酒店|hotel
+location|旅馆|inn
+location|商场|shopping mall
+location|书店|bookstore
+location|图书馆|library
+location|公园|park
+location|电影院|movie theater
+location|博物馆|museum
+location|医院|hospital
+location|诊所|clinic
+location|学校|school
+location|大学|university
+location|健身房|gym
+location|游泳池|swimming pool
+location|咖啡店|café
+location|便利店|convenience store
+location|面包店|bakery
+location|理发店|barbershop
+@kitchenware|Cooking & kitchenware|Everyday life
+buy|锅|pot
+buy|平底锅|frying pan
+buy|电饭锅|rice cooker
+buy|烤箱|oven
+buy|微波炉|microwave
+buy|水壶|kettle
+buy|盘子|plate
+buy|碗|bowl
+buy|杯子|cup
+buy|筷子|chopsticks|some chopsticks
+buy|勺子|spoon
+buy|叉子|fork
+buy|刀|knife
+buy|菜板|cutting board
+buy|饭盒|lunch box
+object|切|cut
+object|洗|wash
+object|煮|boil
+object|炒|stir-fry
+object|蒸|steam
+object|烤|bake
+object|加热|heat up
+object|搅拌|stir
+@staples|Meals & staple foods|Everyday life
+order|米饭|rice
+order|面条|noodles
+order|饺子|dumplings
+order|包子|steamed buns
+order|馒头|steamed bread
+order|面包|bread
+order|粥|rice porridge
+order|汤|soup
+order|炒饭|fried rice
+order|炒面|fried noodles
+order|米粉|rice noodles
+order|火锅|hot pot
+order|烧烤|barbecue
+order|煎饼|Chinese pancakes
+order|馄饨|wontons
+order|春卷|spring rolls
+order|豆腐|tofu
+order|鸡蛋|eggs
+order|鸡肉|chicken
+order|牛肉|beef
+order|猪肉|pork
+order|羊肉|lamb
+order|鱼|fish
+order|虾|shrimp
+order|海鲜|seafood
+order|三明治|sandwiches
+order|汉堡|hamburgers
+order|披萨|pizza
+order|沙拉|salad
+order|意大利面|pasta
+order|寿司|sushi
+order|蛋糕|cake
+order|饼干|cookies
+order|甜点|dessert
+order|冰淇淋|ice cream
+order|酸奶|yogurt
+order|早餐|breakfast
+order|午餐|lunch
+order|晚餐|dinner
+order|夜宵|a late-night snack
+@produce|Fruit, vegetables & seasonings|Everyday life
+buy|苹果|apple
+buy|香蕉|banana
+buy|橙子|orange
+buy|橘子|mandarin orange
+buy|葡萄|grapes|some grapes
+buy|西瓜|watermelon
+buy|草莓|strawberries|some strawberries
+buy|蓝莓|blueberries|some blueberries
+buy|芒果|mango
+buy|桃子|peach
+buy|梨|pear
+buy|柠檬|lemon
+buy|西红柿|tomato
+buy|土豆|potato
+buy|红薯|sweet potato
+buy|胡萝卜|carrot
+buy|黄瓜|cucumber
+buy|洋葱|onion
+buy|大蒜|garlic|some garlic
+buy|姜|ginger|some ginger
+buy|葱|scallions|some scallions
+buy|菠菜|spinach|some spinach
+buy|生菜|lettuce|some lettuce
+buy|西兰花|broccoli|some broccoli
+buy|蘑菇|mushrooms|some mushrooms
+buy|茄子|eggplant
+buy|青椒|green pepper
+buy|辣椒|chili peppers|some chili peppers
+buy|玉米|corn|some corn
+buy|南瓜|pumpkin
+buy|盐|salt|some salt
+buy|糖|sugar|some sugar
+buy|酱油|soy sauce|some soy sauce
+buy|醋|vinegar|some vinegar
+buy|油|cooking oil|some cooking oil
+@drinks|Drinks & ordering|Everyday life
+order|水|water
+order|热水|hot water
+order|冰水|ice water
+order|茶|tea
+order|绿茶|green tea
+order|红茶|black tea
+order|乌龙茶|oolong tea
+order|咖啡|coffee
+order|拿铁|latte|a latte
+order|美式咖啡|Americano coffee
+order|牛奶|milk
+order|豆浆|soy milk
+order|果汁|juice
+order|橙汁|orange juice
+order|汽水|soda
+order|奶茶|milk tea
+order|啤酒|beer
+order|红酒|red wine
+order|柠檬水|lemon water
+order|矿泉水|mineral water
+adjective|热|hot
+adjective|冷|cold
+adjective|酸|sour
+adjective|苦|bitter
+adjective|香|fragrant
+adjective|新鲜|fresh
+adjective|好吃|tasty
+adjective|好喝|good to drink
+@clothing|Clothes & personal items|Everyday life
+buy|衣服|clothes|some clothes
+buy|衬衫|shirt
+buy|上衣|top
+buy|毛衣|sweater
+buy|大衣|overcoat
+buy|雨衣|raincoat
+buy|裤子|pants|some pants
+buy|牛仔裤|jeans|some jeans
+buy|短裤|shorts|some shorts
+buy|裙子|skirt
+buy|连衣裙|dress
+buy|睡衣|pajamas|some pajamas
+buy|袜子|socks|some socks
+buy|鞋|shoes|some shoes
+buy|运动鞋|sneakers|some sneakers
+buy|拖鞋|slippers|some slippers
+buy|靴子|boots|some boots
+buy|帽子|hat
+buy|围巾|scarf
+buy|手套|gloves|some gloves
+buy|腰带|belt
+buy|背包|backpack
+buy|钱包|wallet
+buy|眼镜|glasses|some glasses
+buy|太阳镜|sunglasses|some sunglasses
+buy|手表|watch
+buy|雨伞|umbrella
+@travel-tools|Travel & transport|Everyday life
+transport|公交车|bus
+transport|出租车|taxi
+transport|网约车|ride-hailing car
+transport|火车|train
+transport|高铁|high-speed train
+transport|飞机|plane
+ride|自行车|bicycle
+ride|摩托车|motorcycle
+location|机场|airport
+location|火车站|train station
+location|地铁站|metro station
+location|公交站|bus stop
+buy|车票|ticket
+buy|机票|plane ticket
+where|护照|passport
+where|身份证|ID card
+where|行李|luggage|the luggage
+where|行李箱|suitcase
+where|登机牌|boarding pass
+where|座位|seat
+where|安全带|seat belt
+where|地图|map
+where|地址|address
+where|路线|route
+where|站台|platform
+where|登机口|boarding gate
+@body|Body & feeling unwell|Everyday life
+body|头|head
+body|脸|face
+body|眼睛|eyes
+body|耳朵|ears
+body|鼻子|nose
+body|嘴|mouth
+body|牙齿|teeth
+body|脖子|neck
+body|肩膀|shoulders
+body|手|hands
+body|手指|fingers
+body|胳膊|arms
+body|背|back
+body|肚子|belly
+body|腰|lower back
+body|腿|legs
+body|膝盖|knees
+body|脚|feet
+body|脚踝|ankles
+body|皮肤|skin
+state|饿|hungry
+state|渴|thirsty
+state|困|sleepy
+state|难受|unwell
+state|头疼|headachy
+state|不舒服|unwell
+health|感冒|a cold
+health|咳嗽|a cough
+health|发烧|a fever
+health|过敏|an allergy
+health|胃疼|a stomachache
+@emotions|Emotions & personality|Everyday life
+state|开心|happy
+state|高兴|glad
+state|快乐|happy
+state|难过|sad
+state|伤心|upset
+state|生气|angry
+state|紧张|nervous
+state|着急|anxious
+state|害怕|scared
+state|失望|disappointed
+state|激动|excited
+state|兴奋|excited
+state|无聊|bored
+state|孤单|lonely
+state|满意|satisfied
+state|惊讶|surprised
+state|尴尬|awkward
+state|不好意思|embarrassed
+trait|认真|conscientious
+trait|细心|careful
+trait|耐心|patient
+trait|热情|welcoming
+trait|友好|friendly
+trait|诚实|honest
+trait|聪明|smart
+trait|勇敢|brave
+trait|安静|quiet
+trait|害羞|shy
+trait|开朗|outgoing
+@nature|Nature & surroundings|Everyday life
+see|太阳|the sun
+see|月亮|the moon
+see|星星|stars
+see|云|clouds
+see|彩虹|a rainbow
+see|雪|snow
+see|雨|rain
+see|雾|fog
+see|山|mountains
+see|河|a river
+see|湖|a lake
+see|海|the sea
+see|海滩|a beach
+see|树|trees
+see|花|flowers
+see|鸟|birds
+see|猫|a cat
+see|狗|a dog
+see|兔子|a rabbit
+see|马|a horse
+see|牛|a cow
+see|羊|a sheep
+see|鸭子|ducks
+see|虫子|insects
+@time-words|Days, dates & time|Everyday life
+time|今天|today
+time|明天|tomorrow
+time|昨天|yesterday
+time|后天|the day after tomorrow
+time|前天|the day before yesterday
+time|早上|in the morning
+time|上午|in the morning
+time|中午|at noon
+time|下午|in the afternoon
+time|晚上|in the evening
+time|早晨|early in the morning
+time|夜里|at night
+time|星期一|on Monday
+time|星期二|on Tuesday
+time|星期三|on Wednesday
+time|星期四|on Thursday
+time|星期五|on Friday
+time|星期六|on Saturday
+time|星期日|on Sunday
+time|星期天|on Sunday
+time|下周|next week
+time|下个月|next month
+time|今年|this year
+time|明年|next year
+time|平时|usually
+time|每天|every day
+time|每周|every week
+time|有时候|sometimes
+time|偶尔|occasionally
+time|经常|often
+time|一直|all along
+@time-nouns|Time, seasons & schedules|Everyday life
+topic|时间|time
+topic|日期|the date
+topic|日历|the calendar
+topic|假期|the holiday
+topic|节日|the festival
+topic|生日|the birthday
+topic|工作日|workdays
+topic|小时|hours
+topic|分钟|minutes
+topic|秒|seconds
+topic|春天|spring
+topic|夏天|summer
+topic|秋天|autumn
+topic|冬天|winter
+topic|季节|the seasons
+topic|未来|the future
+topic|现在|the present
+topic|早饭|breakfast
+topic|午饭|lunch
+topic|晚饭|dinner
+topic|日程|the schedule
+topic|预约|the appointment
+topic|约会|the date
+topic|期限|the deadline
+topic|开会|having meetings
+topic|加班|working overtime
+topic|请假|taking leave
+@work-details|Work, learning & ideas|At work
+topic|工作|work
+topic|团队|the team
+topic|部门|the department
+topic|目标|the goal
+topic|计划|the plan
+topic|办法|the approach
+topic|方法|the method
+topic|方案|the proposed solution
+topic|结果|the result
+topic|原因|the reason
+topic|情况|the situation
+topic|细节|the details
+topic|重点|the main point
+topic|顺序|the order
+topic|优先级|the priority
+topic|流程|the process
+topic|步骤|the steps
+topic|标准|the standard
+topic|范围|the scope
+topic|方向|the direction
+topic|选择|the choices
+topic|机会|the opportunity
+topic|经验|the experience
+topic|能力|the ability
+topic|知识|the knowledge
+topic|内容|the content
+topic|资料|the reference material
+topic|文档|the documentation
+topic|说明|the explanation
+topic|例子|the example
+topic|意见|the opinion
+topic|建议|the suggestion
+topic|想法|the idea
+topic|责任|the responsibility
+topic|合作|collaboration
+topic|沟通|communication
+topic|支持|support
+topic|帮助|help
+@tech-words|Software & communication tools|At work
+topic|软件|software
+topic|硬件|hardware
+topic|系统|the system
+topic|程序|the program
+topic|应用|the application
+topic|网站|the website
+topic|网页|the webpage
+topic|页面|the page
+topic|界面|the interface
+topic|按钮|the button
+topic|菜单栏|the menu bar
+topic|功能|the feature
+topic|设置|the settings
+topic|选项|the options
+topic|账号|the account
+topic|账户|the account
+topic|用户名|the username
+topic|验证码|the verification code
+topic|权限|permissions
+topic|通知|notifications
+topic|消息|messages
+topic|邮件|email
+topic|电子邮件|email
+topic|附件|attachments
+topic|文件夹|folders
+topic|表格|spreadsheets
+topic|数据|data
+topic|数据库|the database
+topic|服务器|the server
+topic|浏览器|the browser
+topic|输入法|the input method
+topic|键盘|the keyboard
+topic|鼠标|the mouse
+topic|触摸板|the trackpad
+topic|耳机|headphones
+topic|麦克风|the microphone
+topic|摄像头|the camera
+topic|视频|video
+topic|信号|the signal
+topic|连接|the connection
+topic|速度|the speed
+topic|错误|the error
+topic|故障|the malfunction
+topic|漏洞|the bug
+topic|备份|the backup
+@actions|Everyday actions|Everyday life
+action|走|walk
+action|跑|run
+action|坐|sit down
+action|站|stand up
+action|睡觉|sleep
+action|起床|get up
+action|出门|go out
+action|回家|go home
+action|上班|go to work
+action|下班|finish work
+action|上学|go to school
+action|放学|leave school
+action|洗澡|take a shower
+action|刷牙|brush my teeth
+action|洗脸|wash my face
+action|做饭|cook
+action|吃饭|eat
+action|买东西|go shopping
+action|睡午觉|take a nap
+action|出发|set off
+action|回来|come back
+action|回去|go back
+action|离开|leave
+action|留下|stay
+action|进去|go in
+action|出来|come out
+action|上去|go up
+action|下来|come down
+action|开始|start
+action|结束|finish
+@handling|Handling things|Everyday life
+object|拿|take
+object|放|put away
+object|带|bring
+object|送|deliver
+object|寄|mail
+object|找|find
+object|收|collect
+object|借|borrow
+object|还|return
+object|买|buy
+object|卖|sell
+object|换|exchange
+object|修|fix
+object|修理|repair
+object|打开|open
+object|关上|close
+object|关掉|turn off
+object|收拾|tidy up
+object|整理|organize
+object|搬|move
+object|抬|lift
+object|推|push
+object|拉|pull
+object|捡|pick up
+object|扔|throw away
+object|丢掉|discard
+object|装|pack
+object|拆|take apart
+object|盖|cover
+object|挂|hang up
+object|锁|lock
+object|擦|wipe
+@work-actions|Actions at work|At work
+object|检查|check
+object|处理|handle
+object|管理|manage
+object|分析|analyze
+object|研究|research
+object|调查|investigate
+object|了解|look into
+object|学习|study
+object|练习|practice
+object|复习|review
+object|记录|record
+object|保存|save
+object|删除|delete
+object|复制|copy
+object|粘贴|paste
+object|发送|send
+object|接收|receive
+object|上传|upload
+object|下载|download
+object|安装|install
+object|启动|start
+object|关闭|close
+object|重启|restart
+object|搜索|search for
+object|查找|look for
+object|填写|fill in
+object|提交|submit
+object|审核|review
+object|批准|approve
+object|拒绝|reject
+object|调整|adjust
+object|改进|improve
+object|优化|optimize
+object|设计|design
+object|开发|develop
+object|实现|implement
+object|发布|release
+object|维护|maintain
+object|总结|summarize
+object|分享|share
+object|转发|forward
+object|打印|print
+object|扫描|scan
+object|取消|cancel
+@speaking|Talking & listening|Everyday life
+object|说|say
+object|讲|explain
+object|问|ask about
+object|回答|answer
+object|读|read
+object|写|write
+object|听|listen to
+object|看|look at
+object|翻译|translate
+object|描述|describe
+object|表达|express
+object|提问|ask about
+object|理解|understand
+object|记住|remember
+object|忘记|forget
+object|注意|pay attention to
+object|发现|discover
+object|同意|agree to
+object|反对|oppose
+object|考虑|consider
+object|比较|compare
+object|强调|emphasize
+object|补充|add to
+object|指出|point out
+@qualities|Qualities & descriptions|Everyday life
+adjective|好|good
+adjective|坏|bad
+adjective|大|big
+adjective|小|small
+adjective|高|tall
+adjective|矮|short
+adjective|长|long
+adjective|短|short
+adjective|宽|wide
+adjective|窄|narrow
+adjective|厚|thick
+adjective|薄|thin
+adjective|重|heavy
+adjective|轻|lightweight
+adjective|快|fast
+adjective|早|early
+adjective|晚|late
+adjective|远|far away
+adjective|近|nearby
+adjective|多|plentiful
+adjective|少|scarce
+adjective|新|new
+adjective|旧|old
+adjective|年轻|young
+adjective|便捷|convenient
+adjective|干净|clean
+adjective|脏|dirty
+adjective|整齐|tidy
+adjective|乱|messy
+adjective|安全|safe
+adjective|危险|dangerous
+adjective|稳定|stable
+adjective|方便|convenient
+adjective|容易|easy
+adjective|难|difficult
+adjective|正确|correct
+adjective|准确|accurate
+adjective|正常|normal
+adjective|奇怪|strange
+adjective|特别|special
+adjective|普通|ordinary
+adjective|常见|common
+adjective|真实|real
+adjective|具体|specific
+adjective|完整|complete
+adjective|清晰|clear
+@free-time|Leisure & activities|Everyday life
+activity|游泳|swimming
+activity|爬山|hiking
+activity|骑车|cycling
+activity|跳舞|dancing
+activity|唱歌|singing
+activity|画画|drawing
+activity|摄影|photography
+activity|旅游|traveling
+activity|旅行|travel
+activity|露营|camping
+activity|钓鱼|fishing
+activity|瑜伽|yoga
+activity|健身|fitness training
+activity|篮球|basketball
+activity|足球|soccer
+activity|网球|tennis
+activity|乒乓球|table tennis
+activity|羽毛球|badminton
+activity|游戏|games
+activity|电子游戏|video games
+activity|桌游|board games
+activity|读书|reading
+@media|Media & culture|Everyday life
+topic|电视剧|TV series
+topic|节目|shows
+topic|新闻|the news
+topic|故事|the story
+topic|小说|novels
+topic|杂志|magazines
+topic|报纸|newspapers
+topic|文章|the article
+topic|书|books
+topic|漫画|comics
+topic|动画|animation
+topic|纪录片|documentaries
+topic|播客|podcasts
+topic|歌曲|songs
+topic|歌词|the lyrics
+topic|演唱会|the concert
+topic|音乐会|the concert
+topic|展览|the exhibition
+topic|文化|culture
+topic|历史|history
+@money-errands|Paying & practical matters|Everyday life
+topic|钱|money
+topic|现金|cash
+topic|零钱|small change
+topic|银行卡|bank cards
+topic|信用卡|credit cards
+topic|支付宝|Alipay
+topic|微信|WeChat
+topic|付款|payment
+topic|支付|paying
+topic|转账|bank transfers
+topic|退款|refunds
+topic|账单|the bill
+topic|费用|the fee
+topic|运费|the delivery charge
+topic|小费|tipping
+topic|优惠|discounts
+topic|折扣|the discount
+topic|打折|sales
+@colours|Colors & appearance|Everyday life
+adjective|红|red
+adjective|黄|yellow
+adjective|蓝|blue
+adjective|绿|green
+adjective|黑|black
+adjective|白|white
+adjective|灰|gray
+adjective|紫|purple
+@numbers|Numbers & amounts|Everyday life
+number|一|one
+number|二|two
+number|三|three
+number|四|four
+number|五|five
+number|六|six
+number|七|seven
+number|八|eight
+number|九|nine
+number|十|ten
+number|两|two
+number|百|a hundred
+@conversation-basics|Core conversation words|Everyday life
+custom|我|I; me|我今天有空。|我今天有空。|Wǒ jīntiān yǒu kòng.|I’m free today.|Used for the speaker. Chinese pronouns do not change form between subject and object.
+custom|你|you|你明天有空吗？|你明天有空嗎？|Nǐ míngtiān yǒu kòng ma?|Are you free tomorrow?|The ordinary singular “you,” suitable for friends and familiar coworkers.
+custom|您|you, politely|您好，请坐。|您好，請坐。|Nín hǎo, qǐng zuò.|Hello, please have a seat.|A respectful singular “you.” With familiar tech coworkers, 你 is usually the more natural choice.
+custom|他|he; him|他是我的同事。|他是我的同事。|Tā shì wǒ de tóngshì.|He’s my coworker.|Spoken tā sounds the same for 他, 她, and 它; their written forms differ.
+custom|她|she; her|她也在这个团队。|她也在這個團隊。|Tā yě zài zhège tuánduì.|She’s on this team too.|The written pronoun for “she,” pronounced tā.
+custom|它|it|它在桌子上。|它在桌子上。|Tā zài zhuōzi shang.|It’s on the table.|The written pronoun for an object or animal when you refer to it as “it.”
+custom|我们|we; us|我们一起去吧。|我們一起去吧。|Wǒmen yìqǐ qù ba.|Let’s go together.|Includes the speaker and others; context tells you whether the listener is included.
+custom|你们|you, plural|你们想吃什么？|你們想吃什麼？|Nǐmen xiǎng chī shénme?|What would you all like to eat?|Use when addressing more than one person.
+custom|他们|they; them|他们已经到了。|他們已經到了。|Tāmen yǐjīng dào le.|They’ve already arrived.|Can refer to a male or mixed group. In speech it sounds like 她们.
+custom|她们|they; them, female|她们是我的朋友。|她們是我的朋友。|Tāmen shì wǒ de péngyou.|They’re my friends.|The written form for a group of women or girls.
+custom|自己|oneself; by oneself|这个我自己来吧。|這個我自己來吧。|Zhège wǒ zìjǐ lái ba.|I’ll handle this myself.|Add after a pronoun to emphasize who does something personally.
+custom|别人|other people; someone else|先听听别人的想法。|先聽聽別人的想法。|Xiān tīngting biéren de xiǎngfǎ.|Let’s hear other people’s ideas first.|Often refers to people other than yourself or the person already mentioned.
+custom|谁|who|这是谁的？|這是誰的？|Zhè shì shéi de?|Whose is this?|Both shéi and shuí are heard; this entry uses conversational shéi.
+custom|什么|what|你想喝什么？|你想喝什麼？|Nǐ xiǎng hē shénme?|What would you like to drink?|The question word stays where the answer would go in the sentence.
+custom|哪|which|你想去哪家店？|你想去哪家店？|Nǐ xiǎng qù nǎ jiā diàn?|Which shop would you like to go to?|Commonly followed by a measure word and a noun: 哪家店, 哪个人.
+custom|哪儿|where|我们在哪儿见？|我們在哪兒見？|Wǒmen zài nǎr jiàn?|Where shall we meet?|Often heard in northern mainland speech. 哪里 is another ordinary option.
+custom|哪里|where|你住在哪里？|你住在哪裡？|Nǐ zhù zài nǎlǐ?|Where do you live?|An alternative to 哪儿 that is common across Mandarin-speaking regions.
+custom|怎么|how|这个怎么用？|這個怎麼用？|Zhège zěnme yòng?|How do I use this?|Usually asks about a way of doing something; context can also give a “how come?” meaning.
+custom|为什么|why|你为什么这么想？|你為什麼這麼想？|Nǐ wèishénme zhème xiǎng?|What makes you think that?|A direct request for a reason. Use a curious tone rather than sounding accusatory.
+custom|多少|how much; how many|这个多少钱？|這個多少錢？|Zhège duōshao qián?|How much is this?|The second syllable is commonly light in this question word.
+custom|几|how many; a few|你想约几点？|你想約幾點？|Nǐ xiǎng yuē jǐ diǎn?|What time would you like to meet?|Common for a small number or a time. 几点 asks for the hour.
+custom|什么时候|when|你什么时候方便？|你什麼時候方便？|Nǐ shénme shíhou fāngbiàn?|When works for you?|An everyday way to ask when, without knowing whether the answer will be a day or a time.
+custom|怎么样|how; how about|这个办法怎么样？|這個辦法怎麼樣？|Zhège bànfǎ zěnmeyàng?|What do you think of this approach?|Useful for asking about a condition, an experience, or someone’s opinion.
+custom|多久|how long|你在这里住了多久？|你在這裡住了多久？|Nǐ zài zhèlǐ zhù le duō jiǔ?|How long have you lived here?|Asks for duration. 什么时候 asks for a point in time instead.
+custom|是|to be|这是我的电脑。|這是我的電腦。|Zhè shì wǒ de diànnǎo.|This is my computer.|Links things and identities. Simple adjective descriptions usually do not need 是.
+custom|有|to have; there is|我有一个问题。|我有一個問題。|Wǒ yǒu yí ge wèntí.|I have a question.|Can express possession or existence. Its ordinary negative is 没有.
+custom|在|at; in; doing|我在开会。|我在開會。|Wǒ zài kāi huì.|I’m in a meeting.|Can introduce a location or mark an action in progress.
+custom|不|not|今天不太方便。|今天不太方便。|Jīntiān bú tài fāngbiàn.|Today isn’t very convenient.|Normally bù; before a fourth tone it is pronounced bú, as in 不太.
+custom|没|not; have not|我还没吃饭。|我還沒吃飯。|Wǒ hái méi chī fàn.|I haven’t eaten yet.|Use 没 or 没有 for an action that did not happen; 没有 also means not having something.
+custom|很|very; an adjective linker|这个很实用。|這個很實用。|Zhège hěn shíyòng.|This is useful.|In a simple description, unstressed 很 often links the subject and adjective without a strong “very.”
+custom|也|also; too|我也这么觉得。|我也這麼覺得。|Wǒ yě zhème juéde.|I think so too.|Usually comes before the verb or description, rather than at the end like English “too.”
+custom|都|all; both|这两个我都喜欢。|這兩個我都喜歡。|Zhè liǎng ge wǒ dōu xǐhuan.|I like both of these.|Refers back to the people or things being included.
+custom|就|then; just; as soon as|我下班就过去。|我下班就過去。|Wǒ xià bān jiù guòqu.|I’ll come over as soon as I finish work.|Often connects a condition or time to what follows promptly. It has other context-dependent uses.
+custom|才|only then; not until|我六点才下班。|我六點才下班。|Wǒ liù diǎn cái xià bān.|I don’t finish work until six.|Often marks something as later or less than expected; context matters.
+custom|只|only|我只要一杯水。|我只要一杯水。|Wǒ zhǐ yào yì bēi shuǐ.|I just want a glass of water.|Here it is zhǐ for “only.” The measure word for an animal is zhī.
+custom|但是|but|我想去，但是今天没空。|我想去，但是今天沒空。|Wǒ xiǎng qù, dànshì jīntiān méi kòng.|I’d like to go, but I’m not free today.|Introduces a contrast. 不过 is a common conversational alternative.
+custom|谢谢|thank you|谢谢你帮忙！|謝謝你幫忙！|Xièxie nǐ bāngmáng!|Thanks for your help!|A simple thanks is enough for many everyday favors. The second xie is light.
+custom|不客气|you’re welcome|不客气，应该的。|不客氣，應該的。|Bú kèqi, yīnggāi de.|You’re welcome. Happy to help.|A reply to thanks. 不 becomes rising bú before 客 kè.
+custom|对不起|sorry|对不起，我迟到了。|對不起，我遲到了。|Duìbuqǐ, wǒ chídào le.|Sorry I’m late.|A direct apology. 不好意思 is often lighter for a small interruption or minor inconvenience.
+custom|没关系|it’s okay; no problem|没关系，不着急。|沒關係，不著急。|Méi guānxi, bù zháojí.|No worries. There’s no rush.|Often responds to an apology or reassures someone about a small problem.
+custom|请|please; to invite|请进，先坐一下。|請進，先坐一下。|Qǐng jìn, xiān zuò yíxià.|Come in and have a seat.|A polite invitation or request. Familiar conversations also use questions or 一下 to soften requests.
+custom|你好|hello|你好，我来取快递。|你好，我來取快遞。|Nǐ hǎo, wǒ lái qǔ kuàidì.|Hi, I’m here to collect a package.|Useful when starting an exchange with someone you do not know well.
+custom|再见|goodbye|那明天见，再见！|那明天見，再見！|Nà míngtiān jiàn, zàijiàn!|See you tomorrow. Bye!|明天见 or 回头见 can also be natural everyday parting phrases.
+custom|欢迎|welcome; to welcome|欢迎来我家玩。|歡迎來我家玩。|Huānyíng lái wǒ jiā wán.|You’re welcome to come over to my place.|Can welcome someone or say that a visit or idea is welcome.
+custom|恭喜|congratulations; to congratulate|恭喜你找到新工作！|恭喜你找到新工作！|Gōngxǐ nǐ zhǎo dào xīn gōngzuò!|Congratulations on finding a new job!|Use for someone’s good news, such as a new job, graduation, or a wedding.
+custom|祝|to wish someone well|祝你周末愉快！|祝你週末愉快！|Zhù nǐ zhōumò yúkuài!|Have a great weekend!|Follow with the person and the good outcome you wish for them.
+custom|当然|of course|当然可以，你拿去用吧。|當然可以，你拿去用吧。|Dāngrán kěyǐ, nǐ ná qù yòng ba.|Of course. Go ahead and use it.|Can give warm agreement. Tone determines whether “of course” sounds friendly or impatient.
+custom|没问题|no problem|没问题，我来安排。|沒問題，我來安排。|Méi wèntí, wǒ lái ānpái.|No problem. I’ll arrange it.|A short, friendly acknowledgment that you can do what was asked.
+@larger-numbers|Larger numbers & zero|Everyday life
+number|零|zero
+number|千|a thousand
+number|万|ten thousand
+@grammar|Small words for natural sentences|Everyday life
+custom|和|and; with|我想要茶和水。|我想要茶和水。|Wǒ xiǎng yào chá hé shuǐ.|I’d like tea and water.|Use 和 between nouns. It does not usually connect two whole sentences in the same way as English “and.”
+custom|跟|with; to follow|我跟你一起去。|我跟你一起去。|Wǒ gēn nǐ yìqǐ qù.|I’ll go with you.|跟 is common for “with” when talking about people doing something together.
+custom|给|to give; for; to|我给你发个消息。|我給你發個消息。|Wǒ gěi nǐ fā ge xiāoxi.|I’ll send you a message.|Can mean giving something or introduce who receives an action. It is gěi here, not jǐ as in 供给.
+custom|对|toward; for; correct|对我来说，这个时间很合适。|對我來說，這個時間很合適。|Duì wǒ lái shuō, zhège shíjiān hěn héshì.|This time works well for me.|对我来说 introduces your perspective. On its own, 对 can also acknowledge that something is correct.
+custom|从|from|我从家里出发。|我從家裡出發。|Wǒ cóng jiālǐ chūfā.|I’m setting off from home.|Introduces the starting place or point of a journey, time period, or process.
+custom|到|to arrive; until; to|我十分钟后到。|我十分鐘後到。|Wǒ shí fēnzhōng hòu dào.|I’ll arrive in ten minutes.|Can describe arriving or introduce an endpoint, as in 从九点到十点.
+custom|向|toward; in the direction of|一直向前走。|一直向前走。|Yìzhí xiàng qián zǒu.|Keep going straight ahead.|Introduces a direction. 向前 is toward the front or ahead.
+custom|离|away from; distance from|公司离这里远吗？|公司離這裡遠嗎？|Gōngsī lí zhèlǐ yuǎn ma?|Is the office far from here?|Use A 离 B with a distance description. It does not mean going away in this pattern.
+custom|为|for; for the sake of|这是为你准备的。|這是為你準備的。|Zhè shì wèi nǐ zhǔnbèi de.|This was prepared for you.|This reading wèi introduces a beneficiary or purpose. 为 also has a separate wéi reading in other words and uses.
+custom|的|possession or description marker|这是我的包。|這是我的包。|Zhè shì wǒ de bāo.|This is my bag.|Light de connects a possessor or description to a noun. Often like an apostrophe-s in simple possession.
+custom|了|change or completion particle|我吃过饭了。|我吃過飯了。|Wǒ chī guo fàn le.|I’ve already eaten.|Light le can mark a changed situation or a completed action. It is not a general past-tense ending.
+custom|过|experience marker|我去过那里。|我去過那裡。|Wǒ qù guo nàlǐ.|I’ve been there before.|Light guo after a verb can mark a past experience. Fourth-tone guò has other uses, such as passing by.
+custom|着|ongoing state marker|门开着。|門開著。|Mén kāi zhe.|The door is open.|Light zhe after a verb can describe a continuing state. 着 has other readings in words such as 着急.
+custom|吗|yes-or-no question particle|你明天来吗？|你明天來嗎？|Nǐ míngtiān lái ma?|Are you coming tomorrow?|Add light ma to a statement to make a yes-or-no question. Do not add it to a normal 什么 or 谁 question.
+custom|呢|what about; topic continuation|我喝茶，你呢？|我喝茶，你呢？|Wǒ hē chá, nǐ ne?|I’m having tea. How about you?|Light ne can turn the same topic back to the listener: 你呢, “How about you?”
+custom|吧|suggestion or tentative tone particle|我们走吧。|我們走吧。|Wǒmen zǒu ba.|Let’s go.|Light ba often makes a suggestion, invitation, or tentative statement.
+custom|把|object-handling marker|我把文件发给你。|我把文件發給你。|Wǒ bǎ wénjiàn fā gěi nǐ.|I’ll send you the file.|Places a known object before the action that affects it. The rest of the sentence normally says what happens to that object.
+custom|被|passive marker|我的杯子被打破了。|我的杯子被打破了。|Wǒ de bēizi bèi dǎ pò le.|My cup got broken.|Introduces a passive construction. This example leaves out who broke it because that is not the focus.
+custom|得|result or manner linker|他说得很清楚。|他說得很清楚。|Tā shuō de hěn qīngchu.|He explained it clearly.|Light de connects an action to how it is done. This differs from dé in 得到 and děi for “have to.”
+custom|地|adverbial marker|他认真地看了一遍。|他認真地看了一遍。|Tā rènzhēn de kàn le yí biàn.|He read it through carefully.|Light de links a description of manner to an action. Fourth-tone dì means land or ground.
+# Core modal verbs and verbs for personal interactions; same topic as the preceding grammar entries.
+custom|想|to want; to think|我想休息一下。|我想休息一下。|Wǒ xiǎng xiūxi yíxià.|I’d like to take a break.|Use 想 before an action for something you would like to do. It can also mean thinking about something.
+custom|要|to want; to need; going to|我要一杯茶。|我要一杯茶。|Wǒ yào yì bēi chá.|I’d like a cup of tea.|Can state what you want or need. 想要 and a friendly question can soften a request.
+custom|会|can; know how; will|我会说一点中文。|我會說一點中文。|Wǒ huì shuō yìdiǎn Zhōngwén.|I can speak a little Chinese.|Use 会 for a learned skill or a prediction. It is huì here, unlike kuài in 会计.
+custom|能|can; be able to|你能帮我一下吗？|你能幫我一下嗎？|Nǐ néng bāng wǒ yíxià ma?|Could you help me for a moment?|Often asks about ability or whether circumstances allow an action. 能…吗 is a common request.
+custom|可以|can; may; acceptable|我可以坐这里吗？|我可以坐這裡嗎？|Wǒ kěyǐ zuò zhèlǐ ma?|May I sit here?|Useful for permission or checking whether a plan is acceptable.
+custom|愿意|to be willing to|你愿意跟我们一起去吗？|你願意跟我們一起去嗎？|Nǐ yuànyì gēn wǒmen yìqǐ qù ma?|Would you like to go with us?|Asks about willingness, rather than ability or permission.
+custom|喜欢|to like|我喜欢在家做饭。|我喜歡在家做飯。|Wǒ xǐhuan zài jiā zuò fàn.|I like cooking at home.|Can be followed by a person, thing, or activity. The final huan is commonly light in conversation.
+custom|知道|to know information|你知道怎么去吗？|你知道怎麼去嗎？|Nǐ zhīdào zěnme qù ma?|Do you know how to get there?|Use 知道 for information or facts. 认识 is for being acquainted with a person or recognizing something.
+custom|认识|to know; to be acquainted with|很高兴认识你。|很高興認識你。|Hěn gāoxìng rènshi nǐ.|Nice to meet you.|Useful for knowing a person or recognizing a word or thing. It differs from 知道 for knowing information.
+custom|帮忙|to help; to lend a hand|谢谢你来帮忙。|謝謝你來幫忙。|Xièxie nǐ lái bāngmáng.|Thanks for coming to help.|A common everyday expression for helping. With a specific task, you can say 帮我看一下这个.
