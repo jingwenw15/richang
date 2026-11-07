@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import { vocabulary, vocabularyGroups, vocabularyById, selectVocabulary } from '../src/vocabulary.js';
 import { phrases } from '../src/content.js';
 
-test('vocabulary contains 1,000 distinct words in 48 topics, each with a complete example', () => {
-  assert.equal(vocabulary.length, 1000);
-  assert.equal(vocabularyGroups.length, 48);
+test('vocabulary contains 1,200 distinct words in 56 topics, each with a complete example', () => {
+  assert.equal(vocabulary.length, 1200);
+  assert.equal(vocabularyGroups.length, 56);
   assert.equal(new Set([...vocabulary, ...phrases].map(p => p.id)).size, vocabulary.length + phrases.length);
   assert.equal(new Set(vocabulary.map(word => word.zh)).size, vocabulary.length);
   assert.equal(new Set(vocabularyGroups.map(group => group.id)).size, vocabularyGroups.length);

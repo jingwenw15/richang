@@ -28,11 +28,11 @@ test('example frames keep full traditional sentences and idiomatic numeric excep
 });
 
 test('the sourced expansion has provenance and excludes inappropriate alternate readings', () => {
-  assert.equal(vocabularySource.added, 856);
+  assert.equal(vocabularySource.added, 1056);
   assert.equal(vocabularySource.license, 'CC-BY-SA-4.0');
   assert.match(vocabularySource.sha256, /^[a-f0-9]{64}$/);
   const get = zh => vocabulary.find(word => word.zh === zh);
-  for (const [zh, pinyin] of [['背','bèi'],['鸟','niǎo'],['猫','māo'],['妻子','qīzi'],['老公','lǎogōng'],['绿','lǜ'],['薄','báo'],['只','zhǐ'],['得','de']]) assert.equal(get(zh).pinyin, pinyin, zh);
-  for (const [zh, traditional] of [['家','家'],['困','睏'],['云','雲'],['和','和'],['只','只'],['千','千']]) assert.equal(get(zh).traditional, traditional, zh);
-  assert.equal(vocabulary.filter(word => word.source === 'cc-cedict').length, 856);
+  for (const [zh, pinyin] of [['背','bèi'],['鸟','niǎo'],['猫','māo'],['妻子','qīzi'],['老公','lǎogōng'],['绿','lǜ'],['薄','báo'],['只','zhǐ'],['得','de'],['尽快','jǐnkuài'],['当天','dāngtiān'],['当时','dāngshí'],['约','yuē'],['空闲','kòngxián'],['一致','yízhì']]) assert.equal(get(zh).pinyin, pinyin, zh);
+  for (const [zh, traditional] of [['家','家'],['困','睏'],['云','雲'],['和','和'],['只','只'],['千','千'],['尽快','儘快'],['夸','誇']]) assert.equal(get(zh).traditional, traditional, zh);
+  assert.equal(vocabulary.filter(word => word.source === 'cc-cedict').length, 1056);
 });

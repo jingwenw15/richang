@@ -894,3 +894,211 @@ custom|喜欢|to like|我喜欢在家做饭。|我喜歡在家做飯。|Wǒ xǐh
 custom|知道|to know information|你知道怎么去吗？|你知道怎麼去嗎？|Nǐ zhīdào zěnme qù ma?|Do you know how to get there?|Use 知道 for information or facts. 认识 is for being acquainted with a person or recognizing something.
 custom|认识|to know; to be acquainted with|很高兴认识你。|很高興認識你。|Hěn gāoxìng rènshi nǐ.|Nice to meet you.|Useful for knowing a person or recognizing a word or thing. It differs from 知道 for knowing information.
 custom|帮忙|to help; to lend a hand|谢谢你来帮忙。|謝謝你來幫忙。|Xièxie nǐ lái bāngmáng.|Thanks for coming to help.|A common everyday expression for helping. With a specific task, you can say 帮我看一下这个.
+@coordination|Coordinating with your team|At work
+object|对接|coordinate on
+object|协调|coordinate
+custom|跟上|to keep up; to catch up|这样我就能跟上进度了。|這樣我就能跟上進度了。|Zhèyàng wǒ jiù néng gēn shàng jìndù le.|That way I can keep up with the work.|跟上 means keeping pace with something. 跟不上 describes not being able to keep up.
+object|接手|take over
+object|交接|hand over
+custom|分工|division of work; to divide up tasks|我们先分工，再开始做吧。|我們先分工，再開始做吧。|Wǒmen xiān fēn gōng, zài kāishǐ zuò ba.|Let’s divide up the tasks before we start.|Useful for agreeing who will handle which part of the work.
+custom|配合|to cooperate; to help with|这部分我可以配合你。|這部分我可以配合你。|Zhè bùfen wǒ kěyǐ pèihé nǐ.|I can help you with this part.|Often means working with someone so their part of a task goes smoothly.
+topic|进展|the progress
+topic|阻碍|the obstacle
+custom|卡住|to get stuck; to be blocked|这一步我卡住了，能帮我看看吗？|這一步我卡住了，能幫我看看嗎？|Zhè yí bù wǒ kǎ zhù le, néng bāng wǒ kànkan ma?|I’m stuck on this step. Could you take a look?|A casual way to describe being blocked. Explain the specific step and what help you need.
+custom|回应|to respond; a response|我还没收到回应。|我還沒收到回應。|Wǒ hái méi shōu dào huíyìng.|I haven’t heard back yet.|Can describe a reply to a request, question, or suggestion. 回复 is another common word for a reply.
+custom|复盘|to review how something went|我们找个时间复盘一下吧。|我們找個時間復盤一下吧。|Wǒmen zhǎo ge shíjiān fùpán yíxià ba.|Let’s find a time to look back at how it went.|Common tech-team language for reviewing what happened and what to improve; originally used for replaying a board game.
+topic|待办|the to-do items
+topic|议程|the agenda
+topic|纪要|the meeting summary
+topic|共识|the shared understanding
+topic|分歧|the disagreement
+topic|预期|the expectations
+topic|风险|the risk
+topic|资源|the resources
+topic|人手|the staffing
+topic|负责人|the person in charge
+topic|参与者|the participants
+custom|优先|first; as a priority|我们优先处理这个问题吧。|我們優先處理這個問題吧。|Wǒmen yōuxiān chǔlǐ zhège wèntí ba.|Let’s handle this issue first.|Comes before the action to give it priority. 优先级 is the noun for a priority level.
+topic|事项|the items to handle
+@delivery|Software delivery & debugging|At work
+topic|接口|the interface
+topic|参数|the parameters
+topic|请求|the request
+topic|响应|the response
+topic|日志|the logs
+topic|环境|the environment
+topic|配置|the configuration
+topic|依赖|the dependencies
+topic|分支|the branch
+object|合并|merge
+topic|补丁|the patch
+object|部署|deploy
+custom|回滚|to roll back|出了问题的话，我们可以回滚。|出了問題的話，我們可以回滾。|Chū le wèntí de huà, wǒmen kěyǐ huígǔn.|If there’s a problem, we can roll back.|In software, returning to an earlier version.
+topic|迭代|the iteration
+topic|变更|the change
+custom|兼容|compatible; to be compatible with|这个版本和旧系统兼容吗？|這個版本和舊系統兼容嗎？|Zhège bǎnběn hé jiù xìtǒng jiānróng ma?|Is this version compatible with the old system?|Name the other system or version when asking about compatibility.
+topic|性能|the performance
+topic|流量|the traffic
+topic|负载|the load
+custom|超时|to time out; a timeout|这个请求超时了。|這個請求超時了。|Zhège qǐngqiú chāoshí le.|This request timed out.|In software, an operation exceeded its time limit. It can also describe going over an allotted time more generally.
+custom|崩溃|to crash; to break down|应用刚才崩溃了。|應用剛才崩潰了。|Yìngyòng gāngcái bēngkuì le.|The app crashed just now.|Used for software crashes; in other contexts it can describe a person feeling overwhelmed.
+topic|延迟|the latency
+object|重现|reproduce
+object|排查|troubleshoot
+custom|上线|to go live; to launch|我们明天上午上线，可以吗？|我們明天上午上線，可以嗎？|Wǒmen míngtiān shàngwǔ shàngxiàn, kěyǐ ma?|Would tomorrow morning work for the launch?|In a tech team, often means making a feature or service available to users.
+@connectors|Connecting ideas naturally|Everyday life
+custom|原来|so that’s why; originally|原来是这样，我明白了。|原來是這樣，我明白了。|Yuánlái shì zhèyàng, wǒ míngbai le.|Oh, that’s how it is. I get it now.|Often signals a new realization. In other contexts it means originally or previously.
+custom|反正|anyway; in any case|反正我不着急，你慢慢来。|反正我不著急，你慢慢來。|Fǎnzhèng wǒ bù zháojí, nǐ mànman lái.|I’m not in a hurry anyway. Take your time.|Introduces something that holds regardless of the details. Tone can make it sound reassuring or dismissive.
+custom|毕竟|after all|别太着急，毕竟是第一次做。|別太著急，畢竟是第一次做。|Bié tài zháojí, bìjìng shì dì yī cì zuò.|Don’t rush yourself. It’s your first time doing this, after all.|Gives a reason that puts the situation in perspective. 一 keeps its base tone in ordinal 第一次.
+custom|另外|in addition; separately|另外，我还有个问题。|另外，我還有個問題。|Lìngwài, wǒ hái yǒu ge wèntí.|Also, I have another question.|Useful for adding another point or shifting to a separate matter.
+custom|顺便|while you’re at it; incidentally|我去买咖啡，顺便给你带一杯。|我去買咖啡，順便給你帶一杯。|Wǒ qù mǎi kāfēi, shùnbiàn gěi nǐ dài yì bēi.|I’m getting coffee. I’ll pick one up for you too.|Adds something convenient to an action already planned. 顺路 specifically concerns being on the same route.
+custom|至少|at least|至少先跟他说一声吧。|至少先跟他說一聲吧。|Zhìshǎo xiān gēn tā shuō yì shēng ba.|At least give him a heads-up first.|States a minimum amount or a basic step that should happen.
+custom|尤其|especially|我喜欢这家店，尤其是他们的面。|我喜歡這家店，尤其是他們的麵。|Wǒ xǐhuan zhè jiā diàn, yóuqí shì tāmen de miàn.|I like this place, especially their noodles.|Especially common in the pattern 尤其是 when highlighting one item.
+custom|而且|and also; moreover|这家店好吃，而且离公司近。|這家店好吃，而且離公司近。|Zhè jiā diàn hǎochī, érqiě lí gōngsī jìn.|The food’s good here, and it’s close to the office.|Adds another related point. Unlike 和, it can connect full descriptions or clauses.
+custom|然后|then; after that|我们先吃饭，然后去散步。|我們先吃飯，然後去散步。|Wǒmen xiān chī fàn, ránhòu qù sàn bù.|Let’s eat first, then go for a walk.|Links events in sequence. 先…然后… is useful for outlining a simple plan.
+custom|后来|later; afterwards|后来你们怎么解决的？|後來你們怎麼解決的？|Hòulái nǐmen zěnme jiějué de?|How did you resolve it in the end?|Usually follows events already being recounted. For a future “later,” use something like 晚点 or 以后.
+custom|不然|otherwise; how about instead|不然我们明天再聊？|不然我們明天再聊？|Bùrán wǒmen míngtiān zài liáo?|How about talking tomorrow instead?|Can propose an alternative, or introduce what would happen otherwise.
+custom|否则|otherwise; or else|最好早点出门，否则可能会迟到。|最好早點出門，否則可能會遲到。|Zuì hǎo zǎo diǎn chū mén, fǒuzé kěnéng huì chídào.|It’s best to leave early; otherwise, we might be late.|States the consequence if the earlier condition is not met. It is more explicit than a casual 不然.
+custom|只要|as long as|只要你方便，我都可以。|只要你方便，我都可以。|Zhǐyào nǐ fāngbiàn, wǒ dōu kěyǐ.|As long as it works for you, I’m flexible.|Introduces a sufficient condition. 只要…就… is a common full pattern.
+custom|只有|only if; only|只有周六我有空。|只有週六我有空。|Zhǐyǒu zhōuliù wǒ yǒu kòng.|Saturday is the only day I’m free.|Restricts the options. 只有…才… can express a necessary condition, unlike 只要…就….
+custom|即使|even if|即使下雨，我们也可以在室内见。|即使下雨，我們也可以在室內見。|Jíshǐ xià yǔ, wǒmen yě kěyǐ zài shìnèi jiàn.|Even if it rains, we can meet indoors.|即使…也… says that the result still holds under a condition.
+custom|虽然|although; even though|虽然有点累，但我还是想去。|雖然有點累，但我還是想去。|Suīrán yǒudiǎn lèi, dàn wǒ háishi xiǎng qù.|Although I’m a bit tired, I’d still like to go.|Chinese can use both 虽然 and 但是 or 但 in one sentence.
+custom|尽管|even though; despite|尽管时间不多，我们还是做完了。|儘管時間不多，我們還是做完了。|Jǐnguǎn shíjiān bù duō, wǒmen háishi zuò wán le.|Even though time was short, we still finished.|Here it introduces a concession. It can also mean “go ahead and” in expressions such as 尽管说.
+custom|既然|since; given that|既然你有空，我们就现在聊吧。|既然你有空，我們就現在聊吧。|Jìrán nǐ yǒu kòng, wǒmen jiù xiànzài liáo ba.|Since you’re free, let’s talk now.|Starts from a fact both speakers accept and draws a practical conclusion.
+custom|要是|if|要是来不及，就跟我说。|要是來不及，就跟我說。|Yàoshi lái bu jí, jiù gēn wǒ shuō.|If there isn’t enough time, let me know.|A conversational alternative to 如果. The final shi is commonly light.
+custom|甚至|even; to the point that|他忙得甚至没时间吃午饭。|他忙得甚至沒時間吃午飯。|Tā máng de shènzhì méi shíjiān chī wǔfàn.|He’s so busy he doesn’t even have time for lunch.|Highlights something more extreme than the previous point.
+custom|大概|about; probably|我大概六点能到。|我大概六點能到。|Wǒ dàgài liù diǎn néng dào.|I can probably get there around six.|Can give an approximate amount or an uncertain estimate.
+custom|差点|almost; nearly|我差点忘了这件事。|我差點忘了這件事。|Wǒ chàdiǎn wàng le zhè jiàn shì.|I almost forgot about this.|Often describes an event that nearly happened. 差点没 can be context-dependent, so use the simpler positive pattern first.
+custom|好像|it seems; apparently|我好像把钥匙忘在家里了。|我好像把鑰匙忘在家裡了。|Wǒ hǎoxiàng bǎ yàoshi wàng zài jiālǐ le.|I think I left my keys at home.|Presents an impression rather than a fully certain statement.
+custom|似乎|it seems; apparently|他似乎没听见。|他似乎沒聽見。|Tā sìhū méi tīngjiàn.|He doesn’t seem to have heard.|Similar to 好像, but a little more written or measured in tone. 好像 is often the casual choice.
+custom|恐怕|I’m afraid; probably|今天恐怕来不及了。|今天恐怕來不及了。|Jīntiān kǒngpà lái bu jí le.|I’m afraid there won’t be enough time today.|Often introduces an unwelcome possibility or a cautious negative estimate.
+@scheduling|Timing & work-life plans|At work
+custom|尽快|as soon as possible|我会尽快给你回复。|我會儘快給你回覆。|Wǒ huì jǐnkuài gěi nǐ huífù.|I’ll get back to you as soon as I can.|An urgency expression. Give an actual estimate too when someone needs to plan around your reply.
+custom|稍后|a little later|我稍后把链接发给你。|我稍後把鏈接發給你。|Wǒ shāohòu bǎ liànjiē fā gěi nǐ.|I’ll send you the link a little later.|A short “later” often used in messages. 晚点 is a more casual alternative.
+custom|提前|in advance; ahead of time|时间有变化的话，提前告诉我。|時間有變化的話，提前告訴我。|Shíjiān yǒu biànhuà de huà, tíqián gàosu wǒ.|If the time changes, let me know in advance.|Can describe doing something early, or moving an event earlier.
+custom|推迟|to postpone; to move later|我们把会议推迟半个小时吧。|我們把會議推遲半個小時吧。|Wǒmen bǎ huìyì tuīchí bàn ge xiǎoshí ba.|Let’s move the meeting back half an hour.|Use for postponing an event. Say the new time or amount of delay.
+custom|延后|to move later; to defer|这个可以延后到下周吗？|這個可以延後到下週嗎？|Zhège kěyǐ yánhòu dào xià zhōu ma?|Could this wait until next week?|Useful for asking whether something can happen later.
+custom|临时|last-minute; temporary|不好意思，我临时有点事。|不好意思，我臨時有點事。|Bù hǎoyìsi, wǒ línshí yǒudiǎn shì.|Sorry, something came up at the last minute.|Can describe an unplanned change or a temporary arrangement.
+custom|暂时|for now; temporarily|这个问题暂时先放一下。|這個問題暫時先放一下。|Zhège wèntí zànshí xiān fàng yíxià.|Let’s leave this issue for now.|Marks something as a temporary choice, rather than the final decision.
+custom|定期|regularly; at fixed intervals|我们定期聊一下进度吧。|我們定期聊一下進度吧。|Wǒmen dìngqī liáo yíxià jìndù ba.|Let’s check in on progress regularly.|Useful for a recurring check-in or other regularly scheduled activity.
+custom|按时|on time; as scheduled|我应该能按时做完。|我應該能按時做完。|Wǒ yīnggāi néng ànshí zuò wán.|I should be able to finish on time.|Focuses on meeting the agreed schedule or deadline.
+custom|准时|punctual; exactly on time|我们三点准时开始吧。|我們三點準時開始吧。|Wǒmen sān diǎn zhǔnshí kāishǐ ba.|Let’s start at three sharp.|Often emphasizes punctuality at a particular time.
+custom|及时|in time; promptly|谢谢你及时提醒我。|謝謝你及時提醒我。|Xièxie nǐ jíshí tíxǐng wǒ.|Thanks for reminding me in time.|Means early enough to help or prevent a problem, rather than simply matching a clock time.
+custom|目前|currently; at present|目前还没有新的消息。|目前還沒有新的消息。|Mùqián hái méiyǒu xīn de xiāoxi.|There isn’t any new information at the moment.|Useful for describing the current state of something that may change.
+custom|眼下|right now; at the moment|眼下先把这个问题解决吧。|眼下先把這個問題解決吧。|Yǎnxià xiān bǎ zhège wèntí jiějué ba.|For now, let’s sort out this issue first.|Focuses on the immediate situation. 现在 is a more general “now.”
+custom|随时|at any time|有问题随时问我。|有問題隨時問我。|Yǒu wèntí suíshí wèn wǒ.|Feel free to ask me whenever you have questions.|A friendly way to make yourself available. Use it when you are comfortable with that open invitation.
+custom|日常|everyday; daily life|这就是我的日常。|這就是我的日常。|Zhè jiù shì wǒ de rìcháng.|That’s a typical day for me.|Can modify everyday activities, or informally refer to the routine of daily life. It is also this app’s name.
+topic|周期|the cycle
+custom|频率|frequency|我们开会的频率是不是有点高？|我們開會的頻率是不是有點高？|Wǒmen kāi huì de pínlǜ shì bu shì yǒudiǎn gāo?|Are we meeting a little too often?|Use with a recurring activity to talk about how often it happens.
+custom|期间|during; in the course of|我出差期间，有事发消息就行。|我出差期間，有事發消息就行。|Wǒ chūchāi qījiān, yǒu shì fā xiāoxi jiù xíng.|Just message me if you need anything while I’m away on business.|Usually follows a time period or event, such as 假期期间 or 出差期间.
+custom|当天|on that day; the same day|当天再确认一下时间吧。|當天再確認一下時間吧。|Dāngtiān zài quèrèn yíxià shíjiān ba.|Let’s double-check the time on the day.|Refers to the day of an event already mentioned.
+custom|当时|at that time|我当时在开会，没看到消息。|我當時在開會，沒看到消息。|Wǒ dāngshí zài kāi huì, méi kàn dào xiāoxi.|I was in a meeting then and didn’t see the message.|Looks back to the time of an event, usually in the past.
+custom|到时候|when the time comes; then|到时候我们再看吧。|到時候我們再看吧。|Dào shíhou wǒmen zài kàn ba.|Let’s see how things look then.|Leaves a decision or discussion until the relevant time arrives.
+custom|空闲|free; unoccupied time|你空闲的时候一般做什么？|你空閒的時候一般做什麼？|Nǐ kòngxián de shíhou yìbān zuò shénme?|What do you usually do in your free time?|Describes spare time. 有空 is a very common conversational way to say someone is available.
+custom|工时|working hours|这周工时有点长。|這週工時有點長。|Zhè zhōu gōngshí yǒudiǎn cháng.|I’m working rather long hours this week.|Refers to the hours spent working, not the opening hours of a shop.
+custom|休假|to take leave; to be on vacation|我下周休假，有事先跟我说。|我下週休假，有事先跟我說。|Wǒ xià zhōu xiūjià, yǒu shì xiān gēn wǒ shuō.|I’m on leave next week. Let me know beforehand if you need anything.|A general expression for taking time off work.
+custom|调休|to offset work with time off|我周五调休。|我週五調休。|Wǒ zhōuwǔ tiáoxiū.|I’m taking compensatory time off on Friday.|Can refer to time off that offsets work done at another time, or to rearranged work and rest days.
+@social|Keeping conversations warm|Everyday life
+custom|约|to arrange to meet; to invite|我们约个时间见面吧。|我們約個時間見面吧。|Wǒmen yuē ge shíjiān jiàn miàn ba.|Let’s find a time to meet.|Common for arranging a meeting or a social plan. It does not imply a romantic date by itself.
+custom|见面|to meet in person|我们明天见面再聊。|我們明天見面再聊。|Wǒmen míngtiān jiàn miàn zài liáo.|Let’s talk when we meet tomorrow.|Focuses on meeting face to face, rather than just exchanging messages.
+custom|聚会|a get-together; to get together|周末的聚会你来吗？|週末的聚會你來嗎？|Zhōumò de jùhuì nǐ lái ma?|Are you coming to the get-together this weekend?|Can be a casual gathering of friends, family, or coworkers.
+custom|联系|to contact; to keep in touch|到了以后再联系我。|到了以後再聯繫我。|Dào le yǐhòu zài liánxì wǒ.|Get in touch with me once you arrive.|Can refer to contacting someone or maintaining contact over time.
+custom|邀请|to invite; an invitation|谢谢你的邀请！|謝謝你的邀請！|Xièxie nǐ de yāoqǐng!|Thanks for the invitation!|A general word for inviting someone. In casual speech, 叫我一起去 can also mean including you in a plan.
+custom|参加|to attend; to take part|这次活动我也想参加。|這次活動我也想參加。|Zhè cì huódòng wǒ yě xiǎng cānjiā.|I’d like to join this activity too.|Use for taking part in an activity, event, or meeting.
+custom|陪|to accompany; to keep company|我陪你一起去吧。|我陪你一起去吧。|Wǒ péi nǐ yìqǐ qù ba.|I’ll go with you.|Often emphasizes accompanying someone for their benefit or company.
+custom|关心|to care about; to show concern|谢谢你的关心，我好多了。|謝謝你的關心，我好多了。|Xièxie nǐ de guānxīn, wǒ hǎo duō le.|Thanks for checking on me. I’m much better.|Refers to caring about how someone is doing, not simply being curious.
+custom|照顾|to look after; to take care of|你先照顾好自己。|你先照顧好自己。|Nǐ xiān zhàogu hǎo zìjǐ.|Take care of yourself first.|Can refer to caring for a person or looking after their needs.
+custom|信任|to trust; trust|谢谢你信任我。|謝謝你信任我。|Xièxie nǐ xìnrèn wǒ.|Thanks for trusting me.|Refers to trusting someone’s intentions, ability, or reliability.
+custom|尊重|to respect; respect|我尊重你的决定。|我尊重你的決定。|Wǒ zūnzhòng nǐ de juédìng.|I respect your decision.|A direct way to acknowledge another person’s choice or perspective.
+custom|体谅|to be understanding of|谢谢你体谅我的难处。|謝謝你體諒我的難處。|Xièxie nǐ tǐliàng wǒ de nánchu.|Thanks for understanding the difficult position I’m in.|Means considering someone’s circumstances with sympathy.
+custom|误会|a misunderstanding; to misunderstand|可能是个误会，我们再确认一下。|可能是個誤會，我們再確認一下。|Kěnéng shì ge wùhuì, wǒmen zài quèrèn yíxià.|Maybe it’s a misunderstanding. Let’s double-check.|Can name a misunderstanding or describe misunderstanding someone’s meaning or intentions.
+custom|道歉|to apologize|我想为昨天的事道歉。|我想為昨天的事道歉。|Wǒ xiǎng wèi zuótiān de shì dào qiàn.|I’d like to apologize for what happened yesterday.|The verb for making an apology. A small everyday apology may simply be 不好意思.
+custom|感谢|to thank; thanks|真的很感谢你的帮助。|真的很感謝你的幫助。|Zhēn de hěn gǎnxiè nǐ de bāngzhù.|I really appreciate your help.|A stronger acknowledgment than a quick 谢谢, useful for a meaningful favor.
+custom|原谅|to forgive|这次就原谅我吧。|這次就原諒我吧。|Zhè cì jiù yuánliàng wǒ ba.|Please forgive me this time.|Use when seeking forgiveness, rather than just saying sorry for a tiny interruption.
+custom|夸|to praise; to compliment|谢谢你夸我。|謝謝你誇我。|Xièxie nǐ kuā wǒ.|Thanks for the compliment.|A conversational word for praising someone or saying something nice about them.
+custom|奖励|a reward; to reward|我想给自己一点奖励。|我想給自己一點獎勵。|Wǒ xiǎng gěi zìjǐ yìdiǎn jiǎnglì.|I’d like to give myself a little reward.|Can be a noun or a verb. Rewarding yourself is 给自己一点奖励.
+custom|客气|polite; standing on ceremony|别客气，想喝什么就拿。|別客氣，想喝什麼就拿。|Bié kèqi, xiǎng hē shénme jiù ná.|Make yourself at home. Help yourself to a drink.|别客气 often encourages someone not to be overly reserved about accepting hospitality or help.
+custom|熟悉|to be familiar with; familiar|我对这部分比较熟悉。|我對這部分比較熟悉。|Wǒ duì zhè bùfen bǐjiào shúxī.|I’m fairly familiar with this part.|Common pattern: 对…熟悉, for being familiar with a topic, place, or process.
+custom|陌生|unfamiliar; a stranger|这个地方对我来说有点陌生。|這個地方對我來說有點陌生。|Zhège dìfang duì wǒ lái shuō yǒudiǎn mòshēng.|This place is a bit unfamiliar to me.|Describes something or someone you do not know well.
+custom|热闹|lively; bustling|外面挺热闹的。|外面挺熱鬧的。|Wàimian tǐng rènao de.|It’s pretty lively outside.|Usually a lively atmosphere with people and activity, rather than simply noise.
+custom|气氛|atmosphere; mood|今天的气氛挺轻松的。|今天的氣氛挺輕鬆的。|Jīntiān de qìfēn tǐng qīngsōng de.|The atmosphere’s pretty relaxed today.|Use for the social mood of a room, gathering, or conversation.
+custom|关系|relationship; connection|我们关系挺好的。|我們關係挺好的。|Wǒmen guānxi tǐng hǎo de.|We get along well.|关系 can describe personal relationships or a connection between things. The final xi is commonly light in casual speech.
+buy|礼物|gift
+@decisions|Choices, changes & follow-through|Everyday life
+custom|确保|to make sure; to ensure|我先确认一下，确保没问题。|我先確認一下，確保沒問題。|Wǒ xiān quèrèn yíxià, quèbǎo méi wèntí.|I’ll check first to make sure everything’s okay.|Focuses on making an outcome certain, rather than just checking a fact.
+custom|避免|to avoid|我们尽量避免重复做同样的事。|我們儘量避免重複做同樣的事。|Wǒmen jǐnliàng bìmiǎn chóngfù zuò tóngyàng de shì.|Let’s try to avoid doing the same work twice.|Use before the situation or action you want to avoid.
+custom|防止|to prevent|我加个提醒，防止自己忘记。|我加個提醒，防止自己忘記。|Wǒ jiā ge tíxǐng, fángzhǐ zìjǐ wàngjì.|I’ll set a reminder so I don’t forget.|Emphasizes taking action to stop an unwanted outcome.
+custom|允许|to allow; to permit|这里允许拍照吗？|這裡允許拍照嗎？|Zhèlǐ yǔnxǔ pāizhào ma?|Is photography allowed here?|A clear way to ask whether a rule or person permits something.
+custom|值得|to be worth|这个地方值得去看看。|這個地方值得去看看。|Zhège dìfang zhíde qù kànkan.|This place is worth a visit.|Use before an action to say that it is worthwhile.
+custom|适合|to suit; to be suitable for|这个时间适合你吗？|這個時間適合你嗎？|Zhège shíjiān shìhé nǐ ma?|Does this time work for you?|Usually links something to the person, purpose, or situation it suits. 合适 can describe something as a good fit.
+custom|取决于|to depend on|这取决于大家的时间。|這取決於大家的時間。|Zhè qǔjuéyú dàjiā de shíjiān.|It depends on everyone’s availability.|Names the factor that determines an outcome or decision.
+custom|影响|to affect; an effect|我担心会影响进度。|我擔心會影響進度。|Wǒ dānxīn huì yǐngxiǎng jìndù.|I’m worried it will affect progress.|Can be a verb or a noun. It does not always imply that the effect is negative.
+custom|导致|to lead to; to cause|这个改动导致了一个新问题。|這個改動導致了一個新問題。|Zhège gǎidòng dǎozhì le yí ge xīn wèntí.|This change caused a new issue.|Often introduces an undesirable result or consequence.
+custom|造成|to cause; to bring about|不好意思，给你造成麻烦了。|不好意思，給你造成麻煩了。|Bù hǎoyìsi, gěi nǐ zàochéng máfan le.|Sorry for the trouble I caused you.|Often used with a result such as 麻烦 or 损失. This apology is more explicit than a casual 麻烦你了.
+custom|保持|to maintain; to keep|我们保持联系吧。|我們保持聯繫吧。|Wǒmen bǎochí liánxì ba.|Let’s keep in touch.|Means keeping a state or relationship going.
+custom|改变|to change; a change|计划有改变吗？|計劃有改變嗎？|Jìhuà yǒu gǎibiàn ma?|Has the plan changed?|Can be a verb or noun for a change in a plan, state, or behavior.
+custom|增加|to add; to increase|你能增加一个例子吗？|你能增加一個例子嗎？|Nǐ néng zēngjiā yí ge lìzi ma?|Could you add another example?|Use for making a number, amount, or set larger.
+custom|减少|to reduce; to decrease|我们可以减少一些会议吗？|我們可以減少一些會議嗎？|Wǒmen kěyǐ jiǎnshǎo yìxiē huìyì ma?|Could we have fewer meetings?|Use for making an amount smaller or having fewer of something.
+custom|提高|to raise; to improve|我想提高中文口语。|我想提高中文口語。|Wǒ xiǎng tígāo Zhōngwén kǒuyǔ.|I’d like to improve my spoken Chinese.|Common with ability, quality, level, or efficiency; not simply moving an object upward.
+custom|降低|to lower; to reduce|能把音量降低一点吗？|能把音量降低一點嗎？|Néng bǎ yīnliàng jiàngdī yìdiǎn ma?|Could you turn the volume down a little?|Used for lowering a level, amount, cost, or intensity.
+custom|改善|to improve a condition|最近睡眠改善了不少。|最近睡眠改善了不少。|Zuìjìn shuìmián gǎishàn le bù shǎo.|My sleep has improved quite a bit lately.|Often describes making a condition, situation, or quality of life better.
+custom|节省|to save; to economize on|这样可以节省一点时间。|這樣可以節省一點時間。|Zhèyàng kěyǐ jiéshěng yìdiǎn shíjiān.|This could save a little time.|Common with time, effort, money, or another resource.
+custom|浪费|to waste; a waste|我不想浪费你的时间。|我不想浪費你的時間。|Wǒ bù xiǎng làngfèi nǐ de shíjiān.|I don’t want to waste your time.|Can describe wasting time, effort, food, or money.
+custom|代替|to replace; in someone’s place|这次我代替他参加。|這次我代替他參加。|Zhè cì wǒ dàitì tā cānjiā.|I’ll attend in his place this time.|Use when one person or thing takes the place of another.
+custom|结合|to combine; to incorporate|结合你的建议，我做了些修改。|結合你的建議，我做了些修改。|Jiéhé nǐ de jiànyì, wǒ zuò le xiē xiūgǎi.|I made some changes incorporating your suggestions.|Can mean combining things or considering them together.
+custom|区分|to distinguish; to tell apart|这两个词我还不太会区分。|這兩個詞我還不太會區分。|Zhè liǎng ge cí wǒ hái bú tài huì qūfēn.|I’m still not sure how to tell these two words apart.|Use for recognizing or explaining the difference between similar things.
+custom|分配|to allocate; to divide among|我们先分配一下任务吧。|我們先分配一下任務吧。|Wǒmen xiān fēnpèi yíxià rènwu ba.|Let’s divide up the tasks first.|Usually names the tasks, time, or resources being shared out.
+custom|跟进|to follow up on|这个问题我来跟进。|這個問題我來跟進。|Zhège wèntí wǒ lái gēnjìn.|I’ll follow up on this issue.|Common at work for keeping track of an issue and moving it forward.
+custom|应付|to cope with; to deal with|今天事情太多，有点应付不过来。|今天事情太多，有點應付不過來。|Jīntiān shìqing tài duō, yǒudiǎn yìngfu bu guòlai.|There’s too much going on today. I’m struggling to keep up.|Often means dealing with demands or a difficult situation. It can also mean doing something perfunctorily, depending on context.
+@nuance|Describing things with nuance|Everyday life
+adjective|实用|practical
+adjective|灵活|flexible
+adjective|可靠|reliable
+adjective|高效|efficient
+custom|顺利|smooth; smoothly|今天开会还顺利吗？|今天開會還順利嗎？|Jīntiān kāi huì hái shùnlì ma?|Did the meeting go smoothly today?|Describes an activity going well without major problems.
+custom|正式|formal; official|不用太正式，随便聊聊就好。|不用太正式，隨便聊聊就好。|Bú yòng tài zhèngshì, suíbiàn liáoliao jiù hǎo.|No need to be too formal. We can just chat.|Can refer to a formal register or to something being official, rather than provisional.
+custom|随意|casual; as one likes|今天穿得随意一点就行。|今天穿得隨意一點就行。|Jīntiān chuān de suíyì yìdiǎn jiù xíng.|Casual clothes are fine today.|Can describe a relaxed manner or freedom to choose, depending on the sentence.
+custom|自然|natural; naturally|这样说比较自然。|這樣說比較自然。|Zhèyàng shuō bǐjiào zìrán.|This is a more natural way to say it.|Useful when discussing wording that sounds normal or unforced.
+custom|礼貌|polite; politeness|这样说会不会不太礼貌？|這樣說會不會不太禮貌？|Zhèyàng shuō huì bu huì bú tài lǐmào?|Would this sound a little rude?|Can describe a person’s behavior or how a request comes across.
+custom|直接|direct; directly|你可以直接跟我说。|你可以直接跟我說。|Nǐ kěyǐ zhíjiē gēn wǒ shuō.|Feel free to tell me directly.|Can mean without an intermediate step, or straightforwardly in conversation.
+custom|委婉|tactful; indirect|我想说得委婉一点。|我想說得委婉一點。|Wǒ xiǎng shuō de wěiwǎn yìdiǎn.|I’d like to put it a bit more gently.|Useful for softening a refusal, disagreement, or sensitive request.
+custom|明显|obvious; clear|区别很明显。|區別很明顯。|Qūbié hěn míngxiǎn.|The difference is clear.|Describes something easy to notice, rather than clearly explaining something with 清楚.
+custom|大致|roughly; in broad terms|我大致看了一下。|我大致看了一下。|Wǒ dàzhì kàn le yíxià.|I took a quick look through it.|Often signals that you have the general picture but have not checked every detail.
+custom|基本|basically; mostly; basic|我基本做完了。|我基本做完了。|Wǒ jīběn zuò wán le.|I’m mostly done.|Can mean mostly in a statement, or basic when modifying a noun.
+custom|总体|overall; as a whole|总体来说，还挺顺利的。|總體來說，還挺順利的。|Zǒngtǐ lái shuō, hái tǐng shùnlì de.|Overall, it went pretty smoothly.|总体来说 is a common way to give an overall assessment.
+custom|相同|the same; identical|这两个版本的内容相同。|這兩個版本的內容相同。|Zhè liǎng ge bǎnběn de nèiróng xiāngtóng.|The content is the same in these two versions.|Focuses on a shared property or sameness between things.
+custom|不同|different|我们可能有不同的理解。|我們可能有不同的理解。|Wǒmen kěnéng yǒu bùtóng de lǐjiě.|We may be understanding it differently.|Use before a noun or as a description to indicate a difference.
+custom|类似|similar|有没有类似的例子？|有沒有類似的例子？|Yǒu méi yǒu lèisì de lìzi?|Are there any similar examples?|Describes similarity without saying two things are identical.
+custom|一致|in agreement; consistent|我们对下一步的想法一致。|我們對下一步的想法一致。|Wǒmen duì xià yí bù de xiǎngfǎ yízhì.|We agree on what to do next.|Can describe agreement between people or consistency between things. 一 is yí before fourth-tone 致.
+custom|相反|opposite; on the contrary|我的想法正好相反。|我的想法正好相反。|Wǒ de xiǎngfǎ zhènghǎo xiāngfǎn.|My view is actually the opposite.|Can describe an opposite idea or introduce a contrasting statement.
+custom|相关|related; relevant|这个跟我们讨论的事相关吗？|這個跟我們討論的事相關嗎？|Zhège gēn wǒmen tǎolùn de shì xiāngguān ma?|Is this related to what we’re discussing?|Commonly used with 跟 or 与 to say what something relates to.
+custom|必要|necessary; a necessity|有必要再开一次会吗？|有必要再開一次會嗎？|Yǒu bìyào zài kāi yí cì huì ma?|Do we need another meeting?|有必要… asks whether an action is necessary or worthwhile.
+custom|合理|reasonable; sensible|这个时间安排合理吗？|這個時間安排合理嗎？|Zhège shíjiān ānpái hélǐ ma?|Does this timing make sense?|Describes a plan, explanation, or arrangement as reasonable.
+custom|充分|sufficient; thorough|我们还需要更充分的讨论。|我們還需要更充分的討論。|Wǒmen hái xūyào gèng chōngfèn de tǎolùn.|We still need a more thorough discussion.|Can describe enough time or evidence, or something done thoroughly.
+custom|确切|exact; definite|确切时间我晚点告诉你。|確切時間我晚點告訴你。|Quèqiè shíjiān wǒ wǎn diǎn gàosu nǐ.|I’ll let you know the exact time later.|Useful when distinguishing a definite answer from an estimate.
+@errands|Deliveries, housing & errands|Everyday life
+custom|度假|to go on vacation|我们今年想去海边度假。|我們今年想去海邊度假。|Wǒmen jīnnián xiǎng qù hǎibiān dù jià.|We’d like to take a beach vacation this year.|Focuses on taking a holiday, rather than travel in general.
+topic|景点|the sights
+object|预订|book
+object|办理|handle
+action|取件|pick up a package
+where|包裹|package
+object|寄送|send
+custom|送达|to be delivered; to reach|包裹已经送达了。|包裹已經送達了。|Bāoguǒ yǐjīng sòngdá le.|The package has been delivered.|Often appears in delivery status updates to say an item reached its destination.
+custom|送货|to deliver goods|周末也送货吗？|週末也送貨嗎？|Zhōumò yě sòng huò ma?|Do you also deliver on weekends?|Refers to delivering goods, such as furniture or a shop order.
+object|签收|sign for
+object|退换|return or exchange
+action|排队|wait in line
+action|挂号|register for an appointment
+where|号码|number
+topic|门禁|the building access system
+topic|房租|the rent
+topic|电费|the electricity bill
+topic|物业|the property management
+custom|房东|landlord|房东说周末可以来看房。|房東說週末可以來看房。|Fángdōng shuō zhōumò kěyǐ lái kàn fáng.|The landlord said we can view the place this weekend.|The person who rents out a home or room.
+custom|房客|tenant; lodger|我是这里的房客。|我是這裡的房客。|Wǒ shì zhèlǐ de fángkè.|I’m a tenant here.|The person renting or staying in a rented room or home.
+topic|合同|the contract
+object|搬运|move
+object|维修|repair
+object|续费|renew
+custom|到期|to expire; to become due|我的会员下个月到期。|我的會員下個月到期。|Wǒ de huìyuán xià ge yuè dàoqī.|My membership expires next month.|Can describe an expiring membership or the date when an obligation becomes due.

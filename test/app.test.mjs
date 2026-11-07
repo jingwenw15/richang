@@ -421,11 +421,12 @@ test('every vocabulary topic supports paginated recall while preserving existing
 test('vocabulary pagination reaches the last word and resets for searches, topics and saved filters', async () => {
   const ui = app(); await ui.click({ page: 'vocabulary' });
   assert.equal((ui.html().match(/class="vocab-card"/g) || []).length, 24);
-  assert.match(ui.html(), /1–24 of 1000/);
+  assert.ok(ui.html().includes(`1–24 of ${vocabulary.length}`));
   await ui.click({ action: 'vocab-next' });
-  assert.match(ui.element('#vocab-pagination').outerHTML, /25–48 of 1000/);
-  for (let i = 0; i < 100; i++) await ui.click({ action: 'vocab-next' });
-  assert.match(ui.element('#vocab-pagination').outerHTML, /985–1000 of 1000/);
+  assert.ok(ui.element('#vocab-pagination').outerHTML.includes(`25–48 of ${vocabulary.length}`));
+  const pages = Math.ceil(vocabulary.length / 24);
+  for (let i = 0; i < pages; i++) await ui.click({ action: 'vocab-next' });
+  assert.ok(ui.element('#vocab-pagination').outerHTML.includes(`${(pages - 1) * 24 + 1}–${vocabulary.length} of ${vocabulary.length}`));
   const last = vocabulary.at(-1);
   assert.ok(ui.element('#vocab-results').innerHTML.includes(`data-vpractice="${last.id}"`));
   ui.input('vocab-search', last.zh);

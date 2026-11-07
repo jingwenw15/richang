@@ -72,15 +72,15 @@ The [lesson text audit](docs/content-audit.md) covers all 144 phrases and 72 rol
 
 ## Common vocabulary
 
-Open **Vocabulary** in the sidebar for **1,000 useful words across 48 topics**. Topics cover family, people, household items, shopping, food, travel, weather, work, technology, hobbies, numbers, question words, and the small grammar words that connect a sentence. Every entry has pinyin, both character scripts, a usage note, and an example with translation and listening. The original 144 individual examples are retained; the 856 additions use reusable conversation patterns with individual examples for grammar words and exceptions.
+Open **Vocabulary** in the sidebar for **1,200 useful words across 56 topics**. Topics cover family, people, household items, shopping, food, travel, weather, work, technology, hobbies, numbers, question words, and the small grammar words that connect a sentence. New topics include team coordination, software delivery, scheduling, social conversations, decisions, tactful wording, and errands. Every entry has pinyin, both character scripts, a usage note, and an example with translation and listening. The original 144 individual examples are retained; the 1,056 additions use reusable conversation patterns with individual examples for grammar words and exceptions.
 
 - Listen to the word or its example separately. The normal reading, character, translation, and listening-speed preferences apply.
 - Search in English, either character script, or pinyin with or without tones: `fankui` and `fǎnkuì` both find 反馈.
-- Browse 24 cards per page, choose a topic from the topic picker, or filter to saved words. Search covers all 1,000 words, and practice uses all matches across pages. Bookmarks also appear in the shared Phrasebook.
+- Browse 24 cards per page, choose a topic from the topic picker, or filter to saved words. Search covers all 1,200 words, and practice uses all matches across pages. Bookmarks also appear in the shared Phrasebook.
 - Choose **Practice word** or **Practice these words** for recall practice. Batches contain up to ten matching words, with unpracticed words first. Reveal the word and example, then rate your recall to add it to spaced review and daily activity.
 - Practiced words also appear in Review and listening drills. Browsing and bookmarking do not award practice or change the review schedule.
 
-Vocabulary progress uses the existing local save and export format; previous lesson progress and bookmarks are preserved. The 1,000 words are a practical starter selection, not a frequency ranking or an HSK-level claim. Notes explain distinctions such as 再/又, 还是/或者, and 有空 **kòng** versus empty **kōng**.
+Vocabulary progress uses the existing local save and export format; previous lesson progress and bookmarks are preserved. The 1,200 words are a practical starter selection, not a frequency ranking or an HSK-level claim. Notes explain distinctions such as 再/又, 还是/或者, and 有空 **kòng** versus empty **kōng**.
 
 Dictionary spellings for the expansion come from [CC-CEDICT](https://www.mdbg.net/chinese/dictionary?page=cc-cedict). Attribution, the CC BY-SA 4.0 data license, example-pattern limitations, and regeneration instructions are in [vocabulary sources](docs/vocabulary-sources.md). No dictionary download is needed to run the app.
 
