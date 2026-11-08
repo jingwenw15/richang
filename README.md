@@ -72,17 +72,27 @@ The [lesson text audit](docs/content-audit.md) covers all 144 phrases and 72 rol
 
 ## Common vocabulary
 
-Open **Vocabulary** in the sidebar for **1,200 useful words across 56 topics**. Topics cover family, people, household items, shopping, food, travel, weather, work, technology, hobbies, numbers, question words, and the small grammar words that connect a sentence. New topics include team coordination, software delivery, scheduling, social conversations, decisions, tactful wording, and errands. Every entry has pinyin, both character scripts, a usage note, and an example with translation and listening. The original 144 individual examples are retained; the 1,056 additions use reusable conversation patterns with individual examples for grammar words and exceptions.
+Open **Vocabulary** for **11,585 distinct words**. The **Conversation set** has 1,225 words with pinyin, both character scripts, usage notes, and spoken sentence examples across 57 topics. It includes 25 new casual expressions such as 靠谱、吐槽、搞定、拿不准 and 不见得. The **broader bank** adds 10,360 dictionary entries for people, daily activities, work, relationships, news, culture, and abstract ideas.
 
-- Listen to the word or its example separately. The normal reading, character, translation, and listening-speed preferences apply.
-- Search in English, either character script, or pinyin with or without tones: `fankui` and `fǎnkuì` both find 反馈.
-- Browse 24 cards per page, choose a topic from the topic picker, or filter to saved words. Search covers all 1,200 words, and practice uses all matches across pages. Bookmarks also appear in the shared Phrasebook.
-- Choose **Practice word** or **Practice these words** for recall practice. Batches contain up to ten matching words, with unpracticed words first. Reveal the word and example, then rate your recall to add it to spaced review and daily activity.
+Use **Range** to choose where to spend your attention:
+
+| Range | Words | What it offers |
+| --- | ---: | --- |
+| Conversation set | 1,225 | Usage notes and sentence examples for real situations |
+| Everyday foundations | 1,546 | More vocabulary for familiar activities and situations |
+| Wider conversations | 2,873 | More range for work, opinions, relationships, and general topics |
+| Reading & advanced topics | 5,941 | News, culture, formal vocabulary, and abstract ideas |
+
+- Listen to words and, in the conversation set, their sentence examples. Reading, character, translation, and listening-speed preferences apply.
+- Search English, either character script, or pinyin with or without tones and apostrophes: `fankui` finds 反馈, `baoxian` finds 保险, and `faner` finds 反而. Search also covers alternate readings and full dictionary meanings.
+- Browse 24 cards per page, choose a range and topic, or filter to saved words. Search and practice cover all matching pages. Phrasebook uses 40 items per page and places your personal expressions first.
+- Open **All meanings & other readings** when a spelling has more than one pronunciation or traditional form. Each reading keeps its own definitions. Broader entries provide dictionary information; they do not have generated conversation examples.
+- Choose **Practice word** or **Practice these words** for recall practice. Batches contain up to ten matching words, with unpracticed words first. Reveal the answer, then rate your recall to add it to spaced review and daily activity.
 - Practiced words also appear in Review and listening drills. Browsing and bookmarking do not award practice or change the review schedule.
 
-Vocabulary progress uses the existing local save and export format; previous lesson progress and bookmarks are preserved. The 1,200 words are a practical starter selection, not a frequency ranking or an HSK-level claim. Notes explain distinctions such as 再/又, 还是/或者, and 有空 **kòng** versus empty **kōng**.
+Existing lessons, all previous 1,200 vocabulary records, IDs, progress, and bookmarks are preserved. The broader ranges use membership in a sourced HSK word list to organize exploration. They are not frequency rankings or a claim that knowing a fixed number of words makes someone fluent. Some advanced entries are formal, literary, or primarily useful for reading; the conversation set remains the place for usage examples.
 
-Dictionary spellings for the expansion come from [CC-CEDICT](https://www.mdbg.net/chinese/dictionary?page=cc-cedict). Attribution, the CC BY-SA 4.0 data license, example-pattern limitations, and regeneration instructions are in [vocabulary sources](docs/vocabulary-sources.md). No dictionary download is needed to run the app.
+Definitions, spellings, and readings come from [CC-CEDICT](https://www.mdbg.net/chinese/dictionary?page=cc-cedict). The broader selection uses [Complete HSK Vocabulary](https://github.com/drkameleon/complete-hsk-vocabulary), with traditional-form preferences adapted from [OpenCC](https://github.com/BYVoid/OpenCC). See [vocabulary sources](docs/vocabulary-sources.md) for attribution, licenses, limits, and offline regeneration. No download is needed to run the app.
 
 ## Everyday conversations
 
@@ -152,6 +162,6 @@ The renderer has no Node access. A restricted preload exposes speech and specifi
 
 The 48 automated tests cover curriculum integrity, listening answer concealment and speech dispatch, preservation of recall schedules, all 24 lesson flows, personal rehearsal from preparation through completion, review, reminders, persistence, retry behavior, escaping, provider response handling, key storage, transcription request construction, daily goals, review timing, and streaks. Provider tests use mocked responses and never make paid API calls.
 
-The installed Electron executable exited during macOS application initialization (`SIGABRT`) when launched by this development environment. Packaging also failed because its download request could not complete. The November 2 browser preview check verified the 1,000-word total, untoned search for 工程师, the topic picker, and navigation between 24-card pages. The October 23 browser preview check verified vocabulary discovery, untoned pinyin search, hidden-answer recall, example display, and rating controls. The October 20 browser preview check verified the expanded catalogue, the new video-call lesson and roleplay, and listening conceal/reveal with no browser console errors. Native Electron audio and microphone behavior have not been reverified. An existing running window was reachable, but reloading it did not load the current renderer. Consequently, the new desktop UI, live audio playback, microphone recording, and live provider calls remain unverified here. Restart the app from your terminal to complete those checks.
+The installed Electron executable exited during macOS application initialization (`SIGABRT`) when launched by this development environment. Packaging also failed because its download request could not complete. The November 7 browser preview check verified the 11,585-word total, range selection, untoned search for 保险, expanded dictionary meanings, and hidden-answer recall/reveal without rating a word. The November 2 browser preview check verified the 1,000-word total, untoned search for 工程师, the topic picker, and navigation between 24-card pages. The October 23 browser preview check verified vocabulary discovery, untoned pinyin search, hidden-answer recall, example display, and rating controls. The October 20 browser preview check verified the expanded catalogue, the new video-call lesson and roleplay, and listening conceal/reveal with no browser console errors. Native Electron audio and microphone behavior have not been reverified. An existing running window was reachable, but reloading it did not load the current renderer. Consequently, the new desktop UI, live audio playback, microphone recording, and live provider calls remain unverified here. Restart the app from your terminal to complete those checks.
 
 Electron setup follows the [official security guidance](https://www.electronjs.org/docs/latest/tutorial/security).

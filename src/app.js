@@ -1,6 +1,7 @@
 import { scenarios, phrases, phraseById, pinyinGuide } from './content.js';
-import { vocabulary, vocabularyGroups, vocabularyById, selectVocabulary } from './vocabulary.js';
+import { vocabulary, vocabularyGroups, vocabularyCollections, vocabularyById, selectVocabulary } from './vocabulary.js';
 import { vocabularySource } from './expanded-vocabulary.js';
+import { broadVocabularySource } from './broad-vocabulary.js';
 import { hydrate, dateKey, dueIds, logPractice, streak } from './model.js';
 import { rehearsalExamples, suggestRehearsalTopic, createOfflinePreparation, offlineRehearsalReply, makeRehearsal, rehearsalPhrases, completeRehearsal, retryRehearsal, validatePreparation, validateRehearsalResponse } from './rehearsal.js';
 
@@ -11,8 +12,12 @@ let page = 'today';
 let filter = 'All situations';
 let query = '';
 let savedOnly = false;
+let libraryPageIndex = 0;
+const libraryPageSize = 40;
 let vocabQuery = '';
 let vocabTopic = 'all';
+let vocabCollection = 'all';
+const vocabCollectionCounts = vocabulary.reduce((counts,word) => { const key = word.collection || 'guided'; counts[key] = (counts[key] || 0) + 1; return counts; }, {});
 let vocabSavedOnly = false;
 let vocabPage = 0;
 const vocabPageSize = 24;
@@ -130,20 +135,37 @@ function phraseRow(p, withDue = false) {
 }
 function filteredPhrases() {
   const search = query.toLowerCase().trim();
-  return allPhrases().filter(p => (!savedOnly || state.saved.includes(p.id)) && (filter === 'All situations' || p.category === filter) && (!search || [p.zh, p.traditional, p.pinyin, p.en, p.sceneTitle].some(t => t.toLowerCase().includes(search))));
+  return [...state.personalPhrases, ...phrases, ...vocabulary].filter(p => (!savedOnly || state.saved.includes(p.id)) && (filter === 'All situations' || p.category === filter) && (!search || [p.zh, p.traditional, p.pinyin, p.en, p.sceneTitle].some(t => t.toLowerCase().includes(search))));
 }
 function libraryPage() {
-  return `<section class="page-heading"><div class="eyebrow">YOUR POCKET CONVERSATION STARTERS</div><h1>Good words to have around.</h1><p>Find words and phrases you need. Save the ones that sound like you.</p></section><div class="library-tools"><label class="search-field">${icon('search')}<input id="phrase-search" type="search" placeholder="Search in English, Chinese, or pinyin…" value="${escape(query)}" aria-label="Search words and phrases"></label><button class="button secondary ${savedOnly ? 'selected' : ''}" data-action="saved-only" aria-pressed="${savedOnly}">${icon('bookmark')} Saved (${state.saved.length})</button></div>${categoryTabs()}<div class="library-count" id="library-count">${itemCount(filteredPhrases().length)}</div><div class="phrase-list" id="phrase-results">${phraseResults()}</div>`;
+  return `<section class="page-heading"><div class="eyebrow">YOUR POCKET CONVERSATION STARTERS</div><h1>Good words to have around.</h1><p>Find words and phrases you need. Save the ones that sound like you.</p></section><div class="library-tools"><label class="search-field">${icon('search')}<input id="phrase-search" type="search" placeholder="Search in English, Chinese, or pinyin…" value="${escape(query)}" aria-label="Search words and phrases"></label><button class="button secondary ${savedOnly ? 'selected' : ''}" data-action="saved-only" aria-pressed="${savedOnly}">${icon('bookmark')} Saved (${state.saved.length})</button></div>${categoryTabs()}<div class="library-count" id="library-count">${itemCount(filteredPhrases().length)}</div><div class="phrase-list" id="phrase-results">${phraseResults()}</div>${libraryPagination()}`;
 }
 function phraseResults() {
   const list = filteredPhrases();
-  return list.length ? list.map(p => phraseRow(p)).join('') : `<div class="empty-state">${icon('book')}<h3>${savedOnly ? 'Your collection is waiting.' : 'No phrases found.'}</h3><p>${savedOnly ? 'Save phrases with the bookmark button to keep them close.' : 'Try a different word or choose another situation.'}</p></div>`;
+  libraryPageIndex = Math.min(libraryPageIndex, Math.max(0,Math.ceil(list.length/libraryPageSize)-1));
+  return list.length ? list.slice(libraryPageIndex*libraryPageSize,(libraryPageIndex+1)*libraryPageSize).map(p => phraseRow(p)).join('') : `<div class="empty-state">${icon('book')}<h3>${savedOnly ? 'Your collection is waiting.' : 'No phrases found.'}</h3><p>${savedOnly ? 'Save phrases with the bookmark button to keep them close.' : 'Try a different word or choose another situation.'}</p></div>`;
+}
+function libraryPagination() {
+  const count = filteredPhrases().length;
+  const pages = Math.max(1,Math.ceil(count/libraryPageSize));
+  libraryPageIndex = Math.min(libraryPageIndex,pages-1);
+  return `<div class="vocab-pagination" id="library-pagination"><button class="button secondary" data-action="library-prev" ${libraryPageIndex===0?'disabled':''}>Previous items</button><span role="status" aria-live="polite">${count ? `${libraryPageIndex*libraryPageSize+1}–${Math.min(count,(libraryPageIndex+1)*libraryPageSize)} of ${count}`:'0 items'} · Page ${libraryPageIndex+1} of ${pages}</span><button class="button secondary" data-action="library-next" ${libraryPageIndex+1>=pages?'disabled':''}>Next items</button></div>`;
+}
+function refreshLibrary() {
+  document.querySelector('#phrase-results').innerHTML = phraseResults();
+  document.querySelector('#library-count').textContent = itemCount(filteredPhrases().length);
+  document.querySelector('#library-pagination').outerHTML = libraryPagination();
 }
 function visibleVocabulary() {
-  return selectVocabulary({ query: vocabQuery, topic: vocabTopic, savedOnly: vocabSavedOnly, saved: state.saved });
+  return selectVocabulary({ query: vocabQuery, topic: vocabTopic, collection: vocabCollection, savedOnly: vocabSavedOnly, saved: state.saved });
 }
 function vocabularyExample(word) {
+  if (!word.example) return vocabularyReadings(word);
   return `<div class="vocab-example"><span class="small-label">IN A CONVERSATION</span><p class="vocab-example-zh" lang="zh-CN">${escape(chinese(word.example))}</p>${state.settings.pinyin ? `<p class="pinyin">${escape(word.example.pinyin)}</p>` : ''}${state.settings.english ? `<p class="translation">${escape(word.example.en)}</p>` : ''}<button class="text-button" data-vexample="${word.id}" aria-label="Listen to example: ${escape(word.en)}">${icon('volume')} Listen to example</button></div>`;
+}
+function vocabularyReadings(word) {
+  if (!word.readings?.length) return '';
+  return `<details class="vocab-readings"><summary>All meanings${word.readings.length>1?' & other readings':''}</summary>${word.readings.map(form=>`<div><strong lang="zh-CN">${escape(state.settings.traditional ? form.traditional : word.zh)}</strong>${state.settings.pinyin?`<p class="pinyin">${escape(form.pinyin)}</p>`:''}${state.settings.english?`<ul>${form.meanings.map(meaning=>`<li>${escape(meaning)}</li>`).join('')}</ul>`:''}</div>`).join('')}</details>`;
 }
 function vocabularyResults() {
   const words = visibleVocabulary();
@@ -163,9 +185,19 @@ function refreshVocabulary() {
   document.querySelector('#vocab-pagination').outerHTML = vocabularyPagination();
 }
 function vocabularyPage() {
-  const saved = vocabulary.filter(word => state.saved.includes(word.id)).length;
+  const savedIds = new Set(state.saved);
+  const saved = vocabulary.filter(word => savedIds.has(word.id)).length;
   const learned = vocabulary.filter(word => state.reviews[word.id]).length;
-  return `<section class="page-heading"><div class="eyebrow">THE WORDS THAT HOLD A CONVERSATION TOGETHER</div><h1>A few good words go a long way.</h1><p>${vocabulary.length} useful words for everyday life and your team. Hear each word, see it in a sentence, and try recalling it.</p></section><div class="vocab-summary"><span>${learned} of ${vocabulary.length} words practiced</span><span>${vocabularyGroups.length} topics · Examples with every word</span></div><div class="library-tools"><label class="search-field">${icon('search')}<input id="vocab-search" type="search" placeholder="Try feedback, fankui, or 反馈…" value="${escape(vocabQuery)}" aria-label="Search vocabulary"></label><button class="button secondary ${vocabSavedOnly ? 'selected' : ''}" data-action="vocab-saved" aria-pressed="${vocabSavedOnly}">${icon('bookmark')} Saved words (${saved})</button></div><div class="vocab-topic-picker"><label for="vocab-topic">Topic</label><select id="vocab-topic"><option value="all" ${vocabTopic === 'all' ? 'selected' : ''}>All topics (${vocabulary.length})</option>${vocabularyGroups.map(group => `<option value="${group.id}" ${vocabTopic === group.id ? 'selected' : ''}>${escape(group.title)} (${group.words.length})</option>`).join('')}</select></div><div class="section-heading"><span class="library-count" id="vocab-count" role="status" aria-live="polite">${visibleVocabulary().length} word${visibleVocabulary().length === 1 ? '' : 's'}</span><button class="button secondary" data-action="vocab-practice">Practice these words ${icon('arrow')}</button></div><p class="vocab-help">Practice up to ten matching words, starting with new words. Practice uses all matches across pages. Only rating your recall adds a word to spaced review and your daily activity.</p><div class="vocab-grid" id="vocab-results">${vocabularyResults()}</div>${vocabularyPagination()}<details class="pronunciation-help"><summary>Vocabulary sources & example patterns</summary><p>The original 144 entries use individual examples. The expansion adds ${vocabularySource.added} selected words with spellings from CC-CEDICT contributors, published by MDBG, under CC BY-SA 4.0. Its examples use reusable conversation patterns, with individual examples for grammar words and other exceptions. This is a practical selection rather than a ranked frequency list. Source: www.mdbg.net/chinese/dictionary?page=cc-cedict · License: creativecommons.org/licenses/by-sa/4.0/.</p></details>`;
+  const groups = vocabularyGroups.filter(group => vocabCollection === 'all' || (group.words[0].collection || 'guided') === vocabCollection);
+  const count = vocabCollection === 'all' ? vocabulary.length : vocabCollectionCounts[vocabCollection] || 0;
+  const description = vocabularyCollections.find(collection => collection.id === vocabCollection)?.description || 'Start with the conversation set, then explore wider topics as you need them.';
+  return `<section class="page-heading"><div class="eyebrow">THE WORDS THAT HOLD A CONVERSATION TOGETHER</div><h1>A wider world of words.</h1><p>${vocabulary.length} useful words to explore, from everyday conversations to news, culture, and ideas. Save the ones you want to use.</p></section>
+  <div class="vocab-summary"><span>${learned} of ${vocabulary.length} words practiced</span><span>${vocabularyGroups.length} topics & study groups · ${vocabCollectionCounts.guided} words with examples</span></div>
+  <div class="library-tools"><label class="search-field">${icon('search')}<input id="vocab-search" type="search" placeholder="Try feedback, fankui, or 反馈…" value="${escape(vocabQuery)}" aria-label="Search vocabulary"></label><button class="button secondary ${vocabSavedOnly ? 'selected' : ''}" data-action="vocab-saved" aria-pressed="${vocabSavedOnly}">${icon('bookmark')} Saved words (${saved})</button></div>
+  <div class="vocab-filter-fields"><div class="vocab-topic-picker"><label for="vocab-collection">Range</label><select id="vocab-collection"><option value="all" ${vocabCollection==='all'?'selected':''}>All words (${vocabulary.length})</option>${vocabularyCollections.map(collection=>`<option value="${collection.id}" ${vocabCollection===collection.id?'selected':''}>${escape(collection.title)} (${vocabCollectionCounts[collection.id] || 0})</option>`).join('')}</select></div>
+  <div class="vocab-topic-picker"><label for="vocab-topic">Topic</label><select id="vocab-topic"><option value="all" ${vocabTopic === 'all' ? 'selected' : ''}>All topics (${count})</option>${groups.map(group => `<option value="${group.id}" ${vocabTopic === group.id ? 'selected' : ''}>${escape(group.title)} (${group.words.length})</option>`).join('')}</select></div></div><p class="vocab-range-help">${escape(description)}</p>
+  <div class="section-heading"><span class="library-count" id="vocab-count" role="status" aria-live="polite">${visibleVocabulary().length} word${visibleVocabulary().length === 1 ? '' : 's'}</span><button class="button secondary" data-action="vocab-practice">Practice these words ${icon('arrow')}</button></div><p class="vocab-help">Practice up to ten matching words, starting with new words. Search and practice cover all matching pages. The conversation set includes examples; the wider bank gives dictionary meanings and readings.</p><div class="vocab-grid" id="vocab-results">${vocabularyResults()}</div>${vocabularyPagination()}
+  <details class="pronunciation-help"><summary>Vocabulary sources & study ranges</summary><p>The conversation set contains the original 144 entries and ${vocabularySource.added} curated additions. The wider bank adds ${broadVocabularySource.added} dictionary entries selected using Complete HSK Vocabulary (MIT). Traditional-form preferences use OpenCC (Apache-2.0). Definitions, spellings, and readings come from CC-CEDICT contributors, published by MDBG, under CC BY-SA 4.0. Study ranges follow source word-list membership; they are not frequency rankings or a measure of native fluency. Dictionary entries include formal and reading vocabulary as well as conversational words. Conversation examples use individual sentences and reusable patterns. Source: github.com/drkameleon/complete-hsk-vocabulary · www.mdbg.net/chinese/dictionary?page=cc-cedict · License: creativecommons.org/licenses/by-sa/4.0/.</p></details>`;
 }
 function progressPage() {
   const learned = Object.keys(state.reviews).filter(id => findPhrase(id)).length;
@@ -497,10 +529,10 @@ document.addEventListener('click', async event => {
   if (await handleRehearsalClick(button)) return;
   if (button.dataset.page) { event.preventDefault(); disposeRehearsalAudio(); rehearsalError = ''; page = button.dataset.page; render(); window.scrollTo(0, 0); return; }
   if (button.dataset.start) { startScene(button.dataset.start); return; }
-  if (button.dataset.filter) { filter = button.dataset.filter; render(); return; }
+  if (button.dataset.filter) { filter = button.dataset.filter; libraryPageIndex = 0; render(); return; }
   if (button.dataset.vtopic) { vocabTopic = button.dataset.vtopic; vocabPage = 0; render(); return; }
   if (button.dataset.vpractice) { if (vocabularyById(button.dataset.vpractice)) startReview([button.dataset.vpractice]); return; }
-  if (button.dataset.vexample) { const word = vocabularyById(button.dataset.vexample); if (word) await speak(chinese(word.example)); return; }
+  if (button.dataset.vexample) { const word = vocabularyById(button.dataset.vexample); if (word?.example) await speak(chinese(word.example)); return; }
   if (button.dataset.speak || button.dataset.slow) { const p = findPhrase(button.dataset.speak || button.dataset.slow); await speak(chinese(p), button.dataset.slow ? true : state.settings.slow); return; }
   if (button.dataset.save) {
     const id = button.dataset.save; const wasSaved = state.saved.includes(id);
@@ -521,7 +553,9 @@ document.addEventListener('click', async event => {
   }
   switch (button.dataset.action) {
     case 'pinyin': state.settings.pinyin = !state.settings.pinyin; save(); render(); break;
-    case 'saved-only': savedOnly = !savedOnly; render(); break;
+    case 'saved-only': savedOnly = !savedOnly; libraryPageIndex = 0; render(); break;
+    case 'library-prev': libraryPageIndex = Math.max(0,libraryPageIndex-1); refreshLibrary(); document.querySelector('#phrase-results').scrollIntoView?.({block:'start'}); break;
+    case 'library-next': libraryPageIndex = Math.min(Math.max(0,Math.ceil(filteredPhrases().length/libraryPageSize)-1),libraryPageIndex+1); refreshLibrary(); document.querySelector('#phrase-results').scrollIntoView?.({block:'start'}); break;
     case 'vocab-saved': vocabSavedOnly = !vocabSavedOnly; vocabPage = 0; render(); break;
     case 'vocab-prev': vocabPage = Math.max(0, vocabPage - 1); refreshVocabulary(); document.querySelector('#vocab-results').scrollIntoView?.({ block: 'start' }); break;
     case 'vocab-next': vocabPage = Math.min(Math.max(0, Math.ceil(visibleVocabulary().length / vocabPageSize) - 1), vocabPage + 1); refreshVocabulary(); document.querySelector('#vocab-results').scrollIntoView?.({ block: 'start' }); break;
@@ -560,7 +594,7 @@ document.addEventListener('click', async event => {
 });
 document.addEventListener('input', event => {
   if (event.target.id === 'vocab-search') { vocabQuery = event.target.value; vocabPage = 0; refreshVocabulary(); }
-  if (event.target.id === 'phrase-search') { query = event.target.value; document.querySelector('#phrase-results').innerHTML = phraseResults(); document.querySelector('#library-count').textContent = `${itemCount(filteredPhrases().length)}`; }
+  if (event.target.id === 'phrase-search') { query = event.target.value; libraryPageIndex = 0; refreshLibrary(); }
   if (event.target.id === 'rehearsal-goal') rehearsalDraft.goal = event.target.value.slice(0, 1000);
   if (event.target.id === 'rehearsal-answer' && currentRehearsal()) { currentRehearsal().draft = event.target.value.slice(0, 2000); save(); }
   if (event.target.id === 'rehearsal-reflection' && currentRehearsal()) { currentRehearsal().reflection = event.target.value.slice(0, 1000); save(); }
@@ -568,6 +602,7 @@ document.addEventListener('input', event => {
   if (connectionField) { connectionDraft ||= { ...aiConnection, apiKey: '', rememberKey: aiConnection.keyStored }; connectionDraft[connectionField] = event.target.value; }
 });
 document.addEventListener('change', event => {
+  if (event.target.id === 'vocab-collection') { vocabCollection = event.target.value; vocabTopic = 'all'; vocabPage = 0; render(); }
   if (event.target.id === 'vocab-topic') { vocabTopic = event.target.value; vocabPage = 0; render(); }
   if (event.target.id === 'daily-goal') { state.settings.goal = Number(event.target.value); save(); render(); }
   if (event.target.id === 'rehearsal-audience') rehearsalDraft.audience = event.target.value;

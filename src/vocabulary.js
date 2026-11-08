@@ -1,4 +1,5 @@
 import { expandedVocabularyGroups } from './expanded-vocabulary.js';
+import { broadVocabularyGroups } from './broad-vocabulary.js';
 
 // A practical starter list, grouped by use rather than a proficiency exam level.
 // Pinyin follows the same spoken 一/不 and neutral-tone conventions as the lessons.
@@ -192,18 +193,28 @@ export const vocabularyGroups = [
 ];
 
 vocabularyGroups.push(...expandedVocabularyGroups.filter(group => group.words.length));
+vocabularyGroups.push(...broadVocabularyGroups.filter(group => group.words.length));
+
+export const vocabularyCollections = [
+  { id:'guided', title:'Conversation set · with examples', description:'Useful situations, usage notes, and sentence examples.' },
+  { id:'foundations', title:'Everyday foundations', description:'More words for familiar people, activities, and situations.' },
+  { id:'range', title:'Wider conversations', description:'Build range for work, relationships, opinions, and everyday topics.' },
+  { id:'advanced', title:'Reading & advanced topics', description:'Explore news, culture, abstract ideas, and more specialized vocabulary.' }
+];
 
 export const vocabulary = vocabularyGroups.flatMap(group => group.words.map(word => ({ ...word,
   topic: group.id, sceneTitle: group.title, category: group.category
 })));
 const vocabularyIndex = new Map(vocabulary.map(word => [word.id, word]));
 export const vocabularyById = id => vocabularyIndex.get(id);
-const vocabSearchKey = value => value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f\s]/g, '');
+const vocabSearchKey = value => value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f\s'’]/g, '');
 const vocabularySearchIndex = new Map(vocabulary.map(word => [word.id,
-  [word.zh, word.traditional, word.pinyin, word.en, word.sceneTitle, ...Object.values(word.example)].map(vocabSearchKey)
+  [word.zh, word.traditional, word.pinyin, word.en, word.sceneTitle, ...Object.values(word.example || {}),
+    ...(word.readings || []).flatMap(form => [form.traditional, form.pinyin, ...form.meanings])].map(vocabSearchKey)
 ]));
-export function selectVocabulary({ query = '', topic = 'all', savedOnly = false, saved = [] } = {}) {
+export function selectVocabulary({ query = '', topic = 'all', collection = 'all', savedOnly = false, saved = [] } = {}) {
   const needle = vocabSearchKey(query.trim());
-  return vocabulary.filter(word => (topic === 'all' || word.topic === topic) && (!savedOnly || saved.includes(word.id)) &&
+  const savedIds = new Set(saved);
+  return vocabulary.filter(word => (topic === 'all' || word.topic === topic) && (collection === 'all' || (word.collection || 'guided') === collection) && (!savedOnly || savedIds.has(word.id)) &&
     (!needle || vocabularySearchIndex.get(word.id).some(text => text.includes(needle))));
 }

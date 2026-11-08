@@ -1,11 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { vocabulary, vocabularyGroups, vocabularyById, selectVocabulary } from '../src/vocabulary.js';
+import { vocabulary, vocabularyGroups, vocabularyCollections, vocabularyById, selectVocabulary } from '../src/vocabulary.js';
 import { phrases } from '../src/content.js';
 
-test('vocabulary contains 1,200 distinct words in 56 topics, each with a complete example', () => {
-  assert.equal(vocabulary.length, 1200);
-  assert.equal(vocabularyGroups.length, 56);
+test('vocabulary contains 11,585 distinct words in 64 topics with complete examples or dictionary readings', () => {
+  assert.equal(vocabulary.length, 11585);
+  assert.equal(vocabularyGroups.length, 64);
+  assert.equal(vocabulary.filter(word => word.example).length, 1225);
   assert.equal(new Set([...vocabulary, ...phrases].map(p => p.id)).size, vocabulary.length + phrases.length);
   assert.equal(new Set(vocabulary.map(word => word.zh)).size, vocabulary.length);
   assert.equal(new Set(vocabularyGroups.map(group => group.id)).size, vocabularyGroups.length);
@@ -14,10 +15,39 @@ test('vocabulary contains 1,200 distinct words in 56 topics, each with a complet
     assert.match(word.id, /^v_[a-z0-9-]+$/);
     assert.equal(word.kind, 'vocabulary');
     for (const key of ['zh', 'traditional', 'pinyin', 'en', 'note', 'sceneTitle', 'topic', 'category']) assert.ok(word[key], `${word.id}: ${key}`);
-    for (const key of ['zh', 'traditional', 'pinyin', 'en']) assert.ok(word.example[key], `${word.id} example: ${key}`);
-    assert.ok(word.example.zh.includes(word.zh), `${word.id} example should demonstrate the word`);
-    assert.ok(word.example.traditional.includes(word.traditional), `${word.id} traditional example should demonstrate the word`);
+    if (word.example) {
+      for (const key of ['zh', 'traditional', 'pinyin', 'en']) assert.ok(word.example[key], `${word.id} example: ${key}`);
+      assert.ok(word.example.zh.includes(word.zh), `${word.id} example should demonstrate the word`);
+      assert.ok(word.example.traditional.includes(word.traditional), `${word.id} traditional example should demonstrate the word`);
+    } else {
+      assert.equal(word.source, 'broad-cedict');
+      assert.ok(word.readings.length);
+      for (const form of word.readings) {
+        assert.ok(form.pinyin && form.traditional && form.meanings.length);
+        assert.ok(form.meanings.every(meaning => typeof meaning === 'string' && meaning.length));
+      }
+      assert.equal(word.pinyin, word.readings[0].pinyin);
+      assert.equal(word.traditional, word.readings[0].traditional);
+      assert.equal(word.en, word.readings[0].meanings.slice(0,3).join('; '));
+    }
   }
+});
+
+test('study ranges partition the collection and search includes alternate readings and all meanings', () => {
+  const groups = vocabularyCollections.map(({id})=>selectVocabulary({collection:id}));
+  assert.equal(groups.flat().length, vocabulary.length);
+  assert.equal(new Set(groups.flat().map(word=>word.id)).size, vocabulary.length);
+  assert.equal(selectVocabulary({collection:'guided'}).length,1225);
+  const faner = vocabulary.find(word=>word.zh==='反而');
+  assert.equal(faner.pinyin,"fǎn'ér");
+  for (const query of ['faner',"fan'er",'反而']) assert.ok(selectVocabulary({query}).includes(faner),query);
+  const chao = vocabulary.find(word=>word.zh==='朝');
+  assert.ok(selectVocabulary({query:'zhao'}).includes(chao));
+  assert.ok(selectVocabulary({query:'morning'}).includes(chao));
+  assert.deepEqual(selectVocabulary({collection:'guided',topic:'broad-7'}),[]);
+  assert.deepEqual(selectVocabulary({collection:'advanced',savedOnly:true,saved:['v_feedback',faner.id]}),[]);
+  assert.equal(vocabulary.find(word=>word.zh==='拿不准').pinyin,'ná bu zhǔn');
+  assert.match(vocabulary.find(word=>word.zh==='不见得').pinyin,/^bú/);
 });
 
 test('vocabulary search accepts Chinese, traditional characters, meanings, and pinyin with or without tones', () => {

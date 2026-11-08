@@ -114,7 +114,7 @@ test('new everyday lessons are discoverable and existing progress survives the e
 test('search handles user text as text, saved filtering, and pinyin preferences persist', async () => {
   const ui = app(); await ui.click({ page: 'library' });
   ui.input('phrase-search', 'latte'); assert.match(ui.element('#phrase-results').innerHTML, /拿铁/);
-  assert.equal(ui.element('#library-count').textContent, '2 items');
+  assert.equal(ui.element('#library-count').textContent, '7 items');
   ui.input('phrase-search', '<img src=x onerror=alert(1)>');
   await ui.click({ filter: 'All situations' }); assert.doesNotMatch(ui.html(), /<img src=x/);
   await ui.click({ action: 'pinyin' }); assert.equal(ui.state().settings.pinyin, false);
@@ -382,17 +382,19 @@ test('vocabulary batches use only matching words, cap at ten, and prioritize new
   await ui.click({ action: 'vocab-practice' }); assert.equal(ui.isOpen(), false);
 });
 
-test('every vocabulary topic supports paginated recall while preserving existing lesson progress', async () => {
+test('every guided vocabulary word supports recall while preserving existing lesson progress', async () => {
   const originalReview = { due: 1, interval: 4, repetitions: 3 };
   const ui = app({ 'richang.v1': JSON.stringify({ version: 1, saved: ['v_feedback', 'u1'], completed: ['updates'], reviews: { u1: originalReview } }) });
   await ui.click({ page: 'vocabulary' });
   assert.ok(ui.html().includes(`${vocabulary.length} useful words`));
   assert.ok(ui.html().includes(`${vocabularyGroups.length} topics`));
-  for (const { id: topic } of vocabularyGroups) {
+  const guided = vocabulary.filter(word=>!word.collection);
+  for (const { id: topic } of vocabularyGroups.filter(group=>!group.words[0].collection)) {
     ui.change('vocab-topic', topic);
     const words = vocabulary.filter(word => word.topic === topic);
     for (const word of words.slice(0, 24)) assert.ok(ui.html().includes(`data-vpractice="${word.id}"`));
-    for (const word of vocabulary.filter(word => word.topic !== topic)) assert.ok(!ui.html().includes(`data-vpractice="${word.id}"`));
+    const visibleIds = [...ui.html().matchAll(/data-vpractice="([^"]+)"/g)].map(match=>match[1]);
+    assert.ok(visibleIds.every(id=>words.some(word=>word.id===id)));
     for (let offset = 0; offset < words.length; offset += 10) {
       await ui.click({ action: 'vocab-practice' });
       const batch = words.slice(offset, offset + 10);
@@ -411,11 +413,11 @@ test('every vocabulary topic supports paginated recall while preserving existing
     }
   }
   const restored = app(ui.stored); await restored.click({ page: 'vocabulary' });
-  assert.ok(restored.html().includes(`${vocabulary.length} of ${vocabulary.length} words practiced`));
+  assert.ok(restored.html().includes(`${guided.length} of ${vocabulary.length} words practiced`));
   assert.deepEqual(restored.state().saved, ['v_feedback', 'u1']);
   assert.deepEqual(restored.state().completed, ['updates']);
   assert.deepEqual(restored.state().reviews.u1, originalReview);
-  assert.equal(Object.values(restored.state().activity)[0].length, vocabulary.length);
+  assert.equal(Object.values(restored.state().activity)[0].length, guided.length);
 });
 
 test('vocabulary pagination reaches the last word and resets for searches, topics and saved filters', async () => {
@@ -438,4 +440,88 @@ test('vocabulary pagination reaches the last word and resets for searches, topic
   assert.match(ui.html(), /Page 1 of 2/);
   await ui.click({ action: 'vocab-saved' });
   assert.match(ui.html(), /No saved words match yet/);
+});
+
+test('each broader study band supports dictionary recall and keeps prior lesson progress', async () => {
+  const prior = {due:1,interval:4,repetitions:3};
+  const ui = app({'richang.v1':JSON.stringify({version:1,reviews:{u1:prior},saved:['v_feedback'],completed:['updates']})});
+  await ui.click({page:'vocabulary'});
+  const groups = vocabularyGroups.filter(group=>group.words[0].collection);
+  for (const group of groups) {
+    ui.change('vocab-collection',group.words[0].collection);
+    ui.change('vocab-topic',group.id);
+    assert.ok(ui.html().includes(`data-vpractice="${group.words[0].id}"`));
+    assert.ok(!ui.html().includes('data-vpractice="v_feedback"'));
+    await ui.click({action:'vocab-practice'});
+    assert.ok(!ui.modal().includes(group.words[0].zh));
+    await ui.click({action:'reveal'});
+    assert.ok(ui.modal().includes(group.words[0].zh));
+    assert.match(ui.modal(),/All meanings/);
+    assert.doesNotMatch(ui.modal(),/IN A CONVERSATION|data-vexample|undefined/);
+    await ui.click({rating:'good'});
+    await ui.click({action:'close-practice'});
+  }
+  const restored = app(ui.stored);
+  assert.deepEqual(restored.state().reviews.u1,prior);
+  assert.deepEqual(restored.state().saved,['v_feedback']);
+  assert.deepEqual(restored.state().completed,['updates']);
+  assert.equal(Object.keys(restored.state().reviews).length,groups.length+1);
+});
+
+test('dictionary words honor preferences, expose alternate readings, and join saved review and listening', async () => {
+  const word = vocabulary.find(word=>word.zh==='保险');
+  const chao = vocabulary.find(word=>word.zh==='朝');
+  const spoken = [];
+  const ui = app({}, {speechAvailable:async()=>true,speak:async(text)=>{spoken.push(text);return true;},stopSpeech(){}});
+  await ui.click({page:'vocabulary'});
+  ui.change('vocab-collection','foundations');
+  ui.input('vocab-search','baoxian');
+  assert.ok(ui.element('#vocab-results').innerHTML.includes(`data-vpractice="${word.id}"`));
+  await ui.click({save:word.id});
+  await ui.click({vpractice:word.id});
+  await ui.click({action:'reveal'});
+  assert.match(ui.modal(),/insurance/);
+  assert.doesNotMatch(ui.modal(),/IN A CONVERSATION|data-vexample/);
+  await ui.click({speak:word.id});
+  await ui.click({vexample:word.id}); // A stale example control must be harmless.
+  assert.deepEqual(spoken,['保险']);
+  await ui.click({rating:'again'});
+  await ui.click({action:'close-practice'});
+  ui.change('vocab-collection','guided');
+  assert.match(ui.html(),/All topics \(1225\)/);
+  assert.doesNotMatch(ui.html(),/<option value="broad-1"/);
+  const data=ui.state(); data.settings={...data.settings,pinyin:false,english:false,traditional:true};
+  const restored=app({'richang.v1':JSON.stringify(data)});
+  await restored.click({page:'vocabulary'});
+  restored.input('vocab-search','baoxian');
+  assert.match(restored.element('#vocab-results').innerHTML,/保險/);
+  assert.doesNotMatch(restored.element('#vocab-results').innerHTML,/class="pinyin"|class="translation"|<li>/);
+  await restored.click({vpractice:chao.id});await restored.click({action:'reveal'});
+  assert.match(restored.modal(),/other readings/);
+  assert.doesNotMatch(restored.modal(),/class="pinyin"|<li>/);
+  await restored.click({action:'close-practice'});
+  await restored.click({page:'review'});await restored.click({action:'listen-learned'});
+  assert.doesNotMatch(restored.modal(),/保險/);
+  await restored.click({action:'reveal'});
+  assert.match(restored.modal(),/保險/);
+  assert.equal(restored.state().reviews[word.id].lastRating,'again');
+  assert.deepEqual(restored.state().saved,[word.id]);
+});
+
+test('phrasebook pagination bounds large lists and searches and saved filters reset the page', async () => {
+  const word=vocabulary.at(-1);
+  const ui=app({'richang.v1':JSON.stringify({version:1,saved:[word.id]})});
+  await ui.click({page:'library'});
+  assert.equal((ui.html().match(/class="phrase-row"/g)||[]).length,40);
+  await ui.click({action:'library-next'});
+  assert.equal((ui.element('#phrase-results').innerHTML.match(/class="phrase-row"/g)||[]).length,40);
+  assert.match(ui.element('#library-pagination').outerHTML,/41–80/);
+  for(let i=0;i<Math.ceil((vocabulary.length+144)/40);i++) await ui.click({action:'library-next'});
+  assert.ok(ui.element('#phrase-results').innerHTML.includes(word.zh));
+  ui.input('phrase-search','insurance');
+  assert.match(ui.element('#library-pagination').outerHTML,/Page 1 of/);
+  assert.match(ui.element('#phrase-results').innerHTML,/保险/);
+  ui.input('phrase-search','');await ui.click({action:'saved-only'});
+  assert.ok(ui.html().includes(word.zh));
+  assert.match(ui.html(),/1–1 of 1/);
 });

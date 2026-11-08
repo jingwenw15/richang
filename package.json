@@ -12,7 +12,8 @@
     "preview": "npm run build && open src/index.html",
     "test": "npm run build && node --test test/*.test.mjs",
     "pack:mac": "npm run build && electron-packager . 'Richang' --platform=darwin --arch=arm64 --out=dist --overwrite --ignore='^/(test|scripts|dist|screenshots)' --extend-info=electron/Info.plist",
-    "vocab:generate": "node scripts/generate-vocabulary.cjs"
+    "vocab:generate": "node scripts/generate-vocabulary.cjs",
+    "vocab:broader": "node scripts/generate-broad-vocabulary.cjs"
   },
   "devDependencies": {
     "electron": "latest",

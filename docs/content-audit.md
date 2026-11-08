@@ -1,4 +1,4 @@
-# Lesson text audit — updated November 5, 2026
+# Lesson text audit — updated November 7, 2026
 
 Reviewed all 144 teaching phrases and 72 roleplay prompts for Chinese wording, simplified/traditional correspondence, pinyin, English meaning, usage notes, and response context. This audit covers written lesson content; it does not independently evaluate the Mac speech voice's recordings.
 
@@ -100,7 +100,7 @@ New regression checks exercise all 1,000 words through recall, topic filtering, 
 
 ## Regression checks
 
-Automated checks protect the daily phrase and all current 一/不 examples, verify selected neutral-tone conventions, require a speaking goal for every roleplay turn, and exercise the new explanations in the renderer. The complete suite has 48 passing tests. These tests protect reviewed choices from accidental edits; they are not an automatic language-accuracy judge.
+Automated checks protect the daily phrase and all current 一/不 examples, verify selected neutral-tone conventions, require a speaking goal for every roleplay turn, and exercise the new explanations in the renderer. The complete suite has 54 passing tests. These tests protect reviewed choices from accidental edits; they are not an automatic language-accuracy judge.
 
 ## Expansion to 1,200 words
 
@@ -109,3 +109,11 @@ Added 200 entries across eight topics: team coordination, software delivery and 
 Regenerated against the November 5 CC-CEDICT snapshot. Explicit sense choices include 尽快 jǐnkuài (儘快), 当天 dāngtiān, 当时 dāngshí, 约 yuē, and praise as 夸／誇. Connectors and most abstract additions receive individual examples; notes distinguish 只要 from 只有, 按时 from 及时, and casual 好像 from more measured 似乎.
 
 The renderer regression exercises every entry through topic browsing and recall, and pagination reaches the final word. Existing progress and bookmarks retain their IDs. The dictionary check covers headword spellings and readings; examples were reviewed as written text, and native speech output was not reverified.
+
+## Broader vocabulary library: 11,585 words
+
+Added 10,360 sourced dictionary entries and 25 curated casual expressions. The conversation set now has 1,225 words with examples; the wider bank supplies definitions and readings, without invented example sentences. All previous 1,200 records are unchanged.
+
+The dictionary import keeps each pronunciation paired with its meanings and traditional form. It filters surname-only and variant-only senses, favors modern traditional spellings using OpenCC preferences, and explicitly selects common readings for ambiguous words such as 比 bǐ, 打 dǎ, 单 dān, 厂 chǎng, and 骑 qí. This is source adaptation with checks of selected ambiguous cases, not independent linguistic review of every dictionary entry. Full source and licensing details are in [vocabulary sources](vocabulary-sources.md).
+
+Automated checks cover all records for uniqueness, complete meanings or examples, and matching primary readings. All guided words still pass through renderer recall. Each broader study group is exercised through recall and progress restoration; additional tests cover alternate readings, hidden pinyin/English, traditional script, bookmarks, listening, study-range filtering, and the last page of both Vocabulary and Phrasebook. The November 7 Chrome preview verified counts, foundation filtering, untoned search for 保险, full meanings, and hidden-answer reveal/close without rating. Native Electron audio, microphone behavior, and every synthesized polyphonic reading remain unverified.
